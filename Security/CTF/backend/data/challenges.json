@@ -1,0 +1,18 @@
+[
+    {
+      "id": 1,
+      "title": "Challenge 1",
+      "description": "Solve the puzzle.",
+      "hint": "Look closely at the details.",
+      "filename": "dolls.jpg",
+      "points": 100
+    },
+    {
+      "id": 2,
+      "title": "Challenge 2",
+      "description": "Decode the message.",
+      "hint": "Use the cipher provided.",
+      "filename": "code2.png",
+      "points": 150
+    }
+  ]

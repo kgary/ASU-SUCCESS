@@ -1,0 +1,12 @@
+[
+    {
+      "id": 1,
+      "answer": "picoCTF{p}",
+      "points": 100
+    },
+    {
+      "id": 2,
+      "answer": "picoCTF{k}",
+      "points": 150
+    }
+  ]
