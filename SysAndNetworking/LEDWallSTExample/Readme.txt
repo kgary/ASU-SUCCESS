@@ -1,0 +1,1 @@
+This folder is for the sketch that accepts input via wifi and accordingly controls the LED strip.
