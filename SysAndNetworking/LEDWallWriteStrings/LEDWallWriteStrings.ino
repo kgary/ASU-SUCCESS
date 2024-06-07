@@ -10,7 +10,7 @@
 CRGB leds[NUM_LEDS];
 //                    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 String colorLetterIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-String letterIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+String letterIndex = colorLetterIndex;
 
 // Define colors for each letter
 uint32_t colorIndex[26] = {
@@ -48,12 +48,16 @@ void setup() {
     FastLED.setBrightness(BRIGHTNESS);
     fill_solid( leds, NUM_LEDS, CRGB::Black);
     FastLED.show();
-    Serial.println("Setup complete");
 }
 
 void loop() {
-    writeWord("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    delay(5000);  // Wait for 5 seconds before repeating
+    // turnOnAll();
+    // writeWord("HELLO");
+    if (Serial.available() > 0) {
+        String input = Serial.readStringUntil('\n');
+        input.trim();  // Remove any whitespace
+        writeWord(input);
+    }
 }
 
 void turnOnAll() {
@@ -61,6 +65,7 @@ void turnOnAll() {
   FastLED.show();
   Serial.println("LEDs are ON");
 }
+
 
 void turnOnLetter(String theLetter) {
   int lightIndex = letterIndex.indexOf(theLetter);
