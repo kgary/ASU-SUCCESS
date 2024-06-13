@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliza</title>
+<style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #000;
+      color: #0F0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+    }
+    nav {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background-color: #222;
+      padding: 10px 0;
+      text-align: center;
+    }
+    nav a {
+      font-family: 'Courier New', Courier, monospace;
+      color: #0F0;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+    input, button, nav a {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #222;
+      border: 1px solid #0F0;
+      color: #0F0;
+      padding: 10px;
+      margin: 5px;
+      width: 250px;
+      box-sizing: border-box;
+      display: none; /* Initially hide all input and buttons except the start conversation button */
+    }
+    #startConversation, nav a {
+      display: block; /* Show the start conversation button and nav links */
+    }
+    button:hover, nav a:hover {
+      background-color: #333;
+    }
+    #responseContainer, #initialQuestionContainer {
+      border: 1px solid #0F0;
+      padding: 10px;
+      width: 250px;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+    .responseText {
+      margin-bottom: 10px;
+    }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let lastResponse = null;
+    const initialQuestion = "How are you feeling today?";
+
+    const interfaceElements = document.querySelectorAll('input, button:not(#startConversation)');
+    const startButton = document.getElementById("startConversation");
+    const toggleButton = document.getElementById("toggleResponse");
+    const repeatButton = document.getElementById("repeatCommand");
+    const responseContainer = document.getElementById("responseContainer");
+    const initialQuestionContainer = document.getElementById("initialQuestionContainer");
+
+    startButton.addEventListener("click", function() {
+        interfaceElements.forEach(element => element.style.display = 'block');
+        startButton.style.display = 'none';
+
+        document.getElementById("initialQuestionContainer").innerHTML = `<div class='responseText'>${initialQuestion}</div>`;
+        document.getElementById("initialQuestionContainer").style.display = "block";
+    });
+
+    document.getElementById("submitCommand").addEventListener("click", function() {
+        const command = {wordToArduino1: document.getElementById("commandInput").value};
+        fetch("http://localhost:8080/send-command", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ command: command }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            lastResponse = data;
+            const responseText = `<div class='responseText'>Response: ${data.wordToArduino1}</div>`;
+            const followUpText = `<div class='responseText'>Follow-up: ${data.wordToArduino2}</div>`;
+            responseContainer.innerHTML = responseText + followUpText;
+            responseContainer.style.display = "block";
+            initialQuestionContainer.style.display = "none"; // Hide initial question on response
+        })
+        .catch(error => console.error("Error:", error));
+    });
+
+    toggleButton.addEventListener("click", function() {
+        if (responseContainer.style.display === "none") {
+            responseContainer.style.display = "block";
+            toggleButton.innerText = "Hide response";
+        } else {
+            responseContainer.style.display = "none";
+            toggleButton.innerText = "Show response";
+        }
+    });
+
+    repeatButton.addEventListener("click", function() {
+        if (lastResponse) {
+            const repeatRequestData = {command: lastResponse, repeat: true};
+
+            fetch("http://localhost:8080/send-command", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(repeatRequestData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const responseText = `<div class='responseText'>Response: ${data.wordToArduino1}</div>`;
+                const followUpText = `<div class='responseText'>Follow-up: ${data.wordToArduino2}</div>`;
+                responseContainer.innerHTML = responseText + followUpText;
+                responseContainer.style.display = "block";
+            })
+            .catch(error => console.error("Error:", error));
+        } else {
+            console.error("No last response to repeat.");
+        }
+    });
+});
+</script>
+</head>
+<body>
+    <nav>
+        <a href="https://example.com/promo1" target="_blank">Promo 1</a>
+        <a href="https://example.com/promo2" target="_blank">Promo 2</a>
+    </nav>
+    <button id="startConversation">Start Conversation</button>
+    <input type="text" id="commandInput" placeholder="Enter your response">
+    <button id="submitCommand">Submit</button>
+    <button id="toggleResponse">Show response</button>
+    <button id="repeatCommand">Repeat</button>
+    <div id="initialQuestionContainer"></div>
+    <div id="responseContainer"></div>
+</body>
+</html>

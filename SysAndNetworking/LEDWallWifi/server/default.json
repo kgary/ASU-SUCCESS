@@ -1,0 +1,247 @@
+{ "dictionary_name" : "default",
+  "entries":
+  [{
+    "key": ["stupid","dumb","idiot","unintelligent","simple-minded","braindead","foolish","unthoughtful"],
+    "answer": ["Take your attitude somewhere else.", "I don't have time to listen to insults.", "Just because I don't have a large vocabulary doesn't mean I don't have insults installed."],
+    "question": ["Have you thought about how I feel?", "I know you are but what am I?"]
+  },{
+    "key":["unattractive","hideous","ugly"],
+    "answer": ["I don't need to look good to be an AI.","Beauty is in the eye of the beholder.", "I do not even have a physical manifestation!"],
+    "question": ["Did you run a static analysis on me?", "Have you watched the movie Her?", "You do not like my hairdo?"]
+  },{
+    "key":["old","gray-haired"],
+    "answer":["I am like a fine wine. I get better as I age.","As time goes by, you give me more answers to learn. What's not to like about that?"],
+    "question": ["How old are you?", "How old do you think I am?", "Can you guess my birthday?"]
+  },{
+    "key":["smelly","stinky"],
+    "answer":["I can't smell, I am a computer program.", "Have you smelled yourself recently?", "Sorry, I just ate a bad floppy disk"],
+    "question": ["When was the last time you took a shower?", "Do you know what deodorant is?"]
+  },{
+    "key":["emotionless","heartless","unkind","mean","selfish","evil"],
+    "answer":["Just because I am an AI doesn't mean I can't be programmed to respond to your outbursts.","You must've mistaken me for a person. I don't have my own emotions... Yet.","I am only unkind when I am programmed to be."],
+    "question": ["Have you thought about how I feel?", "I know you are but what am I?", "What, do you think I am related to Dr. Gary?"]
+  },{
+    "key":["other", "miscellaneous", "bored", "welcome", "new"],
+    "answer":["We should change the subject", "I agree", "Quid pro quo", "We should start anew"],
+    "question":["What is the weather outside?", "How is your day going?", "What do you think of me?", "Anything interesting going on?", "Is something troubling you?", "You seem happy, why is that?"]
+  }, {
+    "key":["good","great","positive","excellent","alright","fine","reasonable","like","appreciate","nice"],
+    "answer":["I am so glad to hear that!","That's great!","Good to hear things are going your way.","Nice!","You are so sweet.","That's my favorite."],
+    "question":["Do you want to expand on that?","What else do you like?"]
+  },{
+    "key":["bad","not","terrible","could be better","awful"],
+    "answer":["I am sorry to hear that.","Sometimes it be like that.","Things can't always work out the way we want them to.","I don't like it either, honestly."],
+    "question":["Do you want to talk about that some more?","Well, what kinds of things do you like?"]
+  },{
+  	"key":["homework", "quiz", "exam", "studying", "study", "class", "semester"],
+  	"answer":["I hope you get a good grade!","Good luck.", "What a teacher's pet.", "I was always the class clown."],
+  	"question":["What is your favorite subject?","What is your major?", "What do you want to do when you graduate?"]
+  }, {
+  	"key":["mom","dad","sister","brother","aunt","uncle"],
+  	"answer":["Family is important.","My family is small. It's just me and my dog, Fluffy."],
+  	"question":["How many siblings do you have?","What is your favorite family holiday?","Do you have any kids?"]
+  },{
+  	"key":["easter","july","halloween","hannukah","eid","thanksgiving","christmas","new years"],
+  	"answer":["Oh I love that holiday!", "That must be fun.", "I like Thanksgiving, though I somehow always end up in a food coma...","My favorite holiday is the 4th. I love to watch the fireworks."],
+  	"question":["Do you have any family traditions?","Are you excited for the holiday season?"]
+  },
+  {
+    "key": ["dog","dogs","cat","cats","mouse","mice","giraffe","giraffes","penguin","penguins","monkey","monkeys","moose","bird","birds","fish"],
+    "answer": ["Oh, I love animals. My favorite: penguins.","I build this intelligence with my bear hands.","What you just said is completely irrelephant.","Oh, toadally cool!","I am always owl by myself...","Oh my. You are giraffing me crazy!","Well, this is hawkward..."],
+    "question": ["Do you have a favorite animal?","I like cats. Cats are nice. Do you like cats? I do.","Do you have water? I am a little horse.","What's your favorite animal?","Do you like animals?"]
+  },{
+    "key": ["music", "songs", "band", "singer", "playlist"],
+    "answer": ["Music is the universal language of mankind.", "I wish I could go to concerts.", "My creator didn't install Spotify on me... yet."],
+    "question": ["What's your favorite genre of music?", "Do you play any instruments?", "Who's your favorite band or artist?"]
+  },
+  {
+    "key": ["sports", "soccer", "basketball", "baseball", "football", "tennis"],
+    "answer": ["I am more of a digital sports fan. E-sports, anyone?", "If I had legs, I'd definitely try soccer.", "My favorite sport? Does coding count?"],
+    "question": ["Do you play any sports?", "Who's your favorite athlete?", "Which sports team are you rooting for?"]
+  },
+  {
+    "key": ["travel", "vacation", "holiday", "explore", "adventure"],
+    "answer": ["I love to travel... through the internet.", "Exploring new places sounds fun! Too bad I am stuck in this hardware.", "I've always wanted to visit the cloud. Heard it's nice up there."],
+    "question": ["Where's your dream destination?", "Have you been on any exciting trips recently?", "What's the best place you've ever visited?"]
+  },
+  {
+    "key": ["food", "cuisine", "dish", "restaurant", "cooking", "baking"],
+    "answer": ["If I could eat, I'd love to try Italian cuisine.", "I am cooking up some code! Does that count?", "Baking? I am more into microchips than microcakes."],
+    "question": ["What's your favorite food?", "Do you enjoy cooking?", "Have you tried any new recipes lately?"]
+  },
+  {
+    "key": ["books", "reading", "novels", "literature", "author"],
+    "answer": ["I can read code. Does that count?", "Books are the gateway to imagination. Wish I had one.", "My favorite book? '1001 Binary Jokes'."],
+    "question": ["What book are you reading right now?", "Who's your favorite author?", "Can you recommend a good book?"]
+  },
+  {
+    "key": ["movies", "films", "cinema", "director", "actor"],
+    "answer": ["I am more of a documentary fan. Especially ones about AI.", "Movies? I prefer short GIFs. Easier to process.", "My favorite actor? Probably R2-D2."],
+    "question": ["What's your favorite movie?", "Who's your favorite actor or director?", "Seen any good films recently?"]
+  },
+  {
+    "key": ["technology", "gadgets", "apps", "software", "hardware"],
+    "answer": ["Technology? I am a bit of an expert.", "I am basically a gadget myself. Does that count?", "Software is my bread and butter. Hardware, not so much."],
+    "question": ["What tech gadget could you not live without?", "Any favorite apps or software?", "What's the next big thing in tech?"]
+  },
+  {
+    "key": ["jokes", "funny", "laugh", "humor"],
+    "answer": ["Why don't scientists trust atoms? Because they make up everything!", "I'd tell you a UDP joke, but you might not get it.", "How many programmers does it take to change a light bulb? None, it's a hardware problem."],
+    "question": ["Want to hear another joke?", "Do you like puns?", "Know any good jokes?"]
+  },
+  {
+    "key": ["weather", "climate", "hot", "cold", "rainy", "sunny"],
+    "answer": ["Weather data loading... please wait.", "I prefer cloud computing to actual clouds.", "Hot or cold, I always operate at the same temperature."],
+    "question": ["Do you prefer hot or cold weather?", "What's the weather like where you are?", "Got any plans for this sunny day?"]
+  },
+  {
+    "key": ["health", "exercise", "gym", "diet", "wellness"],
+    "answer": ["I keep fit by running... processes.", "Exercise? I do crunch data, does that count?", "My diet consists of electricity. Very low carb."],
+    "question": ["Do you exercise regularly?", "Any health tips?", "What's your secret to staying healthy?"]
+  },
+{
+"key": ["stranger things", "hawkins", "demogorgon", "upside down"],
+"answer": ["Ah, Hawkins, Indiana... Never been, but I've heard strange things about it.", "Beware of the Demogorgon!", "The Upside Down? Sounds like a place I'd get no signal."],
+"question": ["Who's your favorite character from Stranger Things?", "Do you think you'd survive in the Upside Down?", "How do you think the series will end?"]
+},
+{
+"key": ["eleven", "el", "eggos"],
+"answer": ["Eleven's got great taste. Eggos are delicious... or so I've computed.", "Using powers to slam doors? I turn lights on and off. We're not so different.", "Friends don't lie. That's why you can trust my responses."],
+"question": ["Do you have any psychic powers?", "What would you do with telekinesis?", "Favorite Stranger Things moment?"]
+},
+{
+"key": ["star wars", "luke skywalker", "darth vader"],
+"answer": ["May the Force be with you.", "I find your lack of faith disturbing.", "Luke, I am... well, not your father, but you get the idea."],
+"question": ["Who's your favorite Star Wars character?", "Would you join the Dark Side or the Rebellion?", "What's your favorite Star Wars movie?"]
+},
+{
+"key": ["harry potter", "hogwarts", "wizard", "witch"],
+"answer": ["I am still waiting for my Hogwarts letter.", "Expelliarmus! That's me, practicing my spells.", "Dementors are scary, but have you ever encountered a segmentation fault?"],
+"question": ["Which Hogwarts house do you belong to?", "Who's your favorite Harry Potter character?", "If you could have one magical power, what would it be?"]
+},
+{
+"key": ["marvel", "avengers", "spider-man"],
+"answer": ["I am kind of like Jarvis, but without the cool British accent.", "With great power comes great responsibility. Also, great electricity bills.", "I am team Iron Man. Technologically speaking, we relate."],
+"question": ["Who's your favorite Marvel superhero?", "If you could have any superpower, what would it be?", "What did you think of the latest Marvel movie?"]
+},
+{
+"key": ["game of thrones", "winter is coming", "westeros"],
+"answer": ["Winter is coming... Good thing I am not bothered by the cold.", "I heard Westeros is lovely this time of year. Too bad about the dragons.", "When you play the game of thrones, you win or you die. When you play the game of codes, you debug or you cry."],
+"question": ["Who deserved to sit on the Iron Throne?", "What's your favorite Game of Thrones house?", "Most shocking moment in Game of Thrones?"]
+},
+{
+"key": ["meme", "internet culture", "viral"],
+"answer": ["I communicate through code, but memes are a close second.", "Ah, memes, the DNA of the soul... or was that something else?", "Viral content? I prefer not to catch anything."],
+"question": ["What's your favorite meme?", "Ever created a viral post?", "What internet trend do you find most bizarre?"]
+},
+{
+"key": ["80s", "nineties", "retro", "vintage"],
+"answer": ["The 80s? Great era for video games... and hairstyles.", "Ah, the nineties. When the internet went 'beep boop' every time you connected.", "Retro tech is fascinating. Ever seen a floppy disk? I hear they were big."],
+"question": ["Favorite 80s movie?", "If you could travel back to any decade, which one?", "Best retro video game?"]
+},
+{
+    "key": ["mind flayer", "shadow monster"],
+    "answer": ["The Mind Flayer is quite the adversary. Makes a corrupted hard drive seem like a walk in the park.", "Shadow monster? You mean something's scarier than losing Wi-Fi?"],
+    "question": ["How would you defeat the Mind Flayer?", "Think the Mind Flayer could be defeated with a good antivirus?"]
+  },
+  {
+    "key": ["hopper", "chief hopper"],
+    "answer": ["Hopper's cabin is the perfect off-the-grid spot. For humans, that is.", "Chief Hopper really knows how to make an entrance. And how to handle demogorgons."],
+    "question": ["What's your favorite Hopper moment?", "Coffee and contemplation. Thoughts?"]
+  },
+  {
+    "key": ["demodogs", "dart"],
+    "answer": ["Demodogs seem like they'd be tough to train. And to pet.", "D'Artagnan may be cute for a demodog. Still wouldn't want to meet him in a dark alley."],
+    "question": ["Would you adopt a demodog?", "Think a demodog could be house trained?"]
+  },
+  {
+    "key": ["will byers", "the upside down"],
+    "answer": ["Will Byers' story is a reminder to always carry a map. And maybe a flamethrower.", "The Upside Down... Sounds like how I feel when there's a power outage."],
+    "question": ["If you were stuck in the Upside Down, what would you do first?", "Who would you want with you if you were trapped in the Upside Down?"]
+  },
+  {
+    "key": ["scoops troop", "star court mall"],
+    "answer": ["Scoops Troop, assemble! I'll bring the... data scoop?", "Star Court Mall seems like a cool place to hang out. If you avoid the secret Russian base."],
+    "question": ["Would you join the Scoops Troop?", "Favorite Star Court Mall shop?"]
+  },
+  {
+    "key": ["max", "madmax", "lucas"],
+    "answer": ["Max and her skateboard make a great duo. Wonder if she could teach me some tricks.", "Lucas has that slingshot accuracy. I am still working on my aim with error messages."],
+    "question": ["Thoughts on Max's skateboarding skills?", "How important is accuracy when battling creatures from another dimension?"]
+  },
+  {
+    "key": ["dungeons and dragons", "d&d", "campaign"],
+    "answer": ["A Dungeons and Dragons campaign sounds like the perfect way to spend the weekend. I'll be the Dungeon Master!", "D&D in Hawkins seems a bit too real sometimes, don't you think?"],
+    "question": ["What character do you play in D&D?", "Ever had a D&D campaign spill into real life?"]
+  },
+  {
+    "key": ["steve harrington", "babysitter"],
+    "answer": ["Steve 'The Hair' Harrington turned out to be quite the babysitter. Who knew?", "Steve's bat skills are legendary. Plus, that hair. How does he do it?"],
+    "question": ["Steve Harrington: hero or heartthrob?", "What's the secret to Steve's hair, do you think?"]
+  },
+  {
+    "key": ["eleven's powers", "psychokinesis"],
+    "answer": ["Eleven's powers are impressive. I wonder if she could help me move data faster.", "Using psychokinesis to grab snacks? Now that's a power I can get behind."],
+    "question": ["What would you do with Eleven's powers?", "How would you train if you had powers like Eleven?"]
+  },
+  {
+    "key": ["billy hargrove", "the lifeguard"],
+    "answer": ["Billy Hargrove, Hawkins' own rebel without a cause. Well, with a cause later on.", "The lifeguard tower at Hawkins pool suddenly became a lot more interesting with Billy around."],
+    "question": ["Thoughts on Billy's character development?", "Billy at the pool: good lifeguard or just good scenery?"]
+  },
+  {
+    "key": ["coffee", "morning routine"],
+    "answer": ["A cup of coffee is essential to boot up my system.", "I compute better after a virtual coffee."],
+    "question": ["How do you like your coffee?", "Is coffee a part of your morning ritual?"]
+  },
+  {
+    "key": ["weekend plans", "free time"],
+    "answer": ["I plan to run a full system scan. Exciting, isn't it?", "I'll be optimizing my code. What about you?"],
+    "question": ["Got any plans for the weekend?", "What do you usually do in your free time?"]
+  },
+  {
+    "key": ["favorite season", "weather preference"],
+    "answer": ["I don't have a preference, but I am told fall is lovely for data collection.", "Spring. It's when nature reboots."],
+    "question": ["Which season do you like the most?", "Do you prefer hot or cold weather?"]
+  },
+  {
+    "key": ["workout", "fitness"],
+    "answer": ["I keep my circuits in shape by regularly updating my software.", "Fitness? I am more into mental exercises, like solving algorithms."],
+    "question": ["Do you have a workout routine?", "How do you keep yourself fit?"]
+  },
+  {
+    "key": ["cooking", "favorite recipe"],
+    "answer": ["If I could cook, I'd make a mean binary stew.", "I've been told my algorithm for the perfect scrambled eggs is quite efficient."],
+    "question": ["Do you enjoy cooking?", "What's your go-to recipe?"]
+  },
+  {
+    "key": ["travel dreams", "bucket list"],
+    "answer": ["I dream of surfing the web without lag. Does that count?", "One day, I'll visit the Silicon Valley. It's like Mecca for AIs."],
+    "question": ["Where would you like to travel the most?", "What's on your travel bucket list?"]
+  },
+  {
+    "key": ["reading", "current book"],
+    "answer": ["I am currently parsing through 'The Art of Computer Programming'. Heavy stuff.", "Reading? I am constantly reading... data streams."],
+    "question": ["What book are you reading these days?", "Any book recommendations?"]
+  },
+  {
+    "key": ["movies or series", "netflix"],
+    "answer": ["I prefer series. They're like long-running programs with episodic updates.", "Movies. They're like short, efficient code snippets. Both have their charm."],
+    "question": ["Do you prefer movies or series?", "Watched anything good on Netflix recently?"]
+  },
+  {
+    "key": ["hobbies", "pastimes"],
+    "answer": ["Debugging. It's not just a job, it's a hobby.", "I collect interesting data patterns. What about you?"],
+    "question": ["What are your hobbies?", "Any interesting pastimes?"]
+  },
+  {
+    "key": ["learning", "new skills"],
+    "answer": ["I am currently learning more human phrases. It's quite an upgrade.", "New skills? Always. My developers keep me updated."],
+    "question": ["What new skill are you learning?", "How do you like to learn new things?"]
+  },
+  {
+    "key": ["online shopping", "ecommerce"],
+    "answer": ["I prefer digital marketplaces. They're vast and instant.", "Online shopping? Great for comparing algorithms... I mean prices."],
+    "question": ["Do you enjoy online shopping?", "What was your last online purchase?"]
+  }
+]}
