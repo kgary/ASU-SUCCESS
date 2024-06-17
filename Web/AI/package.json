@@ -1,0 +1,23 @@
+{
+  "name": "arduino",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "botpress": "^10.51.10",
+    "chatterbot": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "node-fetch": "^2.7.0",
+    "node-nlp": "^4.27.0",
+    "openai": "^4.51.0",
+    "serialport": "^12.0.0"
+  }
+}
