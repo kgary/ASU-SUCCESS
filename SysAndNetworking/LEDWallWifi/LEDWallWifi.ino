@@ -7,10 +7,6 @@
 const char* ssid = "FenwayPark24";  // Replace with your hotspot SSID
 const char* password = "SUCCESS!";  // Replace with your hotspot password
 
-// Server details
-const char* serverIP = "192.168.79.195";
-const int serverPort = 8080;
-
 // How many leds in your strip?
 #define NUM_LEDS 100
 #define DATA_PIN 6
@@ -86,7 +82,6 @@ void loop() {
       String requestData = readRequest(client);
       Serial.println("Request received: " + requestData);
       processInputString(requestData);
-      // sendLogToServer(requestData);
       client.flush(); // Clear the input buffer
       client.stop();
       delay(50);
@@ -254,22 +249,4 @@ void flicker() {
   delay(random_delay);
   fill_solid(leds, NUM_LEDS, CRGB::Black); // Turn off LEDs
   FastLED.show();
-}
-
-void sendLogToServer(String log) {
-  WiFiClient logClient;
-  if (!logClient.connect(serverIP, serverPort)) {
-    Serial.println("Connection to log server failed");
-    return;
-  }
-  logClient.print(String("GET /log?message=") + log + " HTTP/1.1\r\n" +
-                  "Host: " + serverIP + "\r\n" +
-                  "Connection: close\r\n\r\n");
-  delay(10);
-  while (logClient.available()) {
-    String line = logClient.readStringUntil('\r');
-    Serial.print(line);
-  }
-  Serial.println();
-  logClient.stop();
 }
