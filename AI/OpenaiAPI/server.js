@@ -3,8 +3,7 @@ const http = require('http');
 const Dictionary = require('./dictionary');
 const fs = require('fs');
 const cors = require('cors');
-const { OpenAI } = require('openai');
-const { NlpManager } = require('node-nlp');
+require('dotenv').config()
 
 const app = express();
 const port = 8080;
@@ -65,46 +64,16 @@ let dictionary = new Dictionary(JSON.parse(dictionaryData));
 // }
 
 
-// const openai = new OpenAI({
-//     apiKey: 'api-key' // Replace with your OpenAI API key
-// });
-
-const manager = new NlpManager({ languages: ['en'] });
-
-// Train the NLP model
-manager.addDocument('en', 'hello', 'greetings.hello');
-manager.addDocument('en', 'hi', 'greetings.hello');
-manager.addDocument('en', 'how are you', 'greetings.howareyou');
-manager.addDocument('en', 'what is your name', 'agent.name');
-
-manager.addAnswer('en', 'greetings.hello', 'Hello! How can I help you today?');
-manager.addAnswer('en', 'greetings.howareyou', 'I am fine, thank you! How can I assist you?');
-manager.addAnswer('en', 'agent.name', 'I am your friendly chatbot.');
-
-(async () => {
-    console.log('Training the NLP model...');
-    await manager.train();
-    manager.save();
-    console.log('Training completed.');
-
-    // Start the server after training is complete
-    app.listen(port, () => {
-        console.log(`Server running at http://localhost:${port}`);
-    });
-})();
-
-
 async function getAIResponse(prompt) {
-    const response = await manager.process('en', prompt);
-    return response.answer;
-    // const response = await openai.completions.create({
-    //     model: 'gpt-3.5-turbo',
-    //     prompt: prompt,
-    //     max_tokens: 150,
-    //     temperature: 0.9,
-    // });
 
-    // return response.choices[0].text.trim();
+    axios.post('http://localhost:8888/ai-response', { prompt:prompt, encryptedApiKey:process.env.OPENAI_API_KEY })
+    .then(response => {
+        console.log('AI Response:', response.data.response);
+    })
+    .catch(error => {
+        console.error('Error fetching AI response from server:', error);
+    });
+
 }
 
 // Routes
@@ -171,6 +140,6 @@ app.post('/send-command', async (req, res) => {
 // });
 
 // Start the server
-// app.listen(port, () => {
-//     console.log(`Server running at http://localhost:${port}`);
-// });
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
