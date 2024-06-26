@@ -28,17 +28,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installation
 
-1. Clone the repository:
+1. Navigate to the repository:
 
 ```bash
-git clone https://github.com/kartavya-asu/CTF_LeaderBoard.git
-
-```
-
-2. Navigate to the repository:
-
-```bash
-cd CTF_LeaderBoard
+cd CTF
 ```
 
 3. To run backend server
