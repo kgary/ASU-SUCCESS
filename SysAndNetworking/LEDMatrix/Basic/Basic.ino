@@ -10,7 +10,7 @@ void setup() {
 }
 
 void loop() {
-  uint8_t pixels[64];
+  uint8_t pixels[96];
 
  // Turn on all LEDs
   for (int row = 0; row < 8; row++) {
