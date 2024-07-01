@@ -28,15 +28,6 @@ void loop() {
   matrix.loadPixels(pixels, MATRIX_ROWS * MATRIX_COLS); // Update the display
   delay(DELAY);    // Wait for DELAY
 
-  // Turn off all LEDs
-  for (int row = 0; row < MATRIX_ROWS; row++) {
-    for (int col = 0; MATRIX_COLS < 12; col++) {
-      pixels[row * MATRIX_COLS + col] = 0; // Turn off the pixel
-    }
-  }
-  matrix.loadPixels(pixels, MATRIX_ROWS * MATRIX_COLS); // Update the display
-  delay(DELAY);    // Wait for DELAY
-
   // TRY THIS
   // 1. Can you write loops to make the middle row only light up?
   // 2. Can you write loops to make the middle column light up?
