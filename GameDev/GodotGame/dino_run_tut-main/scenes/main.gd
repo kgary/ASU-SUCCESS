@@ -18,7 +18,7 @@ var score : int
 const SCORE_MODIFIER : int = 10
 var high_score : int
 var speed : float
-const START_SPEED : float = 5.0
+const START_SPEED : float = 15.0 #Can be changed
 const MAX_SPEED : int = 25
 const SPEED_MODIFIER : int = 5000
 var screen_size : Vector2i
@@ -28,6 +28,11 @@ var last_obs
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Set desired window size
+    var width = 1280  # Set your desired width
+    var height = 720  # Set your desired height
+    DisplayServer.window_set_size(Vector2(width, height))
+
 	screen_size = get_window().size
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
 	$GameOver.get_node("Button").pressed.connect(new_game)
