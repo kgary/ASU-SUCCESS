@@ -9,8 +9,16 @@
 // Define the array of LEDs
 CRGB leds[NUM_LEDS];
 //                    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-String colorLetterIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-String letterIndex = colorLetterIndex;
+//String colorLetterIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//String letterIndex = colorLetterIndex;
+
+// Depending on where you connect your Arduino to the lights (beginning or end),
+// you use forward or reverse lettering, and then have to figure out what lights to skip
+//                    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+//String letterIndex = "--ABC-DEFG-H------Q-P-O-NM-LKJI-----RSTU-VWX-Y-Z--";
+String letterIndex = "--ZYX-W-V-UT-S----JK-L-MNO-P-QR-----IHG-F-EDC-B-A-";
+//String colorLetterIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+String colorLetterIndex = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
 
 // Define colors for each letter
 uint32_t colorIndex[26] = {
@@ -51,13 +59,17 @@ void setup() {
 }
 
 void loop() {
-    // turnOnAll();
-    // writeWord("HELLO");
+    turnOnAll();
+    delay(500);
+    writeWord("HELLO");
+    delay(500);
     if (Serial.available() > 0) {
         String input = Serial.readStringUntil('\n');
         input.trim();  // Remove any whitespace
+        input.toUpperCase();  // Convert to uppercase to match the wall
         writeWord(input);
     }
+    delay(3000);
 }
 
 void turnOnAll() {
