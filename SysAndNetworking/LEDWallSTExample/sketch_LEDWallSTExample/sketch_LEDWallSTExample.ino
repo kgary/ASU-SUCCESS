@@ -4,11 +4,14 @@
 // How many leds in your strip?
 #define NUM_LEDS 50
 
-#define DATA_PIN    5
+#define DATA_PIN    6
 #define BRIGHTNESS  255
 
 // Define the array of leds
 CRGB leds[NUM_LEDS];
+
+// Depending on where you connect your Arduino to the lights (beginning or end),
+// you use forward or reverse lettering, and then have to figure out what lights to skip
 //                    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //String letterIndex = "--ABC-DEFG-H------Q-P-O-NM-LKJI-----RSTU-VWX-Y-Z--";
 String letterIndex = "--ZYX-W-V-UT-S----JK-L-MNO-P-QR-----IHG-F-EDC-B-A-";
@@ -62,11 +65,14 @@ void loop() {
   delay(2000);
   fill_solid( leds, NUM_LEDS, CRGB::Black);
   
-  writeWord("NO",1000,300);
+  writeWord("ASU",1000,300);
   delay(500);
-  writeWord("TICKET",1000,300);
+  writeWord("SUCCESS",1000,300);
   flickerLeds(50);
   writeWord("RUN",1300,300);
+
+  // Challenge 1: Spell out your name on the wall
+
   turnOnAll();
   flickerLeds(100);
   allToFullBright();
