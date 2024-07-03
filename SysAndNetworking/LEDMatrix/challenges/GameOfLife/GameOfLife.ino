@@ -20,17 +20,20 @@
 #define MAX_X 12
 
 // time to wait between turns
-#define TURN_DELAY 200
+#define TURN_DELAY 100
 
 // how many turns per game before starting a new game
 // you can also use the reset button on the board
-#define TURNS_MAX 60
+#define TURNS_MAX 90
 
 // number of patterns in predefined list
-#define MAX_PATTERNS 4
+#define MAX_PATTERNS 7  // 6 preset 1 random
 
 // how many turns to wait if there are no changes before starting a new game
-#define NO_CHANGES_RESET 4
+#define NO_CHANGES_RESET 9
+
+// The % of pixels (i/d) turned on for the last random entry (challenge 3)
+#define DENSITY 3
 
 int turns = 0;       // counter for turns
 int noChanges = 0;  // counter for turns without changes
@@ -53,7 +56,10 @@ String patternNames[] = {
   "Glider",
   "Light-weight spaceship",
   "R-Pentomino",
-  "Diehard"
+  "Diehard",
+  "Happy",
+  "Heart",
+  "Random"  // Challenge 3
 };
 
 // custom starting grid patterns
@@ -97,9 +103,39 @@ boolean cGrids[][MAX_Y][MAX_X] = {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    },
+    /* Challenge 1: Bring in happy and heart matrices from Basic */
+    /* You can also try Wink if you like                         */
+    { // happy
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0},
+      {0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+      {0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    },
+    { // heart
+     {0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0},
+     {0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0},
+     {0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0},
+     {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0},
+     {0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0},
+     {0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0},
+     {0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
+     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    },
+    { // spot for random
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     }
-    // Challenge 1: Can you add happy, heart, and/or wink?
-    // Challenge 2 (advanced): Can you add a random starting matrix?
 };
 
 
@@ -108,6 +144,12 @@ ArduinoLEDMatrix matrix;
 void setup() {
   Serial.begin(9600);
   delay(1000);
+
+  // if analog input pin 0 is unconnected, random analog
+  // noise will cause the call to randomSeed() to generate
+  // different seed numbers each time the sketch runs.
+  // randomSeed() will then shuffle the random function.
+  randomSeed(analogRead(0));  // Challenge 3
 
   Serial.println("Conway's game of life on Arduino LED Matrix");
   matrix.begin();
@@ -118,6 +160,13 @@ void setup() {
 }
 
 void loop() {
+  // Challenge 3: Random population of the last spot of the matrix with 1/DENSITY density
+  for (int row = 0; row < MAX_Y; row++) {
+    for (int col = 0; col < MAX_X; col++) {
+      cGrids[MAX_PATTERNS-1][row][col] = random(DENSITY);
+    }
+  }
+
   delay(TURN_DELAY);
 
   playGoL();
