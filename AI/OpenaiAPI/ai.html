@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     document.getElementById("submitCommand").addEventListener("click", function() {
-        const command = {wordToArduino1: document.getElementById("commandInput").value};
+        const command = {word1: document.getElementById("commandInput").value};
         fetch("http://localhost:8080/send-command", {
             method: "POST",
             headers: {
@@ -92,47 +92,13 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             lastResponse = data;
-            const responseText = `<div class='responseText'>Response: ${data.wordToArduino1}</div>`;
-            const followUpText = `<div class='responseText'>Follow-up: ${data.wordToArduino2}</div>`;
+            const responseText = `<div class='responseText'>Response: ${data.aiResponse}</div>`;
+            const followUpText = `<div class='responseText'>Follow-up: ${data.followUpQuestion}</div>`;
             responseContainer.innerHTML = responseText + followUpText;
             responseContainer.style.display = "block";
             initialQuestionContainer.style.display = "none"; // Hide initial question on response
         })
         .catch(error => console.error("Error:", error));
-    });
-
-    toggleButton.addEventListener("click", function() {
-        if (responseContainer.style.display === "none") {
-            responseContainer.style.display = "block";
-            toggleButton.innerText = "Hide response";
-        } else {
-            responseContainer.style.display = "none";
-            toggleButton.innerText = "Show response";
-        }
-    });
-
-    repeatButton.addEventListener("click", function() {
-        if (lastResponse) {
-            const repeatRequestData = {command: lastResponse, repeat: true};
-
-            fetch("http://localhost:8080/send-command", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(repeatRequestData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                const responseText = `<div class='responseText'>Response: ${data.wordToArduino1}</div>`;
-                const followUpText = `<div class='responseText'>Follow-up: ${data.wordToArduino2}</div>`;
-                responseContainer.innerHTML = responseText + followUpText;
-                responseContainer.style.display = "block";
-            })
-            .catch(error => console.error("Error:", error));
-        } else {
-            console.error("No last response to repeat.");
-        }
     });
 });
 </script>
