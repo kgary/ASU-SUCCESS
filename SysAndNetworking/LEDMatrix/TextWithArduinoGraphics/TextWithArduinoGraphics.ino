@@ -6,19 +6,6 @@ ArduinoLEDMatrix matrix;
 
 void setup() {
   matrix.begin();
-
-  matrix.beginDraw();
-
-  matrix.stroke(0xFFFFFFFF);
-  matrix.textScrollSpeed(100);
-
-  const char text[] = "  SUCCESS  ";
-  matrix.textFont(Font_4x6);
-  matrix.beginText(0, 1, 0xFFFFFF);
-  matrix.println(text);
-  matrix.endText(SCROLL_LEFT);
-
-  matrix.endDraw();
 }
 
 void loop() {
@@ -27,14 +14,16 @@ void loop() {
   matrix.beginDraw();
 
   matrix.stroke(0xFFFFFFFF);
-  matrix.textScrollSpeed(50);
+  matrix.textScrollSpeed(100);
 
   // add the text
-  const char text[] = "    Scrolling text!    ";
-  matrix.textFont(Font_5x7);
+  const char text[] = "     SUCCESS!     ";
+  matrix.textFont(Font_4x6);
   matrix.beginText(0, 1, 0xFFFFFF);
   matrix.println(text);
   matrix.endText(SCROLL_LEFT);
 
   matrix.endDraw();
+
+  // Challenge 1: Scroll your name!
 }
