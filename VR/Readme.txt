@@ -1,2 +1,1 @@
-Folder for holding game examples and starting code for the camp
-VR
+Link for the ST room VR game - https://www.dropbox.com/scl/fi/f05hetcpejaa1igdjrby7/VR-Game.zip?rlkey=ziqitvtgd1vrzd2fr2enoytok&st=hkff16g9&dl=0
