@@ -2,6 +2,8 @@
 
 // Challenge 1: set a constant for the delay
 #define DELAY 1000
+// ChaLLenge 3: Need a maximum random interval
+#define MAX_INTERVAL 5
 
 #define LED_PIN     6
 #define NUM_LEDS    50
@@ -32,7 +34,12 @@ void loop() {
   delay(DELAY);
 
   // Challenge 2: Write and call a function runTwoByTwo that turns on every other light
+  runTwoByTwo();
+  delay(DELAY);
+
   // Challenge 3: Write and call a function that turns on the next light by random
+  runByRandomInterval();
+  delay(DELAY);
 }
 
 void turnOn() {
@@ -68,4 +75,29 @@ void runOneByOne() {
   }
   FastLED.show();
   Serial.println("Run one by one completed");
+}
+
+// Challenge 2
+void runTwoByTwo() {
+  for (int i = 0; i < NUM_LEDS; i=i+2) {
+    leds[i] = CRGB::White;
+    FastLED.show();
+    delay(100);
+    leds[i] = CRGB::Black;
+  }
+  FastLED.show();
+  Serial.println("Run two by two completed");
+}
+
+// Challenge 3
+void runByRandomInterval() {
+  randomSeed(analogRead(0));
+  for (int i = 0; i < NUM_LEDS; i=i+random(MAX_INTERVAL)) {
+    leds[i] = CRGB::White;
+    FastLED.show();
+    delay(100);
+    leds[i] = CRGB::Black;
+  }
+  FastLED.show();
+  Serial.println("Run by random interval completed");
 }
