@@ -1,0 +1,105 @@
+<HTML>
+  <head>
+    <Title>ASU Eliza!</Title>
+    <style>
+      body {
+      font-family: Helvetica, sans-serif;
+      font-size:28px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Overview</h2>
+    <p>
+      Since the early days of computing, humans wondered if computers could be made "intelligent".
+      The father of modern day computing Alan Turing (movie: The Imitation Game) proposed
+      <i><a href="https://en.wikipedia.org/wiki/Turing_test" target="_blank">the Turing test</a></i>,
+      or the argument that if a computer could communicate like a human, then it possessed human intelligence.
+      To demonstrate this philosophical approach,
+      <a href="http://psych.fullerton.edu/mbirnbaum/psych101/Eliza.htm" target="_blank">
+	a computer program named ELIZA</a> was created to emulate
+      <a href="https://www.goodtherapy.org/learn-about-therapy/types/person-centered" target="_blank">
+	a Rogerian psychological therapist</a> to a person by responding to queries. In essence,
+        Eliza was ChatGPT before ChatGPT was!
+    </p>
+    <h2>Activities</h2>
+    <p>
+      For these activities we are giving you your own Eliza! The file <a href="eliza_local.html">eliza_local.html</a>
+      has a self-contained Eliza program, no web server needed.
+    </p>
+    <p>
+      <i>Pro tip:</i> A software engineering principle is incremental problem solving; each of the
+      numbered items under each Activity are independent, so “code a little test a little” by getting
+      each one done and saving it. Then tackle the next step!
+    </p>
+    <p>
+      <i>Another pro tip:</i> You are starting from a program I give you and modifying it to make it better.
+      It is tempting to want to go straight to the code and understand it, but unless you are very
+      experienced, you won't know where to start and it will be jibberish. Instead, run Eliza a few times
+      and make an outline of the <i>algorithm</i> to so you understand the <i>process</i> first! This is
+      another software engineering technique called <a href="./algorithm.html"><i>reverse engineering</i></a>.
+    </p>
+    <UL>
+      <LI><b>Activity 1</b>: Modify the HTML<br/>
+	Let’s personalize your Eliza! Try some of the following:<br/>
+	<OL>
+	<LI>Change the greeting when the page first runs.</LI>
+	<LI>Add a new paragraph using a p tag to have Eliza give a longer introduction to herself.
+	  Consider using <a href="https://www.w3schools.com/html/html_formatting.asp" target="_blank">
+	    various formatting mechanisms</a> like you would in Google Docs.
+	</LI>
+	<LI>What does Eliza look like? Find a picture on the Internet and insert it in your Eliza welcome
+	  message using the <a href="https://www.w3schools.com/html/html_images.asp" target="_blank">
+	  image tag</a>. 
+	</LI>
+        </OL>
+    </UL>
+    <UL>
+      <LI><b>Activity 2</b>: Add some Javascript<br/>
+	Let’s make your Eliza more intelligent by modifying what she knows. What she knows is stored in
+	the <i>dict</i> variable at the bottom of the document.Try some of the following:<br/>
+	<OL>
+	<LI>For each existing key/phrases in the dictionary, add more keywords and more phrases</LI>
+	<LI>Expand Eliza's vocabularly by adding new - keyword and phrase arrays (pairings)</LI>
+	<LI>Can you think of ways to modify what Eliza says to make her sounds more <i>human</i></LI>
+	<LI>(<i>Challenge!</i>) Have Eliza say something to restart the conversation if the user does
+	  not type in a response in 20 seconds. To do this challenge, you need to use a new type of
+	  <i>event</i> called a
+	  <a href="https://www.w3schools.com/jsref/met_win_settimeout.asp" target="_blank">timer event</a>. 
+	</LI>
+        </OL>
+    </UL>
+    <UL>
+      <LI>(Advanced) Add new features to Eliza!<br/>
+	See if you can do the following:
+	<OL>
+	  <LI>If the user inputs just the word “quit” when talking to Eliza, reset the program
+	    to the beginning (without re-loading the webpage).</LI>
+	  <LI>Change to an ASU SUCCESS theme! Eliza has some pretty boring categories. Make an ASU-inspired theme
+	    by changing Eliza to (these are just examples):
+	    <UL>
+	      <LI>Vecna – answers all things about the Upside Down</LI>
+	      <LI>Your Dad – seems to be all-knowing about a significant number of things</LI>
+	      <LI>Your Mom – expresses a lot of empathy for anything you say</LI>
+	      <LI>Your Dog - just what is your puppy thinking?</LI>
+	      <LI>A favorite movie character - Mine is Kevin from Despicable Me!</LI>
+	    </UL>
+	    Or whatever you want! Put images, phrasings, or anything  in-character (be nice!).
+	    You can even make it a secret friend and you can see if you can get the friend to guess
+	    who yours is!
+	  </LI>
+	  <LI>Make Eliza more intelligent. Can you think of ways to make Eliza more intelligent?
+	    Yes Activity 2 does that in some ways, but what else can you think of? Keep in mind the
+	    Turing test – the idea is to trick someone into believing your computer program is actually
+	    a human! What kind of human traits can you inject that might trick the user into thinking
+	    Eliza is ALIVE? Make a short (3 minutes or less) YouTube video of you running a Turing test
+	    of your (modified) Eliza versus a human and see if you can trick your user!
+	  </LI>
+	</OL>
+    </UL>
+    </p>
+    <p>
+      This activity, while short, includes some <a href="./debrief.html">very real things about computing</a>.
+    </p>
+</body>
+</HTML>

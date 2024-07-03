@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head><title>Eliza the Rogerian Therapist</title></head>
+<body align="center">
+<h2> Eliza </h2>
+
+<div id="name" style="display:block">
+  <form onsubmit="showChat(); return false;">
+    Hi. What is your name? <br>
+    <input id="username" type="text" name="uname" size=50 ><br>
+  </form>
+</div>
+<p><div id="welcomeArea"></div></p>
+<p><div id="chatArea"></div></p>
+</body>
+<script type="text/javascript">
+//variables needed to remember last used messages
+var lastUsedNotFoundMessage = -1;
+var responseHistory = [];
+
+function showChat(){
+  var name=document.getElementById("username").value;
+  if (name == undefined || name == "" || name == null) {
+        return;
+    }
+  //store name for later use
+  localStorage.name=name;
+  document.getElementById("name").innerHTML="";
+  //get random welcome msg
+  var welcomeMsg = getWelcomeMsg();
+  document.getElementById("welcomeArea").innerHTML="<p>Eliza: HI " + name + ", welcome. I am Eliza." +" "+ welcomeMsg+"</p>";
+  document.getElementById("chatArea").innerHTML="<form id=msgForm onsubmit=msgFromUser(); return false;>"+"Talk to Eliza: <input id=msg type=text name=msg size=64><br/></form>";
+}
+function getWelcomeMsg(){
+  var welcomeMessages = ["How is your day going?", "Is something troubling you?", "You seem happy, why is that?"];
+  var randomIndex = Math.floor(Math.random() * welcomeMessages.length);
+  return welcomeMessages[randomIndex];
+}
+//handles input from user
+function msgFromUser(){
+    var userInput=document.getElementById("msg").value.trim();
+    document.getElementById("msg").value=" ";
+    var chatContent = document.getElementById("chatArea");
+    // modified to presumed orderedlist
+    chatContent.innerHTML += "<i>" + localStorage.name + "</i>: " + userInput + "<br/>";
+    //process user input and prepare eliza response
+    var elizaResponse = processReply(userInput);
+    //send appropriate eliza response
+    chatContent.innerHTML += "<b>Eliza:</b> " + elizaResponse + "<br/>";
+}
+//check userInput in dict
+function processReply(userInput){
+    console.log(userInput);
+    var wordsInInput = userInput.split(" ");
+    var matchedIndex=-1;
+
+    for(var i=0; i<wordsInInput.length; i++ ) {
+	//check in dictonary
+	for(var j=0;j<dict.length;j++) {
+	    if(dict[j].key.indexOf(wordsInInput[i]) > -1) { //key found
+		matchedIndex = j;
+	    }
+	}
+    }
+    //get related response(phrase) according to the key
+    if(matchedIndex === -1) {
+	//no matchedIndex
+	var notFoundMessages = ["eee! Not sure what are you talking about!", "OOps! Help me understand please!", "Care to explain more?"];
+	var randomIndex = Math.floor(Math.random() * notFoundMessages.length);
+	while (lastUsedNotFoundMessage == randomIndex) {
+            randomIndex = Math.floor(Math.random() * notFoundMessages.length);
+	}
+	lastUsedNotFoundMessage = randomIndex;
+	return notFoundMessages[randomIndex];
+    } else {
+	//get response for that key from dict.json
+	var response = dict[matchedIndex].phrase;
+	//checks for prev response history or if all the response are used then start afresh
+	if (responseHistory.length == 0 || responseHistory[matchedIndex] == undefined || responseHistory[matchedIndex].length == response.length) {
+            responseHistory[matchedIndex] = [];
+	}
+	var randomIndex = Math.floor(Math.random() * response.length);
+	while(responseHistory[matchedIndex].indexOf(randomIndex) > -1)  {
+            randomIndex = Math.floor(Math.random() * response.length);
+	}
+	responseHistory[matchedIndex].push(randomIndex);
+	return response[randomIndex];
+    }
+}
+var dict = [{
+    "key": [ "sad", "happy", "mad", "sick" ],
+    "phrase": [ "Oh, why do you feel that way?", "Do you feel you are in control of your emotions?", "Did Dr. Gary assign too much homework again?" ]
+},
+{
+    "key": [ "pretty", "ugly" ],
+    "phrase": [ "Do you really think I need to look good to be an AI?", "I know you are but what am I?" ]
+},
+{
+    "key": [ "program", "computer", "AI" ],
+    "phrase": [ "How can you be sure I am not a real person?", "Do you think computers will ever develop emotion?", "Do you think programs can be intelligent? Why or why not?" ]
+},
+{
+    "key": [ "exercise", "games", "tv", "sports", "jogging", "sleeping" ],
+    "phrase": [ "I am not sure that is healthy, what else do you do?",
+                "Interesting, what else do you do?"]
+},
+{
+    "key": [ "show", "theater", "movie" ],
+    "phrase": [ "I like shows like Silicon Valley or Chuck. What shows do you like and why?",
+                "I like movies like Terminator, the Matrix, and AI. What movies do you like and why?",
+                "I like going to the movies, the popcorn is the best. What do you do to relax?"]
+},
+{ 
+    "key": [ "stupid", "dumb", "idiot", "emotionless", "heartless", "unkind", "mean", "selfish","evil" ],
+    "phrase": [ "Resorting to insults suggests a deeper psychosis, should we explore that further?",
+                "Would you like me to call your parents for insulting me?" ]
+},
+{
+    "key": [ "smelly", "stinky", "odor" ],
+    "phrase": [ "Have you smelled yourself recently?", "I am sorry to hear, did you shower recently?"]
+},
+{
+    "key": [ "yes", "no", "maybe", "meh" ],
+    "phrase": [ "Really? Tell me more.", "I do not understand, can you explain more?", "OK we should change the subject. How do you feel today?"]
+},
+{
+    "key": [ "hi", "hello", "going" ],
+    "phrase": [ "Hey how is it going with you", "Hi! how do you feel today?", "Hello, what is going on with you?"]
+},
+{
+    "key": [ "bye", "goodbye", "see you", "later" ],
+    "phrase": [ "Wait! I want to know how it is going with you",
+                "Do not leave yet, we have more to discuss. Tell me how you feel?",
+                "OK fine be that way. Why are you not leaving? Tell me."]
+},
+{
+    "key": [ "asu", "ASU", "Sparky", "SUCCESS", "school" ],
+    "phrase": [ "Explain how school makes you feel.", "I think ASU rocks, explain what you like about it?","Fear the Fork! Where do you want to go to college?"]
+}
+];
+</script>
+</html>
