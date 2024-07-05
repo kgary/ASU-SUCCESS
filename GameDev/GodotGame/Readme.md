@@ -16,7 +16,51 @@
 
     Now let's see the game, you must have often seen a running dyno game while you are not connected to internet, Lets create a similar game to it.
 
-Steps for Creating Game:
+
+### For Godot 2D game ####
+1. Clone the repository.
+2. Go to GameDev folder then GodotGame and then go to dino_run.
+3. Open `Godot_v4.2.2-stable_win64` which is present in Godot_v4.2.2-stable_win64 folder in downloads
+4. Click on import new project and then put the project path till dino_run and click open
+5. On double clicking project, it will open up in a window
+6. CLick on play button on the top right corner.
+![alt text](image.png)
+
+
+
+## For deploying to Web ##
+1. On the main screen, click on Project menu from the Navbar.
+2. Click on Export.
+3. On clicking on export, a window will appear, Under presets you will see `Web Runnable`.
+4. If you don't see `Web Runnable` click on ADD, and under add click on `Web `.
+5. Once you click, it will ask to download and install, click on that button.
+6. Then in Preset, click on Web, under web click Export Project.
+7. Create a folder and in folder save the html file.
+8. Add the Server.py to folder where you saved the html file.
+9. Open Command Prompt and navigate to folder where you saved html file.
+10. Then run the server.py file.
+11. In the browser, hit `http://localhost:8000`.
+12. Then click on the html file which you saved.
+
+
+## Features that can be changed ##
+`Main Script`
+1. Obstacle type, they can add or remove obstacles
+2. Starting position of Dyno can be changed
+3. Speed , max difficulty, speed modifier can be changed.
+
+`Making Obstacles`
+1. From the Navbar, click on Scene -> New Scene.
+2. Click on other Node.
+3. After clicking on other Node, an dialog box will appear in it search for `Area2D`.
+4. Now do right click Area2D and add child Node.
+5. In child Node add 2 child Node one is `Sprite2D` and other one is `Collision2D`. See the below image your scene must look like below
+![alt text](image.png)
+6. Now change the setting two 2D, and then click on Sprite2D
+7. From Asset, search an image for which you want to make obstacle, and drag and place in Texture in Sprite2D(present in inspector window).
+8. On click on Collision2D, and go to inspector and click on shape and select appropriate shape.
+9. Click on save.
+10. Add scene using preload function in main script.
 
  ## Creating Scene ##
 

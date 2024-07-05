@@ -60,6 +60,34 @@ function sendToArduino(data) {
     });
 }
 
+async function lightUpLEDStrip(out, flickerCommand){
+    console.log(`Sending to Arduino: ${out.aiResponse}`);
+    try {
+        await sendToArduino(JSON.stringify({ command: out.aiResponse.toUpperCase() }));
+        console.log('First command sent successfully.');
+    } catch (error) {
+        console.error('Error sending first command to Arduino:', error);
+    }
+
+    console.log('Sending flicker command to Arduino.');
+    try {
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Ensure 2-second delay
+        await sendToArduino(flickerCommand);
+        console.log('Flicker command sent successfully.');
+    } catch (error) {
+        console.error('Error sending flicker command to Arduino:', error);
+    }
+
+    console.log(`Sending to Arduino: ${out.followUpQuestion}`);
+    try {
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Ensure 2-second delay
+        await sendToArduino(JSON.stringify({ command: out.followUpQuestion.toUpperCase() }));
+        console.log('Second command sent successfully.');
+    } catch (error) {
+        console.error('Error sending second command to Arduino:', error);
+    }
+}
+
 
 async function getAIResponse(prompt) {
     try {
@@ -74,6 +102,7 @@ async function getAIResponse(prompt) {
         throw error;
     }
 }
+
 
 // Routes
 app.post('/send-command', async (req, res) => {
@@ -93,32 +122,7 @@ app.post('/send-command', async (req, res) => {
             }
 
         res.send(out);
-
-        console.log(`Sending to Arduino: ${out.aiResponse}`);
-        try {
-            await sendToArduino(JSON.stringify({ command: out.aiResponse.toUpperCase() }));
-            console.log('First command sent successfully.');
-        } catch (error) {
-            console.error('Error sending first command to Arduino:', error);
-        }
-
-        console.log('Sending flicker command to Arduino.');
-        try {
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Ensure 2-second delay
-            await sendToArduino(flickerCommand);
-            console.log('Flicker command sent successfully.');
-        } catch (error) {
-            console.error('Error sending flicker command to Arduino:', error);
-        }
-
-        console.log(`Sending to Arduino: ${out.followUpQuestion}`);
-        try {
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Ensure 2-second delay
-            await sendToArduino(JSON.stringify({ command: out.followUpQuestion.toUpperCase() }));
-            console.log('Second command sent successfully.');
-        } catch (error) {
-            console.error('Error sending second command to Arduino:', error);
-        }
+        lightUpLEDStrip(out, flickerCommand);    
     } else {
         res.status(400).send('No command provided');
     }
