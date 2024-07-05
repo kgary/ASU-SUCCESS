@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Arduino IP address and port
-const arduinoIP = '192.168.77.195';
+const arduinoIP = '192.168.0.150';
 const arduinoPort = 80;
 
 // Function to send data to Arduino using POST request
@@ -131,7 +131,7 @@ app.post('/send-command', async (req, res) => {
 app.get('/read-data', async (req, res) => {
     try {
         const data = await readFromArduino();
-        res.send(`Data from Arduino: ${data}`);
+        res.send(`${data}`);
     } catch (error) {
         res.status(500).send(`Error reading data from Arduino: ${error.message}`);
     }

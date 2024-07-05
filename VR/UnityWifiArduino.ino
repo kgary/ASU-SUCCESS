@@ -172,13 +172,6 @@ void handlePostRequest(WiFiClient client, String requestData) {
       command.trim();
       Serial.println("POST body: " + command);
       processInputString(command);
-
-      // Send a response back to the client
-      String response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n";
-      response += "Received: " + body;
-      client.print(response);
-      client.flush();
-      
     } else {
       Serial.println("Invalid POST request format");
       client.print("HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain\r\n\r\nInvalid POST request format");
