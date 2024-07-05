@@ -54,7 +54,7 @@
 2. Click on other Node.
 3. After clicking on other Node, an dialog box will appear in it search for `Area2D`.
 4. Now do right click Area2D and add child Node.
-5. In child Node add 2 child Node one is `Sprite2D` and other one is `Collision2D`. See the below image your scene must look like below
+5. In child Node add 2 child Node one is `Sprite2D` and other one is `CollisionShape2D`. See the below image your scene must look like below
 ![alt text](image.png)
 6. Now change the setting two 2D, and then click on Sprite2D
 7. From Asset, search an image for which you want to make obstacle, and drag and place in Texture in Sprite2D(present in inspector window).
