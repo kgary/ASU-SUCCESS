@@ -81,7 +81,11 @@ void loop() {
     if (client.available()) {
       String requestData = readRequest(client);
       Serial.println("Request received: " + requestData);
-      processInputString(requestData);
+      if (requestData.startsWith("GET")) {
+        handleGetRequest(client);
+      } else {
+        processInputString(requestData);
+      }      
       client.flush(); // Clear the input buffer
       client.stop();
       delay(50);
@@ -119,6 +123,13 @@ String readRequest(WiFiClient client) {
   return postData;
 }
 
+void handleGetRequest(WiFiClient client) {
+  String response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n";
+  String responseBody = "LEDs operational\nLED Count: " + String(NUM_LEDS) + "\nBrightness: " + String(BRIGHTNESS);
+  response += responseBody;
+
+  client.print(response);
+}
 
 
 void processInputString(String input) {

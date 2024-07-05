@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eliza</title>
+<style>
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #000;
+      color: #0F0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+    }
+    nav {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background-color: #222;
+      padding: 10px 0;
+      display: flex;
+      justify-content: center;
+    }
+    nav a {
+      color: #0F0;
+      margin: 0 10px;
+      text-decoration: none;
+      padding: 10px;
+    }
+    input, button {
+      background-color: #222;
+      border: 1px solid #0F0;
+      color: #0F0;
+      padding: 10px;
+      margin: 5px 0;
+      width: 250px;
+      box-sizing: border-box;
+    }
+    button:hover, nav a:hover {
+      background-color: #333;
+    }
+    #responseContainer {
+      border: 1px solid #0F0;
+      padding: 10px;
+      width: 250px;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+    .responseText {
+      margin-bottom: 10px;
+    }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const submitButton = document.getElementById("submitCommand");
+    const fetchDataButton = document.getElementById("fetchData");
+    const responseContainer = document.getElementById("responseContainer");
+
+    submitButton.addEventListener("click", function() {
+        const command = document.getElementById("commandInput").value;
+        fetch("http://localhost:8080/send-command", {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain",
+            },
+            body: command,
+        })
+        .then(response => response.text())
+        .then(data => {
+            responseContainer.innerHTML = `<div class='responseText'>Response: ${data}</div>`;
+            responseContainer.style.display = "block";
+        })
+        .catch(error => console.error("Error:", error));
+    });
+
+    fetchDataButton.addEventListener("click", function() {
+        fetch("http://localhost:8080/read-data")
+        .then(response => response.text())
+        .then(data => {
+            responseContainer.innerHTML = `<div class='responseText'>Data: ${data}</div>`;
+            responseContainer.style.display = "block";
+        })
+        .catch(error => console.error("Error:", error));
+    });
+});
+</script>
+</head>
+<body>
+    <nav>
+        <a href="https://app.frame.io/reviews/ee5dab61-6941-4e64-9bda-feb42e90bef0/56b523f5-d2b5-45d8-9188-665902320ebf" target="_blank">SUCCESS Promo 1</a>
+        <a href="https://app.frame.io/reviews/852403a1-0903-4436-8462-fdc26eeaffc4/89c0646a-8551-4835-860e-1d4735f7cc37" target="_blank">SUCCESS Promo 2</a>
+    </nav>
+    <input type="text" id="commandInput" placeholder="Enter your command">
+    <button id="submitCommand">Submit Command</button>
+    <button id="fetchData">Fetch Data</button>
+    <div id="responseContainer"></div>
+</body>
+</html>
