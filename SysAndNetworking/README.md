@@ -87,9 +87,8 @@ Finally, we’re going to use WiFi to control the LED wall. This is like using m
 4. Start the server by running `npm start`.
 
 ### Open Eliza in the Browser
-1. Open `eliza.html` in your browser.
-2. Type messages and the HTML page will talk to the backend server.
-3. The server will use the "Eliza chatbot" to generate responses.
-4. These responses will be sent to your Arduino, lighting up the LED strip with your messages!
+1. Open `wallwifiui.html` in your browser.
+2. Enter text in the the field mentioned and then click the submit button and it will light up the LED strip with your message - POST request.
+3. Click the "Fetch Data" button and it will fetch live data(No. of LEDs & their brightness) from the arduino - GET request.
 
 And there you go! You’ve now created your very own Stranger Things themed LED communication system. Keep experimenting and have fun with your Arduino adventures! Remember, the Upside Down is just a code away! 🚀✨
