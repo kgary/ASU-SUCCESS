@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp05mmtgbp37g"]
+
+[ext_resource type="Texture2D" uid="uid://bsqpqaliaek7v" path="res://assets/img/obstacles/basket.png" id="1_k6heq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ho3ai"]
+radius = 63.0317
+
+[node name="Area2D" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_k6heq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ho3ai")
