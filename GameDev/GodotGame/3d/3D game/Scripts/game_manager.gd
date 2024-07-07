@@ -11,6 +11,7 @@ func _ready():
 	player = get_tree().get_first_node_in_group("player")
 
 func on_level_won():
+	
 	player.linear_velocity = Vector3.ZERO
 	player.freeze = true
 	ui.on_level_finished()
