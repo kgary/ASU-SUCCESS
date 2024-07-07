@@ -91,7 +91,7 @@ async function lightUpLEDStrip(out, flickerCommand){
 
 async function getAIResponse(prompt) {
     try {
-        const response = await axios.post('http://192.168.0.41:8888/ai-response', { 
+        const response = await axios.post('http://localhost:8888/ai-response', { 
             prompt: prompt, 
             encryptedApiKey: process.env.OPENAI_API_KEY 
         });
