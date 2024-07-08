@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const app = express();
 const port = 8080;
+// curl -X POST localhost:8080 -H "Content-Type: application/text" -d 'ABCDE'
 
 app.use(cors());
 app.use(express.json());

@@ -161,22 +161,14 @@ void handlePostRequest(WiFiClient client, String requestData) {
     String body = requestData.substring(bodyStartIndex + 4);
     body.trim();
 
-    // Split the body content by lines
-    int firstLineEnd = body.indexOf('\n');
-    int secondLineStart = firstLineEnd + 1;
-    int secondLineEnd = body.indexOf('\n', secondLineStart);
+    // Process the input string
+    Serial.println("POST body: " + body);
+    processInputString(body);
+    // Send a response back to the client
+    client.print("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nRequest processed successfully: ");
+    client.print(body);
+    client.flush();
     
-    // Get the second line which contains the actual command
-    if (firstLineEnd >= 0 && secondLineEnd > secondLineStart) {
-      String command = body.substring(secondLineStart, secondLineEnd);
-      command.trim();
-      Serial.println("POST body: " + command);
-      processInputString(command);
-    } else {
-      Serial.println("Invalid POST request format");
-      client.print("HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain\r\n\r\nInvalid POST request format");
-      client.flush();
-    }
   } else {
     Serial.println("Invalid POST request");
     client.print("HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain\r\n\r\nInvalid POST request");
