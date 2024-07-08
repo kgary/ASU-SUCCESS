@@ -2,12 +2,17 @@ extends Node
 
 #preload obstacles
 var stump_scene = preload("res://scenes/stump.tscn")
-var rock_scene = preload("res://scenes/rock.tscn")
-# UNCOMMENT ME AND ADD TO OBSTACLE TYPES!!!!!!!!!!!!!!!
-#var barrel_scene = preload("res://scenes/barrel.tscn") 
 
+# UNCOMMENT ME AND ADD TO OBSTACLE TYPES!!!!!!!!!!!!!!!
+var rock_scene = preload("res://scenes/rock.tscn")
+#var barrel_scene = preload("res://scenes/barrel.tscn") 
+var redbird= preload("res://scenes/redbird.tscn")
+var bluebird = preload("res://scenes/blue.tscn")
+var greenbird = preload("res://scenes/greenbird.tscn")
 #Add Basket Ball scene
-var obstacle_types := [rock_scene,stump_scene] # Adding obstacles
+#var birds = [redbird,bluebird,greenbird]
+var obstacle_types := [rock_scene,stump_scene,redbird,bluebird,greenbird] # Adding obstacles
+
 # Adding Bird Scenes
 #var bird_scene = preload("res://scenes/bird.tscn")
 
