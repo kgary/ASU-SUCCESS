@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dino Run</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Dino Run</h1>
+      <p><a href="index.html" class="backToHome">Back to Home</a></p>
+      <div class="tutorial-section">
+        <h2>Opening the project</h2>
+        <button class="toggle-button" onclick="toggleInstructions(this)">
+          Show Instructions
+        </button>
+        <div class="content" style="display: none">
+          <ol>
+            <li>
+              Open <code>Godot_v4.2.2-stable_win64</code> from
+              Godot_v4.2.2-stable_win64.exe folder
+            </li>
+            <li>Click on import</li>
+            <img class="import-image" src="import.jpeg" />
+            <li>
+              Enter the following path in the dialog box:
+              <code
+                >/Users/Downloads/ASU-SUCCESS/GameDev/GodotGame/dino_run</code
+              >
+              and click on <code>Select Current Folder</code> button below.
+            </li>
+            <img src="dialog.jpeg" class="import-image" />
+            <li>
+              Click on <code>Import and Edit</code> and then open the project by
+              click on Dino_run project.
+            </li>
+            <img src="dinorun.jpeg" class="import-image" />
+            <li>
+              Now the next step is to test and run the game to make sure
+              everything is working fine. Click on the play button.
+            </li>
+            <img class="import-image" src="playbutton.jpeg" />
+          </ol>
+          <div style="position: relative">
+            <!-- <pre id="basic-code" class="code-block">
+/* Basic - ON, OFF, Happy, Heart code */</pre
+            > -->
+          </div>
+        </div>
+      </div>
+      <div class="tutorial-section">
+        <h2>Changing Parameters</h2>
+        <button class="toggle-button" onclick="toggleInstructions(this)">
+          Show Instructions
+        </button>
+        <div class="content" style="display: none">
+          <ol>
+            <li>
+              Now the first thing you will do in this game is to change the
+              speed
+            </li>
+            <li>
+              Open main.gd file, to open that click on scenes on the bottom left
+              corner.
+            </li>
+            <img src="scenes.jpeg" class="import-image" />
+            <li>In the scenes folder click on main.gd file.</li>
+            <img src="main.jpeg" class="import-image" />
+            <li>
+              In this file there are 3 variables that you can tinker with
+              <ul>
+                <li><code>START_SPEED</code></li>
+                <li><code>MAX_SPEED</code></li>
+                <li><code>SPEED_MODIFIER</code></li>
+              </ul>
+              Try to play around with these to see how it affects the game.
+              START_SPEED is the speed at which the game starts, MAX_SPEED is
+              the maximum speed the game can reach and SPEED_MODIFIER is the
+              speed at which the game speeds up.
+            </li>
+            <li>Save the file by pressing CTRL + S</li>
+            <img src="var.jpeg" class="import-image" />
+            <li>
+              Now you will be adding a new obstacle in the game, to do so, go to
+              <code>line 7</code> and uncomment it by pressing
+              <code>CTRL + /</code>.
+            </li>
+            <li>
+              After doing that add the variable <code>barrel_scene</code> to
+              <code>obstacle_types</code> variable on <code>line 10</code>.
+            </li>
+            <li>
+              After adding your obstacle_types should look like this
+              <code
+                >var obstacle_types :=
+                [rock_scene,stump_scene,barrel_scene]</code
+              >
+            </li>
+            <img src="barrel.jpeg" class="import-image" />
+          </ol>
+          <div style="position: relative"></div>
+        </div>
+      </div>
+      <div class="tutorial-section">
+        <h2>Creating Custom Obstacles</h2>
+        <button class="toggle-button" onclick="toggleInstructions(this)">
+          Show Instructions
+        </button>
+        <div class="content" style="display: none">
+          <ol>
+            <li>
+              Click on Scenes from the Navigation bar and then click on New
+              Scene
+            </li>
+            <img src="scene.jpeg" class="import-image" />
+            <li>Now Click on other nodes</li>
+            <img src="node.jpeg" class="import-image" />
+            <li>
+              Search for Area in the top dialog box and then click on Area2D
+            </li>
+            <img src="area.jpeg" class="import-image" />
+            <li>
+              Now on the left pane, right click on Area2D and then click on
+              <code>Add Child Node</code>.
+            </li>
+            <li>Type in Sprite in the search box and click on Sprite2D</li>
+            <img src="sprite.jpeg" class="import-image" />
+            <li>
+              Now on the left pane, right click on Area2D and then click on
+              <code>Add Child Node</code>.
+            </li>
+            <li>
+              Type in Collision in the search box and click on CollisionShape2D
+            </li>
+            <li>
+              If all the steps were done correctly then it should look like this
+            </li>
+            <img src="final.jpeg" class="import-image" />
+            <li>
+              Now in the bottom left pane, go to
+              <code>assets -> obstacles -> basket.png</code>
+            </li>
+            <li>
+              Now click and drag basket.png to Sprite2D panel on the right and
+              drop it onto the texture pane.
+            </li>
+            <img src="drag.jpeg" class="import-image" />
+            <li>
+              Now change the properties <code>Offset</code> to centered and
+              <code>Scale</code> to 0.25 as shown in the image above.
+            </li>
+            <li>
+              Now click on the <code>CollisionShape2D</code> and then click on
+              the <code>Shape</code> property and then click on the
+              <code>New CircleShape2D</code> option.
+            </li>
+            <li>
+              Now click on the <code>CircleShape2D</code> and then change the
+              <code>Radius</code> to 63.89
+            </li>
+            <img src="circle.jpeg" class="import-image" />
+            <li>
+              Now press <code>CTRL + S</code> to save the scene and place the
+              scene in scene folder and give your scene a name as
+              <code>basketball.tscn</code>
+            </li>
+            <li>
+              Now go back to the main.gd file and add the basketball scene to
+              the obstacle_types variable.
+            </li>
+            <l1>
+              For adding the scene use
+              <code>preload("res://scenes/basketball.tscn")</code> and give a
+              variable name to it using
+              <code
+                >var basketball_scene =
+                preload("res://scenes/basketball.tscn")</code
+              >.
+            </l1>
+            <li>
+              Now you can add the basketball scene to the obstacle_types
+              variable by adding <code>basketball_scene</code> to the list.
+            </li>
+            <li>
+              Now run the game using play button and you will see the new
+              obstacle in the game.
+            </li>
+          </ol>
+          <div style="position: relative"></div>
+        </div>
+      </div>
+      <div class="tutorial-section">
+        <h2>Animating the Bird</h2>
+        <button class="toggle-button" onclick="toggleInstructions(this)">
+          Show Instructions
+        </button>
+        <div class="content" style="display: none">
+          <ol>
+            <li>Navigate to <code>main.gd</code></li>
+            <li>Uncomment <code>line 12</code> by <code>CTRL + /</code></li>
+            <li>
+              Now uncomment <code>line 16</code>. This variable helps control
+              bird's height
+            </li>
+            <li>
+              Now uncomment lines starting from <code>line 128</code> to
+              <code>line 135</code>. This will add bird to the scene.
+            </li>
+            <li>Now press <code>CTRL + S</code> to save</li>
+          </ol>
+          <div style="position: relative"></div>
+        </div>
+      </div>
+      <div class="tutorial-section">
+        <h2>Custom Animating Basketball</h2>
+        <button class="toggle-button" onclick="toggleInstructions(this)">
+          Show Instructions
+        </button>
+        <div class="content" style="display: none">
+          <ol>
+            <li>The next few steps are the same as we did while we added basketball.</li>
+            <li>Click on <code>Scene -> New Scene</code></li>
+            <li>Click on <code>Other Node</code> then type <code>area</code> on the dialog box and click on <code>Area2D<code>.</li>
+          </ol>
+          <div style="position: relative"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function toggleInstructions(button) {
+        var content = button.nextElementSibling;
+        if (content.style.display === "none") {
+          content.style.display = "block";
+          button.innerText = "Hide Instructions";
+        } else {
+          content.style.display = "none";
+          button.innerText = "Show Instructions";
+        }
+      }
+
+      function copyToClipboard(elementId) {
+        var copyText = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(copyText);
+      }
+    </script>
+  </body>
+</html>
