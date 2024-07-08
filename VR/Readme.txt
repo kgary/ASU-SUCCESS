@@ -1,4 +1,4 @@
-Link for the ST room VR game - https://drive.google.com/file/d/1zeaeY8y4-BK1hX26HX-h7DbdzjOBtS2t/view?usp=sharing
+Link for the ST room VR game - https://drive.google.com/file/d/1z16ErK_KbT0GqQ6ugfVe5SvvlzQBDpOZ/view?usp=sharing
 
 1. After downloading from the dropbox link above, unzip the game.
 2. Open Meta Quest Link app, login there using asusuccess2024@gmail.com
