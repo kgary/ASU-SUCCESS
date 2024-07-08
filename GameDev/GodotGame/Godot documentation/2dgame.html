@@ -169,7 +169,7 @@
               Now go back to the main.gd file and add the basketball scene to
               the obstacle_types variable.
             </li>
-            <l1>
+            <li>
               For adding the scene use
               <code>preload("res://scenes/basketball.tscn")</code> and give a
               variable name to it using
@@ -177,10 +177,13 @@
                 >var basketball_scene =
                 preload("res://scenes/basketball.tscn")</code
               >.
-            </l1>
+            </li>
             <li>
               Now you can add the basketball scene to the obstacle_types
               variable by adding <code>basketball_scene</code> to the list.
+            </li>
+            <li>
+              Press <code>CTRL + S</code> to save changes
             </li>
             <li>
               Now run the game using play button and you will see the new
@@ -221,9 +224,97 @@
           <ol>
             <li>The next few steps are the same as we did while we added basketball.</li>
             <li>Click on <code>Scene -> New Scene</code></li>
-            <li>Click on <code>Other Node</code> then type <code>area</code> on the dialog box and click on <code>Area2D<code>.</li>
+            <li>Click on <code>Other Node</code> then type <code>area</code> on the dialog box and click on <code>Area2D</code>.</li>
+            <img src="area.jpeg" class="import-image" />
+            <li>
+              Now on the left pane, right click on Area2D and then click on
+              <code>Add Child Node</code>.
+            </li>
+            <li>Type in Animated in the search box and click on AnimatedSprite2D</li>
+            <img src="animated.jpg" class="import-image" />
+            <li>
+              Now on the left pane, right click on Area2D and then click on
+              <code>Add Child Node</code>.
+            </li>
+            <li>
+              Type in Collision in the search box and click on CollisionShape2D
+            </li>
+            <li>
+              If all the steps were done correctly then it should look like this
+            </li>
+            <img src="finalanimated.jpg" class="import-image" />
+            <li>
+              Now click on New Sprite Frame from options of Sprite Frames under Animation, and double click on SpriteFrame and you will see an animation window on the bottom
+            </li>
+            <img src="animationframe.jpg" class="import-image" />
+            <li>
+              Click on <code>grid</code> structure at top of animated window.
+            </li>
+            <img src="grid.jpg" class="import-image" />
+            <li>
+              Now go to <code>res://assets/img/obstacles</code> and select <code>basketFrame.png</code>.
+            </li>
+            <img src="frameadded.jpg" class="import-image" />
+            <li>
+              As soon as you click on <code>open</code>, a window will open for choosing frame and do the settings as shown in the image.
+            </li>
+            <img src="basketballframes.jpg" class="import-image" />
+            <li>
+              After completing setting choose each of block one by one starting from left to right and then click on <code>Add Frame</code>
+            </li>
+            <li>
+              Now click on AnimatedSprite2D and in Inspector the window , under Node2D change the position and scale according to your choice for better visualization.
+            </li>
+            <img src="Animate2D.jpg" class="import-image" />
+            <li>
+              Now click on the <code>CollisionShape2D</code> and then click on
+              the <code>Shape</code> property and then click on the
+              <code>New CircleShape2D</code> option.
+            </li>
+            <li>
+              Now click on the <code>CircleShape2D</code> and then change the
+              <code>Radius</code> to 42.05
+            </li>
+            <li>
+              Now on the left pane, right click on Area2D and then click on
+              <code>Attach Script...</code> and then click on Save.
+            </li>
+            <li>
+              In the script add the following code to make the ball rotate at the same place.
+            </li>
+            <img src="scriptim.jpg" class = "import-image"/>
+            <li>
+              Now press <code>CTRL + S</code> to save the scene and place the
+              scene in scene folder and give your scene a name as
+              <code>basketballrolling.tscn</code>
+            </li>
+            <li>
+              Now go back to the main.gd file and add the basketball scene to
+              the obstacle_types variable.
+            </li>
+            <li>
+              For adding the scene use
+              <code>preload("res://scenes/basketballrolling.tscn")</code> and give a
+              variable name to it using
+              <code
+                >var basketballroll_scene =
+                preload("res://scenes/basketballrolling.tscn")</code
+              >.
+            </li>
+            <li>
+              Now you can add the basketballrolling scene to the obstacle_types
+              variable by adding <code>basketballroll_scene</code> to the list.
+            </li>
+            <li>
+              Press <code>CTRL + S</code> to save changes
+            </li>
+            <li>
+              Now run the game using play button and you will see the new
+              obstacle in the game.
+            </li>
+            <code>Hurray !!! you have successfully added the animated basketball to the game</code>
           </ol>
-          <div style="position: relative"></div>
+          
         </div>
       </div>
     </div>
