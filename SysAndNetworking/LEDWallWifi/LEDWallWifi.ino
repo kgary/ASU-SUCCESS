@@ -14,7 +14,7 @@ const char* password = "SUCC355!";  // Replace with your hotspot password
 
 // Define the array of leds
 CRGB leds[NUM_LEDS];
-String letterIndex = "ZY-X-W-V-U-T-S-R-Q-P-O-N-M-L-K-J-I-H-G-F-E-D-C-B-A";
+String letterIndex = "Z-Y-X-WV-UT-S-R--I-JK-L-M-NO-P-Q--H-G-F-E-D-C-B-A-";
 String colorLetterIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 // Define colors for each letter

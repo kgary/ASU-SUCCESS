@@ -4,14 +4,13 @@ const cors = require('cors');
 
 const app = express();
 const port = 8080;
-// curl -X POST localhost:8080 -H "Content-Type: application/text" -d 'ABCDE'
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Arduino IP address and port
-const arduinoIP = '192.168.0.150';
+const arduinoIP = '192.168.0.250';
 const arduinoPort = 80;
 
 // Function to send data to Arduino using POST request
