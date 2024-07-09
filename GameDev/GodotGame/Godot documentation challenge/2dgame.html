@@ -165,36 +165,34 @@
               scene in scene folder and give your scene a name as
               <code>basketball.tscn</code>
             </li>
-            
+            <li>
+              Now go back to the main.gd file and add the basketball scene to
+              the obstacle_types variable.
+            </li>
+            <li>
+              For adding the scene use
+              <code>preload("res://scenes/basketball.tscn")</code> and give a
+              variable name to it using
+              <code
+                >var basketball_scene =
+                preload("res://scenes/basketball.tscn")</code
+              >.
+            </li>
+            <li>
+              Now you can add the basketball scene to the obstacle_types
+              variable by adding <code>basketball_scene</code> to the list.
+            </li>
+            <li>
+              Press <code>CTRL + S</code> to save changes
+            </li>
+            <li>
+              Now run the game using play button and you will see the new
+              obstacle in the game.
+            </li>
           </ol>
           <div style="position: relative"></div>
         </div>
       </div>
-
-
-      <div class="tutorial-section">
-        <h2>CHALLENGE 1!!!</h2>
-        <button class="toggle-button" onclick="toggleInstructions(this)">
-          Show Challenge
-        </button>
-        <div class="content" style="display: none">
-          <h3>Adding the created Obstacle to Scene.</h3>
-          <h4>Instructions</h4>
-          <p>Your challenge is to add the obstacle in a game scene:</p>
-         <ol>
-          <li>Take a newly created basketball and add to the scene.</li>
-          <li>Place the basketball as an obstacle in your game scene.</li>
-          
-         </ol>
-              
-         <p>Once you've completed the challenge, see how the  basketball adds fun and interaction to your game!</p>
-          <div style="position: relative"></div>
-        </div>
-      </div>
-
-
-
-
       <div class="tutorial-section">
         <h2>Animating the Bird</h2>
         <button class="toggle-button" onclick="toggleInstructions(this)">
@@ -217,67 +215,130 @@
           <div style="position: relative"></div>
         </div>
       </div>
-
       <div class="tutorial-section">
-        <h2>CHALLENGE 2!!!</h2>
-        <button class="toggle-button" onclick="toggleInstructions(this)">
-          Show Challenge
-        </button>
-        <div class="content" style="display: none">
-          <h3>Animate a basketball like rotate inplace and add it to the game scene.</h3>
-          <h4>Instructions</h4>
-          <p>Your challenge is to animate a basketball in a game scene:</p>
-         <ol>
-          <li>Rotate the basketball in place at a steady speed.</li>
-          <li>Place the basketball as an obstacle in your game scene.</li>
-          <li>For the rotating the basketball use the following script to add to basketball scene:</li>
-         </ol>
-         <input type="image" src="./Assets/copy.png" alt="Copy" class="copy-button" onclick="copyToClipboard('wink-code')">
-         <pre id="wink-code" class="code-block">
-      
-          extends Area2D
-  
-          # Called when the node enters the scene tree for the first time.
-          var rotation_speed : float = 2 * PI 
-          
-          func _ready():
-              # Start the rotation process
-              set_process(true)
-          
-          func _process(delta):
-              # Rotate the basketball
-              rotation += rotation_speed * delta
-            </pre>
-         <p>Feel free to adjust the <code>rotation_speed</code> variable to change how fast the basketball rotates.</p>
-         <p>Once you've completed the challenge, see how the animated basketball adds fun and interaction to your game!</p>
-          <div style="position: relative"></div>
-        </div>
-      </div>
-      <div class="tutorial-section">
-        <h2>Exporting to Web</h2>
+        <h2>Custom Animating Basketball</h2>
         <button class="toggle-button" onclick="toggleInstructions(this)">
           Show Instructions
         </button>
         <div class="content" style="display: none">
           <ol>
-           <li>Click on the <code>Project</code> from the top and then click <code>Export...</code></li>
-           <img src="./Assets/export.jpg" class="import-image" />
-           <li>Click on <code>Add...</code> besides presets and select <code>Web</code></li>
-           <li>Click on <code>download and install<code> present on the bottom of the window.</li>
-           <li>Then in Preset, click on Web, under web click Export Project</li> 
-           <li>Create a folder and in folder save the file with name of your choice with <code>.html</code>.</li>
-           <li>Add <code>Server.py</code> file to folder where you added the file.</li>
-           <li>Go the folder and type <code>cmd</code> in the place surronded by red box in the image and press <code>Enter</code></li>
-           <img src="./Assets/cmdenter.jpg" class="import-image" />
-           <li>In the new window type<code>python server.py</code></li>
-           <li>Web browser will open now and now find your file and double click on it. </li>
-           <li>Hey !!! your game started to run on web</li>
+            <li>The next few steps are the same as we did while we added basketball.</li>
+            <li>Click on <code>Scene -> New Scene</code></li>
+            <li>Click on <code>Other Node</code> then type <code>area</code> on the dialog box and click on <code>Area2D</code>.</li>
+            <img src="./Assets/area.jpeg" class="import-image" />
+            <li>
+              Now on the left pane, right click on Area2D and then click on
+              <code>Add Child Node</code>.
+            </li>
+            <li>Type in Animated in the search box and click on AnimatedSprite2D</li>
+            <img src="./Assets/animated.jpg" class="import-image" />
+            <li>
+              Now on the left pane, right click on Area2D and then click on
+              <code>Add Child Node</code>.
+            </li>
+            <li>
+              Type in Collision in the search box and click on CollisionShape2D
+            </li>
+            <li>
+              If all the steps were done correctly then it should look like this
+            </li>
+            <img src="./Assets/finalanimated.jpg" class="import-image" />
+            <li>
+              Now click on New Sprite Frame from options of Sprite Frames under Animation, and double click on SpriteFrame and you will see an animation window on the bottom
+            </li>
+            <img src="./Assets/animationframe.jpg" class="import-image" />
+            <li>
+              Click on <code>grid</code> structure at top of animated window.
+            </li>
+            <img src="./Assets/grid.jpg" class="import-image" />
+            <li>
+              Now go to <code>res://assets/img/obstacles</code> and select <code>basketFrame.png</code>.
+            </li>
+            <img src="./Assets/frameadded.jpg" class="import-image" />
+            <li>
+              As soon as you click on <code>open</code>, a window will open for choosing frame and do the settings as shown in the image.
+            </li>
+            <img src="./Assets/basketballframes.jpg" class="import-image" />
+            <li>
+              After completing setting choose each of block one by one starting from left to right and then click on <code>Add Frame</code>
+            </li>
+            <li>
+              Now click on AnimatedSprite2D and in Inspector the window , under Node2D change the position and scale according to your choice for better visualization.
+            </li>
+            <img src="./Assets/Animate2D.jpg" class="import-image" />
+            <li>
+              Now click on the <code>CollisionShape2D</code> and then click on
+              the <code>Shape</code> property and then click on the
+              <code>New CircleShape2D</code> option.
+            </li>
+            <li>
+              Now click on the <code>CircleShape2D</code> and then change the
+              <code>Radius</code> to 42.05
+            </li>
+            <li>
+              Now on the left pane, right click on Area2D and then click on
+              <code>Attach Script...</code> and then click on Save.
+            </li>
+            <li>
+              In the script add the following code to make the ball rotate at the same place.
+            </li>
+            <img src="./Assets/scriptim.jpg" class = "import-image"/>
+            <li>
+              Now press <code>CTRL + S</code> to save the scene and place the
+              scene in scene folder and give your scene a name as
+              <code>basketballrolling.tscn</code>
+            </li>
+            <li>
+              Now go back to the main.gd file and add the basketball scene to
+              the obstacle_types variable.
+            </li>
+            <li>
+              For adding the scene use
+              <code>preload("res://scenes/basketballrolling.tscn")</code> and give a
+              variable name to it using
+              <code
+                >var basketballroll_scene =
+                preload("res://scenes/basketballrolling.tscn")</code
+              >.
+            </li>
+            <li>
+              Now you can add the basketballrolling scene to the obstacle_types
+              variable by adding <code>basketballroll_scene</code> to the list.
+            </li>
+            <li>
+              Press <code>CTRL + S</code> to save changes
+            </li>
+            <li>
+              Now run the game using play button and you will see the new
+              obstacle in the game.
+            </li>
+            <code>Hurray !!! you have successfully added the animated basketball to the game</code>
           </ol>
-          <div style="position: relative"></div>
+          
         </div>
-      </div> 
-
-
+        <div class="tutorial-section">
+          <h2>Exporting to Web</h2>
+          <button class="toggle-button" onclick="toggleInstructions(this)">
+            Show Instructions
+          </button>
+          <div class="content" style="display: none">
+            <ol>
+             <li>Click on the <code>Project</code> from the top and then click <code>Export...</code></li>
+             <img src="./Assets/export.jpg" class="import-image" />
+             <li>Click on <code>Add...</code> besides presets and select <code>Web</code></li>
+             <li>Click on <code>download and install<code> present on the bottom of the window.</li>
+             <li>Then in Preset, click on Web, under web click Export Project</li> 
+             <li>Create a folder and in folder save the file with name of your choice with <code>.html</code>.</li>
+             <li>Add <code>Server.py</code> file to folder where you added the file.</li>
+             <li>Go the folder and type <code>cmd</code> in the place surronded by red box in the image and press <code>Enter</code></li>
+             <img src="./Assets/cmdenter.jpg" class="import-image" />
+             <li>In the new window type<code>python server.py</code></li>
+             <li>Web browser will open now and now find your file and double click on it. </li>
+             <li>Hey !!! your game started to run on web</li>
+            </ol>
+            <div style="position: relative"></div>
+          </div>
+      </div>
     </div>
     <script>
       function toggleInstructions(button) {
