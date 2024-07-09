@@ -1,4 +1,4 @@
-Link for the 2D game: https://drive.google.com/drive/folders/10bVAmfwHBt6ALaDP87-SriUQ_QTIZzQE?usp=sharing
+Link for the 2D game: https://drive.google.com/file/d/1fYylvaLo7VBHpfjfZWOl-jfnG_-Dvqe1/view?usp=sharing
 
 1. Download the game from the link above.
 2. Unzip the game to a folder.
