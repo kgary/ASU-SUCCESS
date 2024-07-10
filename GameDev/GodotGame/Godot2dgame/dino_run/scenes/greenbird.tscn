@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx80orqsuxe40"]
+
+[ext_resource type="Texture2D" uid="uid://cdd3kwamc1ei6" path="res://assets/img/obstacles/greenbird.png" id="1_emu8h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rtj0v"]
+radius = 52.0
+
+[node name="Area2D" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.24875, -0.999995)
+scale = Vector2(0.127369, 0.153333)
+texture = ExtResource("1_emu8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("CircleShape2D_rtj0v")

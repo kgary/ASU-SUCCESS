@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d8kx13h174fu"]
+
+[ext_resource type="Texture2D" uid="uid://bvob35gyf65fk" path="res://assets/img/obstacles/angrybird.png" id="1_gogcc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rtj0v"]
+radius = 52.0
+
+[node name="Area2D" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("1_gogcc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("CircleShape2D_rtj0v")
