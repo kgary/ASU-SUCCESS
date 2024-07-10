@@ -6,7 +6,7 @@ class_name Player
 @export var camera_z_offset = 5
 @onready var ui = $"../UI" as UI
 
-var speed = 100 #Can be updated
+var speed = 100 #Change me
 var vertical_speed_increment = .2 #Can be updated
 var horizontal_speed_increment = .1 #Can be updated
 
@@ -34,9 +34,9 @@ func _physics_process(delta):
 		ui.on_level_finished()
 		
 		
-	# Uncomment me to fix boundary
+	
 	#if position.x < -5 or position.x> 5.123 or position.z<-100 : 
-		#position = Vector3(-0.985,1.777,-66.71) # Starting position can be changed
+		#position = Vector3(-0.985,1.777,-66.71) # Respawn
 
 func _input(event):
 	# Change my key bindings

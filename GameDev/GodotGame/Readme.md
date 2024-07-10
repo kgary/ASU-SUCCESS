@@ -16,6 +16,7 @@
 
     Now let's see the game, you must have often seen a running dyno game while you are not connected to internet, Lets create a similar game to it.
 
+`Godot Exe`: https://drive.google.com/file/d/1N10Qc_ewb7IhUU5djQaJ_UWyfrvYgV4S/view?usp=sharing
 
 ### For Godot 2D game ####
 1. Clone the repository.
