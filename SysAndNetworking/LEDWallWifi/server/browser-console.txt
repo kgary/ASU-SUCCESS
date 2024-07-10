@@ -2,7 +2,7 @@ Mentioned below are the API calls that you need to paste in your browser's conso
 
 //GET Request
 
-fetch('http://localhost:8080/read-command')
+fetch('http://localhost:8080/read-data')
   .then(response => response.text())
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));
