@@ -31,7 +31,7 @@ function sendToArduino(data) {
             res.setEncoding('utf8');
             
             res.on('data', chunk => {
-                console.log(`Response from Arduino: ${chunk}`);
+                // console.log(`Response from Arduino: ${chunk}`);
                 responseData += chunk;
             });
 
@@ -70,7 +70,7 @@ function readFromArduino() {
             res.setEncoding('utf8');
             
             res.on('data', chunk => {
-                console.log(`Data from Arduino: ${chunk}`);
+                // console.log(`Data from Arduino: ${chunk}`);
                 responseData += chunk;
             });
 

@@ -1,0 +1,25 @@
+Mentioned below are the API calls that you need to paste in your browser's console tab.
+
+//GET Request
+
+fetch('http://localhost:8080/read-command')
+  .then(response => response.text())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+
+
+
+
+//POST Request
+
+fetch('http://localhost:8080/send-command', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/text'
+  },
+  body: 'ABCDE'
+})
+.then(response => response.text())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+
