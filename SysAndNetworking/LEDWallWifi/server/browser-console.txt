@@ -2,7 +2,7 @@ Mentioned below are the API calls that you need to paste in your browser's conso
 
 //GET Request
 
-fetch('http://192.168.0.54:80/read-data')
+fetch('http://192.168.0.154:80/read-data')
   .then(response => response.text())
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));
@@ -12,7 +12,7 @@ fetch('http://192.168.0.54:80/read-data')
 
 //POST Request
 
-fetch('http://192.168.0.54:80/send-command', {
+fetch('http://192.168.0.154:80/send-command', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/text'

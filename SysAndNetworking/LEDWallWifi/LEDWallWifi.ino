@@ -70,7 +70,6 @@ void connectToWiFi() {
   }
 }
 
-
 void loop() {
   if (!client.connected()) {
     client = server.available(); // Listen for incoming clients
@@ -85,6 +84,8 @@ void loop() {
         handleGetRequest(client);
       } else if (requestData.startsWith("POST ")) {
         handlePostRequest(client, requestData.substring(5));  // Skip "POST " prefix
+      } else if (requestData.startsWith("OPTIONS")) {
+        handleOptionsRequest(client);  // Handle preflight requests
       } else {
         Serial.println("Invalid request method");
         client.print("HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain\r\n\r\nInvalid request method");
@@ -97,12 +98,25 @@ void loop() {
   }
 }
 
+void handleOptionsRequest(WiFiClient client) {
+  Serial.println("Handling OPTIONS request");
+  String response = "HTTP/1.1 204 No Content\r\n";
+  response += "Access-Control-Allow-Origin: *\r\n";
+  response += "Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n";
+  response += "Access-Control-Allow-Headers: Content-Type\r\n";
+  response += "Access-Control-Max-Age: 86400\r\n"; // Cache response for 1 day
+  response += "\r\n";
+  
+  client.print(response);
+  client.flush();
+}
 
 String readRequest(WiFiClient client) {
   String currentLine = "";
   String requestData = "";
   bool isPost = false;
   bool isGet = false;
+  bool isOptions = false;
 
   while (client.connected()) {
     if (client.available()) {
@@ -114,6 +128,8 @@ String readRequest(WiFiClient client) {
           isGet = true;
         } else if (requestData.startsWith("POST")) {
           isPost = true;
+        } else if (requestData.startsWith("OPTIONS")) {
+          isOptions = true;
         }
         break;  // Headers are finished, next line is body
       } else if (c == '\n') {
@@ -138,9 +154,13 @@ String readRequest(WiFiClient client) {
     return "GET";
   }
 
+  // For OPTIONS requests, return the entire request line
+  if (isOptions) {
+    return "OPTIONS";
+  }
+
   return "INVALID";
 }
-
 
 void handleGetRequest(WiFiClient client) {
   Serial.println("Handling GET request");
@@ -154,46 +174,6 @@ void handleGetRequest(WiFiClient client) {
   client.flush();
 }
 
-
-// void handlePostRequest(WiFiClient client, String requestData) {
-//   Serial.println("Handling POST request");
-
-//   // Extract the body content starting after the headers
-//   int bodyStartIndex = requestData.indexOf("\r\n\r\n");
-//   if (bodyStartIndex >= 0) {
-//     String body = requestData.substring(bodyStartIndex + 4);
-//     body.trim();
-
-//     // Split the body content by lines
-//     int firstLineEnd = body.indexOf('\n');
-//     int secondLineStart = firstLineEnd + 1;
-//     int secondLineEnd = body.indexOf('\n', secondLineStart);
-    
-//     // Get the second line which contains the actual command
-//     if (firstLineEnd >= 0 && secondLineEnd > secondLineStart) {
-//       String command = body.substring(secondLineStart, secondLineEnd);
-//       command.trim();
-//       Serial.println("POST body: " + command);
-//       processInputString(command);
-
-//       // Send a response back to the client
-//       String response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n";
-//       response += "Received: " + body;
-//       client.print(response);
-//       client.flush();
-      
-//     } else {
-//       Serial.println("Invalid POST request format");
-//       client.print("HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain\r\n\r\nInvalid POST request format");
-//       client.flush();
-//     }
-//   } else {
-//     Serial.println("Invalid POST request");
-//     client.print("HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain\r\n\r\nInvalid POST request");
-//     client.flush();
-//   }
-// }
-
 void handlePostRequest(WiFiClient client, String requestData) {
   Serial.println("Handling POST request");
 
@@ -206,29 +186,38 @@ void handlePostRequest(WiFiClient client, String requestData) {
     // Process the input string
     Serial.println("POST body: " + body);
     processInputString(body);
+
     // Send a response back to the client
-    client.print("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nRequest processed successfully: ");
-    client.print(body);
+    String response = "HTTP/1.1 200 OK\r\n";
+    response += "Access-Control-Allow-Origin: *\r\n";  // Add CORS header
+    response += "Content-Type: text/plain\r\n\r\n";
+    response += "Request processed successfully: ";
+    response += body;
+    client.print(response);
     client.flush();
     
   } else {
     Serial.println("Invalid POST request");
-    client.print("HTTP/1.1 400 Bad Request\r\nContent-Type: text/plain\r\n\r\nInvalid POST request");
+    String response = "HTTP/1.1 400 Bad Request\r\n";
+    response += "Access-Control-Allow-Origin: *\r\n";  // Add CORS header
+    response += "Content-Type: text/plain\r\n\r\n";
+    response += "Invalid POST request";
+    client.print(response);
     client.flush();
   }
 }
 
-
 void processInputString(String input) {
   input.trim(); // Trim any leading or trailing whitespace
-  Serial.println("displaying: "+input);
+  Serial.println("Displaying: " + input);
   if (input == "FLICKER_SIGNAL") {
     Serial.println("Flickering LEDs");
     flickerLeds(100);
   } else {
     Serial.println("Displaying words");
     displayWordsWithPause(input);
-}}
+  }
+}
 
 void displayWordsWithPause(String input) {
   int wordStart = 0;

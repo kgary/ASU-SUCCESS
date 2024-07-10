@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     submitButton.addEventListener("click", function() {
         const command = document.getElementById("commandInput").value;
-        fetch("http://localhost:8080/send-command", {
+        fetch("http://192.168.0.154:8080/send-command", {
             method: "POST",
             headers: {
                 "Content-Type": "text/plain",
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     fetchDataButton.addEventListener("click", function() {
-        fetch("http://localhost:8080/read-data")
+        fetch("http://192.168.0.154:8080/read-data")
         .then(response => response.text())
         .then(data => {
             responseContainer.innerHTML = `<div class='responseText'>Data: ${data}</div>`;
