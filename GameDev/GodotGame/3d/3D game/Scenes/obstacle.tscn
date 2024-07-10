@@ -10,7 +10,7 @@ albedo_texture = ExtResource("2_f28jc")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3oxy"]
 albedo_texture = ExtResource("2_f28jc")
 
-[sub_resource type="SphereMesh" id="SphereMesh_kxsht"]
+[sub_resource type="SphereMesh" id="SphereMesh_h0dm1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teb4u"]
 albedo_color = Color(0, 0, 0, 1)
@@ -54,7 +54,7 @@ script = ExtResource("1_dwt3f")
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_5g6p8")
 material_overlay = SubResource("StandardMaterial3D_b3oxy")
-mesh = SubResource("SphereMesh_kxsht")
+mesh = SubResource("SphereMesh_h0dm1")
 surface_material_override/0 = SubResource("StandardMaterial3D_teb4u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

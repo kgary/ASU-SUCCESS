@@ -24,7 +24,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.985, 1.777, -66.71)
 sync_position_node = NodePath("../Camera3D")
 
 [node name="Obstacle" parent="." instance=ExtResource("3_5m6rr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.595831, 2.49777, -34.9718)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.595831, 2.49777, -36.1254)
 linear_damp_mode = 0
 angular_damp_mode = 0
 
