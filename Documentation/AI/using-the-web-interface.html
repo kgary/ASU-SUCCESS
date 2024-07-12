@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using the Web Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Using the Web Interface</h1>
+        <p><a href="index.html" class="backToHome">Back to Home</a></p>
+        <div class="tutorial-section">
+            <h2>Steps</h2>
+            <button class="toggle-button" onclick="toggleInstructions(this)">Show Instructions</button>
+            <div class="content" style="display: none;">
+                <ol>
+                    <li>Open your browser.</li>
+                    <li>Navigate to the HTML file:
+                        <ul>
+                            <li>You can do this by opening the <code>ai.html</code> file (inside the OpenaiAPI directory) directly in your browser. Simply double-click on the file, and it should open in your default browser.</li>
+                        </ul>
+                    </li>
+                    <li>You will see a text field on the webpage. Enter your prompt in the text field and press Enter.</li>
+                    <li>The response from the ChatGPT API will be displayed below the text field.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleInstructions(button) {
+            var content = button.nextElementSibling;
+            if (content.style.display === "none") {
+                content.style.display = "block";
+                button.innerText = "Hide Instructions";
+            } else {
+                content.style.display = "none";
+                button.innerText = "Show Instructions";
+            }
+        }
+    </script>
+</body>
+</html>

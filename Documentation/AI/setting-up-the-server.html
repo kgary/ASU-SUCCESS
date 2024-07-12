@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting Up the Server</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Setting Up the Server</h1>
+        <p><a href="index.html" class="backToHome">Back to Home</a></p>
+        <div class="tutorial-section">
+            <h2>Steps</h2>
+            <button class="toggle-button" onclick="toggleInstructions(this)">Show Instructions</button>
+            <div class="content" style="display: none;">
+                <ol>
+                    <li>Open your terminal. Make sure you're inside the AI directory.</li>
+                    <li>Navigate to the OpenaiAPI project directory:
+                        <pre class="code-block">cd OpenaiAPI</pre>
+                    </li>
+                    <li>Install the necessary packages for the 1st server:
+                        <pre class="code-block">npm install</pre>
+                    </li>
+                    <li>Navigate to the Decryption project directory:
+                        <pre class="code-block">cd Decryption</pre>
+                    </li>
+                    <li>Install the necessary packages for the 2nd server:
+                        <pre class="code-block">npm install</pre>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleInstructions(button) {
+            var content = button.nextElementSibling;
+            if (content.style.display === "none") {
+                content.style.display = "block";
+                button.innerText = "Hide Instructions";
+            } else {
+                content.style.display = "none";
+                button.innerText = "Show Instructions";
+            }
+        }
+    </script>
+</body>
+</html>
