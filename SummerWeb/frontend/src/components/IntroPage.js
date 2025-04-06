@@ -1,7 +1,15 @@
+// IntroPage.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './IntroPage.css';
 
 const IntroPage = () => {
+  const navigate = useNavigate();
+
+  const handleCreatePetClick = () => {
+    navigate('/tutorial');
+  };
+
   return (
     <div className="intro-page-container">
       {/* Header section */}
@@ -61,7 +69,9 @@ const IntroPage = () => {
       </div>
 
       <div className="interactive-section">
-        <button className="pet-button">Let's create a Pet!</button>
+        <button className="pet-button" onClick={handleCreatePetClick}>
+          Let's create a Pet!
+        </button>
       </div>
     </div>
   );
