@@ -131,7 +131,49 @@
     left: 15px;
     top: 225px;
   }
-
+  
+  /* Pop up styling */
+  .part-popup {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: 200px;
+  }
+  
+  .popup-content {
+    background-color: white;
+    border: 2px solid #ff69b4;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    position: relative;
+  }
+  
+  .popup-content h4 {
+    margin-top: 0;
+    color: #ff1493;
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 5px;
+  }
+  
+  .close-popup {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
 .info-cards-section {
   display: flex;
   flex-wrap: wrap;
