@@ -71,15 +71,66 @@
 
 .human-body-illustration,
 .web-page-illustration {
-  height: 300px;
-  border: 3px dotted #ff69b4;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #999;
-  background-color: #fff0f5;
+    height: 300px;
+    border: 3px dotted #ff69b4;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #fff0f5;
 }
+
+/* Human body image styling */
+.human-figure {
+    position: relative;
+    height: 250px;
+    width: 100px;
+    margin: 0 auto;
+  }
+  
+  .body-part {
+    position: absolute;
+    background-color: #87CEFA;
+    border: 2px solid #1E90FF;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .body-part:hover {
+    background-color: #1E90FF;
+  }
+  
+  .body-part.head {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    left: 25px;
+    top: 0;
+  }
+  
+  .body-part.torso {
+    width: 70px;
+    height: 80px;
+    border-radius: 15px;
+    left: 15px;
+    top: 55px;
+  }
+  
+  .body-part.legs {
+    width: 60px;
+    height: 80px;
+    left: 20px;
+    top: 140px;
+  }
+  
+  .body-part.feet {
+    width: 70px;
+    height: 20px;
+    border-radius: 10px;
+    left: 15px;
+    top: 225px;
+  }
 
 .info-cards-section {
   display: flex;

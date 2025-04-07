@@ -21,6 +21,156 @@ const FlipCard = ({ frontTitle, frontContent, backContent }) => {
   );
 };
 
+const HumanBodyIllustration = () => {
+  const [activePart, setActivePart] = useState(null);
+  const bodyParts = {
+    head: {
+      title: "🧠 Head",
+      description: "Like your brain! Stores your name & secret thoughts (meta info)."
+    },
+    body: {
+      title: "👕 Body",
+      description: "Your eyes, hands, smile — everything visible! Just like web content."
+    },
+    arms: {
+      title: "Arms",
+      description: "The parts that help you interact with things, like buttons on a webpage!"
+    },
+    legs: {
+      title: "Legs",
+      description: "Help you move around, like navigation links help you move around a website."
+    },
+    feet: {
+      title: "👟 Footer",
+      description: "Your shoes — always at the bottom. Useful info, like contact details."
+    }
+  };
+  
+  const handlePartClick = (part) => {
+    setActivePart(activePart === part ? null : part);
+  };
+  
+  return (
+    <div className="human-body-illustration">
+      <div className="human-figure">
+        <div
+        className="body-part head" 
+          onClick={() => handlePartClick('head')}
+          style={{
+            width: '60px',
+            height: '60px',
+            borderRadius: '50%',
+            left: '20px',
+            top: '0',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#1a5276',
+            fontWeight: 'bold'
+          }}
+        >
+        head
+        </div>
+          
+        <div 
+          className="body-part torso" 
+          onClick={() => handlePartClick('body')}
+          style={{
+            width: '60px',
+            height: '80px',
+            borderRadius: '10px',
+            left: '20px',
+            top: '65px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#1a5276',
+            fontWeight: 'bold'
+          }}
+          >
+          body
+          </div>
+
+        <div 
+          className="body-part left-arm" 
+          onClick={() => handlePartClick('arms')}
+          style={{
+            width: '20px',
+            height: '70px',
+            borderRadius: '10px',
+            left: '0',
+            top: '70px'
+          }}
+        />
+        <div 
+          className="body-part right-arm" 
+          onClick={() => handlePartClick('arms')}
+          style={{
+            width: '20px',
+            height: '70px',
+            borderRadius: '10px',
+            left: '80px',
+            top: '70px'
+          }}
+        />
+
+        <div 
+          className="body-part left-leg" 
+          onClick={() => handlePartClick('legs')}
+          style={{
+            width: '20px',
+            height: '70px',
+            borderRadius: '10px',
+            left: '20px',
+            top: '150px'
+          }}
+        />
+        <div 
+          className="body-part right-leg" 
+          onClick={() => handlePartClick('legs')}
+          style={{
+            width: '20px',
+            height: '70px',
+            borderRadius: '10px',
+            left: '60px',
+            top: '150px'
+          }}
+        />
+
+
+        <div 
+          className="body-part foot" 
+          onClick={() => handlePartClick('feet')}
+          style={{
+            width: '70px',
+            height: '20px',
+            borderRadius: '10px',
+            left: '15px',
+            top: '225px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#1a5276',
+            fontWeight: 'bold'
+          }}
+        >
+          feet
+        </div>
+      </div>
+      
+      {activePart && (
+        <div className="part-popup">
+          <div className="popup-content">
+            <h4>{bodyParts[activePart].title}</h4>
+            <p>{bodyParts[activePart].description}</p>
+            <button className="close-popup" onClick={() => setActivePart(null)}>×</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const IntroPage = () => {
   return (
     <div className="intro-page-container">
@@ -34,11 +184,9 @@ const IntroPage = () => {
 
       <div className="main-content">
         <div className="content-column human-body-section">
-          <h2>🧍‍♀️ Human Body (You!)</h2>
+          <h2>🧍 Human Body (You!)</h2>
+          <HumanBodyIllustration />
           <div className="speech-bubble">
-            <p><strong>🧠 Head:</strong> Like your brain! Stores your name & secret thoughts (meta info).</p>
-            <p><strong>👕 Body:</strong> Your eyes, hands, smile — everything visible! Just like web content.</p>
-            <p><strong>👟 Footer:</strong> Your shoes — always at the bottom. Useful info, like contact details.</p>
             <p><span className="avatar">👦</span> “That's me!”</p>
           </div>
         </div>
@@ -46,9 +194,6 @@ const IntroPage = () => {
         <div className="content-column web-page-section">
           <h2>🌐 Web Page</h2>
           <div className="speech-bubble">
-            <p><strong>&lt;head&gt; 🧠:</strong> Stores page title, hidden secrets, style rules.</p>
-            <p><strong>&lt;body&gt; 🎨:</strong> Text, images, buttons — the fun stuff users see!</p>
-            <p><strong>&lt;footer&gt; 📞:</strong> Bottom of page — copyright, links, contact info.</p>
             <p><span className="avatar">🧑‍🎓</span> “It’s like a digital twin of us!”</p>
           </div>
         </div>
