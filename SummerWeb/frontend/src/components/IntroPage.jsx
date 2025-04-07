@@ -171,6 +171,67 @@ const HumanBodyIllustration = () => {
   );
 };
 
+const WebPageIllustration = () => {
+  const [activePart, setActivePart] = useState(null);
+  
+  const pageParts = {
+    head: {
+      title: "<head> 🧠",
+      description: "Stores page title, hidden secrets, style rules."
+    },
+    body: {
+      title: "<body> 🎨",
+      description: "Text, images, buttons the fun stuff users see!"
+    },
+    footer: {
+      title: "<footer> 📞",
+      description: "Bottom of the page copyright, links, contact info."
+    }
+  };
+  
+  const handlePartClick = (part) => {
+    setActivePart(activePart === part ? null : part);
+  };
+  
+  return (
+    <div className="web-page-illustration">
+      <div className="webpage-figure">
+        <div 
+          className="page-part header" 
+          onClick={() => handlePartClick('head')}
+          style={{ fontWeight: 'bold' }}
+        >
+          &lt;head&gt;
+        </div>
+        <div 
+          className="page-part content" 
+          onClick={() => handlePartClick('body')}
+          style={{ fontWeight: 'bold' }}
+        >
+          &lt;body&gt;
+        </div>
+        <div 
+          className="page-part footer" 
+          onClick={() => handlePartClick('footer')}
+          style={{ display: 'flex', justifyContent: 'center', fontWeight: 'bold'}}
+        >
+          &lt;footer&gt;
+        </div>
+      </div>
+      
+      {activePart && (
+        <div className="part-popup">
+          <div className="popup-content">
+            <h4>{pageParts[activePart].title}</h4>
+            <p>{pageParts[activePart].description}</p>
+            <button className="close-popup" onClick={() => setActivePart(null)}>×</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const IntroPage = () => {
   return (
     <div className="intro-page-container">
@@ -186,14 +247,15 @@ const IntroPage = () => {
         <div className="content-column human-body-section">
           <h2>🧍 Human Body (You!)</h2>
           <HumanBodyIllustration />
-          <div className="speech-bubble">
+          <div className="speech-bubble" style={{ fontWeight: 'bold' }}>
             <p><span className="avatar">👦</span> “That's me!”</p>
           </div>
         </div>
 
         <div className="content-column web-page-section">
           <h2>🌐 Web Page</h2>
-          <div className="speech-bubble">
+          <WebPageIllustration />
+          <div className="speech-bubble" style={{ fontWeight: 'bold' }}>
             <p><span className="avatar">🧑‍🎓</span> “It’s like a digital twin of us!”</p>
           </div>
         </div>

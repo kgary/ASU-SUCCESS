@@ -131,6 +131,43 @@
     left: 15px;
     top: 225px;
   }
+
+  /* Web page figure styling */
+.webpage-figure {
+    position: relative;
+    height: 250px;
+    width: 180px;
+    border: 2px solid #1E90FF;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .page-part {
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+    font-family: monospace;
+    padding: 10px 0;
+  }
+  
+  .page-part.header {
+    background-color: #87CEFA;
+    flex: 1;
+  }
+  
+  .page-part.content {
+    flex: 3;
+    background-color: #f4f0ff;
+  }
+  
+  .page-part.footer {
+    flex: 1;
+    background-color: #b2b0e6;
+  }
   
   /* Pop up styling */
   .part-popup {
@@ -324,5 +361,9 @@
   .info-cards-section {
     gap: 20px;
     padding: 10px;
+  }
+
+  .part-popup {
+    width: 180px;
   }
 }
