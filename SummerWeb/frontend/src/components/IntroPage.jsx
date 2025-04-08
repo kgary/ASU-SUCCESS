@@ -171,6 +171,148 @@ const HumanBodyIllustration = () => {
   );
 };
 
+const WebPageIllustration = () => {
+  const [activePart, setActivePart] = useState(null);
+  
+  const pageParts = {
+    header: {
+      title: "<header> 🧠",
+      description: "This is the top section of your webpage, often containing the URL."
+    },
+    body: {
+      title: "<body> 📝",
+      description: "The main content area of your webpage. This is where most of your text, images, and interactive elements live."
+    },
+    footer: {
+      title: "<footer> 📞",
+      description: "Bottom of the page containing copyright info, links, contact info, and other end-of-page content."
+    },
+  };
+  
+  const handlePartClick = (part) => {
+    setActivePart(activePart === part ? null : part);
+  };
+  
+  return (
+    <div className="web-page-illustration">
+      <div className="browser-window" style={{
+        width: '300px',
+        height: '250px',
+        border: '2px solid #666',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'white',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+        margin: '0 auto'
+      }}>
+        {/* Header with URL bar */}
+        <div 
+          className="browser-chrome" 
+          onClick={() => handlePartClick('header')}
+          style={{
+            height: '30px',
+            backgroundColor: '#f0f0f0',
+            borderBottom: '1px solid #ddd',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '0 10px',
+            cursor: 'pointer'
+          }}
+        >
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px'
+          }}>
+            <div style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: '#ff6058'
+            }}></div>
+            <div style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: '#ffbd2e'
+            }}></div>
+            <div style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: '#28ca41'
+            }}></div>
+          </div>
+
+          <div style={{
+            flex: 1,
+            margin: '0 10px',
+            height: '18px',
+            backgroundColor: 'white',
+            borderRadius: '10px',
+            fontSize: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#999'
+          }}>header</div>
+        </div>
+        
+        {/* Body content */}
+        <div 
+          className="page-part body" 
+          onClick={() => handlePartClick('body')}
+          style={{ 
+            flex: 1,
+            height: '80px',
+            backgroundColor: '#87CEFA',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '12px',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}
+        >
+          body
+        </div>
+        
+        {/* Footer */}
+        <div 
+          className="page-part footer" 
+          onClick={() => handlePartClick('footer')}
+          style={{ 
+            height: '18px',
+            backgroundColor: '#b2b0e6',
+            borderTop: '1px solid #9e9cd2',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '12px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            position: 'relative'
+          }}
+        >
+          footer
+        </div>
+      </div>
+      
+      {activePart && (
+        <div className="part-popup">
+          <div className="popup-content">
+            <h4>{pageParts[activePart].title}</h4>
+            <p>{pageParts[activePart].description}</p>
+            <button className="close-popup" onClick={() => setActivePart(null)}>×</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const IntroPage = () => {
   return (
     <div className="intro-page-container">
@@ -186,14 +328,15 @@ const IntroPage = () => {
         <div className="content-column human-body-section">
           <h2>🧍 Human Body (You!)</h2>
           <HumanBodyIllustration />
-          <div className="speech-bubble">
+          <div className="speech-bubble" style={{ fontWeight: 'bold' }}>
             <p><span className="avatar">👦</span> “That's me!”</p>
           </div>
         </div>
 
         <div className="content-column web-page-section">
           <h2>🌐 Web Page</h2>
-          <div className="speech-bubble">
+          <WebPageIllustration />
+          <div className="speech-bubble" style={{ fontWeight: 'bold' }}>
             <p><span className="avatar">🧑‍🎓</span> “It’s like a digital twin of us!”</p>
           </div>
         </div>
