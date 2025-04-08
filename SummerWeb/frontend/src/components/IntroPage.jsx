@@ -175,18 +175,18 @@ const WebPageIllustration = () => {
   const [activePart, setActivePart] = useState(null);
   
   const pageParts = {
-    head: {
-      title: "<head> 🧠",
-      description: "Stores page title, hidden secrets, style rules."
+    header: {
+      title: "<header> 🧠",
+      description: "This is the top section of your webpage, often containing the URL."
     },
     body: {
-      title: "<body> 🎨",
-      description: "Text, images, buttons the fun stuff users see!"
+      title: "<body> 📝",
+      description: "The main content area of your webpage. This is where most of your text, images, and interactive elements live."
     },
     footer: {
       title: "<footer> 📞",
-      description: "Bottom of the page copyright, links, contact info."
-    }
+      description: "Bottom of the page containing copyright info, links, contact info, and other end-of-page content."
+    },
   };
   
   const handlePartClick = (part) => {
@@ -195,27 +195,108 @@ const WebPageIllustration = () => {
   
   return (
     <div className="web-page-illustration">
-      <div className="webpage-figure">
+      <div className="browser-window" style={{
+        width: '300px',
+        height: '250px',
+        border: '2px solid #666',
+        borderRadius: '8px',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'white',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+        margin: '0 auto'
+      }}>
+        {/* Header with URL bar */}
         <div 
-          className="page-part header" 
-          onClick={() => handlePartClick('head')}
-          style={{ fontWeight: 'bold' }}
+          className="browser-chrome" 
+          onClick={() => handlePartClick('header')}
+          style={{
+            height: '30px',
+            backgroundColor: '#f0f0f0',
+            borderBottom: '1px solid #ddd',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '0 10px',
+            cursor: 'pointer'
+          }}
         >
-          &lt;head&gt;
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px'
+          }}>
+            <div style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: '#ff6058'
+            }}></div>
+            <div style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: '#ffbd2e'
+            }}></div>
+            <div style={{
+              width: '12px',
+              height: '12px',
+              borderRadius: '50%',
+              backgroundColor: '#28ca41'
+            }}></div>
+          </div>
+
+          <div style={{
+            flex: 1,
+            margin: '0 10px',
+            height: '18px',
+            backgroundColor: 'white',
+            borderRadius: '10px',
+            fontSize: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#999'
+          }}>header</div>
         </div>
+        
+        {/* Body content */}
         <div 
-          className="page-part content" 
+          className="page-part body" 
           onClick={() => handlePartClick('body')}
-          style={{ fontWeight: 'bold' }}
+          style={{ 
+            flex: 1,
+            height: '80px',
+            backgroundColor: '#87CEFA',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '12px',
+            fontWeight: 'bold',
+            cursor: 'pointer'
+          }}
         >
-          &lt;body&gt;
+          body
         </div>
+        
+        {/* Footer */}
         <div 
           className="page-part footer" 
           onClick={() => handlePartClick('footer')}
-          style={{ display: 'flex', justifyContent: 'center', fontWeight: 'bold'}}
+          style={{ 
+            height: '18px',
+            backgroundColor: '#b2b0e6',
+            borderTop: '1px solid #9e9cd2',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '12px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            position: 'relative'
+          }}
         >
-          &lt;footer&gt;
+          footer
         </div>
       </div>
       
