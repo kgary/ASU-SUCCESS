@@ -152,9 +152,26 @@ export default function PetProfileApp() {
             placeholder="Tell us about your amazing pet!"
           ></textarea>
         </div>
-      
+        </div>
 
-        
+         {/* Right Panel - Live Preview */}
+      <div className="w-1/2 p-6 flex flex-col justify-center items-center">
+        <h2 className="text-3xl font-bold text-blue-700 mb-6">Live Preview</h2>
+        <div className="w-full max-w-md bg-white p-6 rounded-xl shadow-xl text-center">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-2">{petName}</h3>
+          <p className="text-gray-600 mb-4">{petDescription}</p>
+          {petImage ? (
+            <img
+              src={petImage}
+              alt="Pet"
+              className="mx-auto w-40 h-40 object-cover rounded-full border-4 border-purple-200 shadow-md"
+            />
+          ) : (
+            <div className="w-40 h-40 bg-gray-200 rounded-full mx-auto flex items-center justify-center text-gray-500 text-sm italic">
+              No image
+            </div>
+          )}
+      </div>
       </div>
     </div>
 
