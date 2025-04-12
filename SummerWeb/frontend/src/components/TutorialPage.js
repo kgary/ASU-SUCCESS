@@ -44,7 +44,7 @@ export default function PetProfileApp() {
             placeholder="What's your pet's name?"
           />
 
-          {/* Pet Type Selection */}
+        {/* Pet Type Selection */}
           <label className="text-gray-700 font-medium block">Pet Type:</label>
           <div className="grid grid-cols-4 gap-2 my-2">
             {petTypes.map((type) => (
@@ -63,7 +63,50 @@ export default function PetProfileApp() {
           </div>
         </div>
         
-        
+        {/* Appearance Section */}
+        <div className="bg-blue-50 rounded-xl p-4 mb-4 border-2 border-blue-200">
+          <h3 className="text-xl font-bold text-blue-600 mb-2 flex items-center">
+            Pet Appearance
+          </h3>
+          <label className="text-gray-700 font-medium block">Pet Color:</label>
+          <div className="flex items-center mt-1 mb-3">
+            <input
+              type="color"
+              value={petColor}
+              onChange={(e) => setPetColor(e.target.value)}
+              className="w-12 h-12 rounded-lg mr-3 border-0"
+            />
+            <div 
+              className="w-full h-8 rounded-lg"
+              style={{ backgroundColor: petColor }}
+            ></div>
+          </div>
+          
+          <label className="text-gray-700 font-medium">Pet Age:</label>
+          <div className="flex items-center mt-1 mb-3">
+            <input
+              type="range"
+              min="1"
+              max="15"
+              value={petAge}
+              onChange={(e) => setPetAge(e.target.value)}
+              className="w-full h-4 accent-blue-500"
+            />
+            <span className="ml-3 bg-blue-500 text-white font-bold px-2 py-1 rounded-lg min-w-8 text-center">
+              {petAge}
+            </span>
+          </div>
+
+          <label className="text-gray-700 font-medium block">Pet Image URL:</label>
+          <input
+            type="text"
+            value={petImage}
+            onChange={(e) => setPetImage(e.target.value)}
+            className="border-2 border-blue-300 focus:ring-2 focus:ring-blue-400 focus:outline-none p-2 rounded-lg w-full mt-1 mb-1"
+            placeholder="https://example.com/pet.jpg"
+          />
+        </div>
+
         
       </div>
     </div>
