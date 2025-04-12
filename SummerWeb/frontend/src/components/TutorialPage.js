@@ -22,7 +22,7 @@ export default function PetProfileApp() {
     { id: "dragon", name: "Dragon", emoji: "🐉" }
   ];
 
-  const personalities = ["Friendly", "Shy", "Brave", "Silly", "Smart", "Curious", "Loyal", "Protective", "Playful", "Mischievous", "Energetic", "Lazy", "Noisy" ];
+  const personalities = ["Friendly", "Shy", "Brave", "Silly", "Smart", "Curious", "Loyal", "Protective", "Playful", "Mischievous", "Energetic", "Lazy", "Noisy", "Adventurous", "Clever" ];
 
   return (
     <div className="flex h-screen font-sans bg-gradient-to-br from-purple-100 to-blue-100">
@@ -105,6 +105,38 @@ export default function PetProfileApp() {
             className="border-2 border-blue-300 focus:ring-2 focus:ring-blue-400 focus:outline-none p-2 rounded-lg w-full mt-1 mb-1"
             placeholder="https://example.com/pet.jpg"
           />
+        </div>
+
+        {/* Personality info Section */}
+        <div className="bg-green-50 rounded-xl p-4 mb-4 border-2 border-green-200">
+          <h3 className="text-xl font-bold text-green-600 mb-2 flex items-center">
+            Pet Personality
+          </h3>
+          <label className="text-gray-700 font-medium block">Personality:</label>
+          <div className="grid grid-cols-3 gap-2 my-2">
+            {personalities.map((personality) => (
+              <button
+                key={personality}
+                onClick={() => setPetPersonality(personality)}
+                className={`p-2 rounded-lg text-center transition-all ${
+                  petPersonality === personality 
+                    ? "bg-green-500 text-white shadow-md" 
+                    : "bg-white border border-green-200 hover:bg-green-100"
+                }`} >
+                {personality}
+              </button>
+            ))}
+          </div>
+          <label className="text-gray-700 font-medium block mt-3">Special Talent:</label>
+          <div className="flex items-center">
+            <input
+              type="text"
+              value={petTalent}
+              onChange={(e) => setPetTalent(e.target.value)}
+              className="border-2 border-green-300 focus:ring-2 focus:ring-green-400 focus:outline-none p-2 rounded-lg w-full mt-1"
+              placeholder="What makes your pet special?"
+            />
+          </div>
         </div>
 
         
