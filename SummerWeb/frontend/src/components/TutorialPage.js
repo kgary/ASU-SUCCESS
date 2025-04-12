@@ -139,6 +139,21 @@ export default function PetProfileApp() {
           </div>
         </div>
 
+        {/* Story Section */}
+        <div className="bg-pink-50 rounded-xl p-4 border-2 border-pink-200">
+          <h3 className="text-xl font-bold text-pink-600 mb-2 flex items-center">
+            Pet Story
+          </h3>
+          <label className="text-gray-700 font-medium">Your Pet Story:</label>
+          <textarea
+            value={petDescription}
+            onChange={(e) => setPetDescription(e.target.value)}
+            className="border-2 border-pink-300 focus:ring-2 focus:ring-pink-400 focus:outline-none p-2 rounded-lg w-full mt-1 mb-1 h-24"
+            placeholder="Tell us about your amazing pet!"
+          ></textarea>
+        </div>
+      
+
         
       </div>
     </div>
