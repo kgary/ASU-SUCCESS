@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './IntroPage.css';
 
 const FlipCard = ({ frontTitle, frontContent, backContent }) => {
@@ -314,6 +315,11 @@ const WebPageIllustration = () => {
 };
 
 const IntroPage = () => {
+  const navigate = useNavigate();
+  const handleCreatePetClick = () => {
+    navigate('/tutorial');
+  };
+
   return (
     <div className="intro-page-container">
       <div className="header-section">
@@ -381,7 +387,7 @@ const IntroPage = () => {
       </div>
 
       <div className="interactive-section">
-        <button className="pet-button bounce">🐾 Let's Create a Pet!</button>
+        <button className="pet-button bounce" onClick={handleCreatePetClick} >🐾 Let's Create a Pet!</button>
       </div>
     </div>
   );
