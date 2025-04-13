@@ -1,12 +1,16 @@
 import React from 'react';
-import './App.css';
-import IntroPage from './components/IntroPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TutorialPage from './components/TutorialPage';
+import IntroPage from './components/IntroPage'; // Assuming the original button is on HomePage
 
 function App() {
   return (
-    <div className="App">
-      <IntroPage />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<IntroPage />} />
+        <Route path="/tutorial" element={<TutorialPage />} />
+      </Routes>
+    </Router>
   );
 }
 
