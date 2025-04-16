@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function PetProfileApp() {
   const [petName, setPetName] = useState("My Pet");
@@ -294,52 +294,86 @@ export default function PetProfileApp() {
             </section>
 
       {/* Profile Card Section */}
-      <section className="flex-1 bg-white px-6 py-10 flex justify-center items-start overflow-auto">
-        <div className="w-full max-w-3xl bg-gray-50 rounded-xl shadow-lg p-6">
-          {/* Image */}
-          <div className="flex justify-center mb-6">
-            {petImage ? (
-              <img
-                src={petImage}
-                alt="Pet"
-                className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
-              />
-            ) : (
-              <div className="w-64 h-64 bg-gray-200 rounded-full border-4 border-white shadow-md flex items-center justify-center text-gray-500 text-sm">
-                No image
-              </div>
-            )}
-          </div>
+      <section className="flex-1 bg-white px-6 py-8 flex justify-center items-start overflow-auto">
+              <div className="w-full max-w-3xl bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl shadow-xl p-6 border-2 border-blue-200">
+                {/* Image in a fun frame WITH emoji decorations at specific positions */}
+                <div className="flex justify-center mb-6 relative">
+                  {/* Emojis at specific positions around the image */}
+                  {decorations[petType]?.slice(0, 8).map((emoji, idx) => (
+                    <div
+                      key={`dot-emoji-${idx}`}
+                      className="absolute text-2xl"
+                      style={{
+                        top: emojiPositions[idx].top,
+                        left: emojiPositions[idx].left,
+                        transform: "translate(-50%, -50%)"
+                      }}
+                    >
+                      {emoji}
+                    </div>
+                  ))}
+                  
+                  {petImage ? (
+                    <div className={`w-48 h-48 rounded-full overflow-hidden border-4 border-${petType === 'dragon' ? 'red' : petType === 'fish' ? 'blue' : 'green'}-400 shadow-xl transform hover:scale-105 transition-all duration-300 z-10`}>
+                      <img
+                        src={petImage}
+                        alt={`${petName} the ${petType}`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "/api/placeholder/200/200";
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-48 h-48 bg-gray-200 rounded-full border-4 border-purple-300 shadow-lg flex items-center justify-center text-gray-500 z-10">
+                      <span className="text-4xl">📷</span>
+                    </div>
+                  )}
+                </div>
 
-          {/* Description and Traits */}
-          <div className="text-center">
-            <p className="text-gray-600 text-lg mb-6">{petDescription || 'A lovely pet of mine!'}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left text-sm max-w-2xl mx-auto">
-              <div>
-                <h4 className="font-semibold text-gray-700 mb-1">Personality</h4>
-                <p className="text-gray-800">{petPersonality || 'Chill'}</p>
+                {/* Speech bubble with description */}
+                <div className="relative bg-white rounded-2xl p-4 mb-6 shadow-md border-2 border-blue-200">
+                  <div className="absolute top-0 left-12 transform -translate-y-full">
+                    <div className="w-6 h-6 bg-white border-l-2 border-t-2 border-blue-200 transform rotate-45 translate-y-3"></div>
+                  </div>
+                  <p className="text-gray-700 text-lg text-center">{petDescription || 'A lovely pet of mine!'}</p>
+                </div>
+
+                {/* Fun personality badges */}
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div className="bg-gradient-to-r from-purple-100 to-purple-200 rounded-xl p-4 shadow transform hover:scale-105 transition-all">
+                    <h4 className="font-bold text-purple-700 mb-2 text-lg flex items-center justify-center">
+                      <span className="text-xl mr-1">✨</span> Personality
+                    </h4>
+                    <p className="text-purple-800 text-lg font-medium bg-white bg-opacity-50 rounded-full py-1">
+                      {petPersonality || 'Friendly'}
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-amber-100 to-amber-200 rounded-xl p-4 shadow transform hover:scale-105 transition-all">
+                    <h4 className="font-bold text-amber-700 mb-2 text-lg flex items-center justify-center">
+                      <span className="text-xl mr-1">🌟</span> Special Talent
+                    </h4>
+                    <p className="text-amber-800 text-lg font-medium bg-white bg-opacity-50 rounded-full py-1">
+                      {petTalent || 'Can say Hi!'}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-700 mb-1">Special Talent</h4>
-                <p className="text-gray-800">{petTalent || 'Can say Hi!'}</p>
+            </section>
+
+            {/* Fun Footer */}
+            <footer className="bg-gradient-to-r from-purple-200 to-pink-200 text-center py-4 text-sm text-purple-700 font-medium">
+              <div className="flex items-center justify-center space-x-1">
+                <span>🎈</span>
+                <span>© 2025 PetWorld</span>
+                <span>🎈</span>
               </div>
-            </div>
+              <div className="text-xs mt-1">Made with ❤️ for kids</div>
+            </footer>
           </div>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-100 text-center py-4 text-sm text-gray-500">
-        © 2025 PetWorld. All rights reserved.
-      </footer>
+      </div>
     </div>
-  </div>
-</div>
-
-
-    </div>
-
   );
 }
-
-
