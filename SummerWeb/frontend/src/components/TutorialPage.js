@@ -249,45 +249,49 @@ export default function PetProfileApp() {
       </div>
 
          {/* Right Panel - Live Preview with Browser Window Look */}
-<div className="w-1/2 h-full bg-gray-100 flex flex-col overflow-hidden border-l border-gray-200">
-  {/* Fake Browser Frame */}
-  <div className="rounded-t-lg border border-gray-300 shadow-lg flex flex-col overflow-hidden h-full">
-    {/* Fake Browser Bar */}
-    <div className="flex items-center gap-2 bg-gray-200 px-3 py-2">
-      <span className="w-3 h-3 bg-red-500 rounded-full" />
-      <span className="w-3 h-3 bg-yellow-500 rounded-full" />
-      <span className="w-3 h-3 bg-green-500 rounded-full" />
-    </div>
+         <div className="w-1/2 h-full bg-gradient-to-br from-indigo-100 to-purple-100 flex flex-col overflow-hidden border-l border-gray-200">
+        {/* Fake Browser Frame */}
+        <div className="mx-4 my-4 rounded-2xl border-4 border-purple-300 shadow-xl flex flex-col overflow-hidden h-full bg-white">
+          {/* Fake Browser Bar with cute face */}
+          <div className="flex items-center gap-2 bg-gradient-to-r from-purple-400 to-pink-400 px-4 py-3">
+            <div className="flex gap-2">
+              <span className="w-4 h-4 bg-red-400 rounded-full flex items-center justify-center text-xs font-bold">×</span>
+              <span className="w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center text-xs">−</span>
+              <span className="w-4 h-4 bg-green-400 rounded-full flex items-center justify-center text-xs">+</span>
+            </div>
+            <div className="ml-4 bg-white bg-opacity-20 rounded-full px-4 py-1 text-white text-sm flex-grow text-center">
+              {petName}'s Adventure Zone 🚀
+            </div>
+          </div>
 
     {/* Actual Website Preview */}
-    <div className="flex flex-col h-full overflow-auto bg-white">
+    <div className="flex flex-col h-full overflow-auto bg-white relative">
+            {/* Removed floating decorations from background */}
 
-      {/* Navbar */}
-      <header className="bg-purple-600 text-white py-4 px-6 flex justify-between items-center shadow-md">
-        <h1 className="text-xl font-bold">🐾 PetWorld</h1>
-        <nav className="space-x-4 text-sm">
-          <span className="hover:underline cursor-pointer">Home</span>
-          {/* <span className="hover:underline cursor-pointer">Pets</span>
-          <span className="hover:underline cursor-pointer">Contact</span> */}
-        </nav>
-      </header>
+            {/* Navbar */}
+            <header className="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-6 flex justify-between items-center shadow-md">
+              <h1 className="text-xl font-bold flex items-center">
+                <span className="text-2xl mr-2">🐾</span> 
+                PetWorld
+              </h1>
+              <nav className="space-x-4 text-sm">
+                <button className="bg-white bg-opacity-30 px-3 py-1 rounded-full hover:bg-opacity-40 transition-all">
+                  Home
+                </button>
+              </nav>
+            </header>
 
-      {/* Hero Section - Reduced height */}
+      {/* Hero Section - Colorful & fun */}
       <section
-        className="flex items-center justify-center text-white text-center"
-        style={{
-          backgroundColor: petColor || '#7C3AED',
-          backgroundImage: "url('https://www.transparenttextures.com/patterns/diagmonds.png')",
-          minHeight: '100px', 
-        }}
-      >
-        <div>
-          <h2 className="text-3xl font-bold">{petName || 'My Pet'}</h2>
-          <p className="italic text-base mt-1">
-            {petTypes.find((t) => t.id === petType)?.emoji || '🐾'} {petType?.toUpperCase() || ''} • {petAge} Years Old
-          </p>
-        </div>
-      </section>
+              className={`flex items-center justify-center text-white text-center py-6 bg-gradient-to-r ${bgColors[petType] || 'from-purple-400 to-pink-500'}`}
+            >
+              <div className="py-3">
+                <h2 className="text-4xl font-bold drop-shadow-md">{petName || 'My Pet'}</h2>
+                <p className="italic text-lg mt-2 bg-white bg-opacity-20 rounded-full px-4 py-1">
+                  {petTypes.find((t) => t.id === petType)?.emoji || '🐾'} {petType?.charAt(0).toUpperCase() + petType?.slice(1) || ''} • {petAge} Years Old
+                </p>
+              </div>
+            </section>
 
       {/* Profile Card Section */}
       <section className="flex-1 bg-white px-6 py-10 flex justify-center items-start overflow-auto">
