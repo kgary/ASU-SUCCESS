@@ -10,6 +10,58 @@ export default function PetProfileApp() {
   const [petPersonality, setPetPersonality] = useState("Friendly");
   const [petTalent, setPetTalent] = useState("");
 
+  // Stored animal images based on pet type
+  const petImages = {
+    dog: [
+      "/images/dog1.jpg",
+      "/images/dog2.jpg",
+      "/images/dog3.jpg"    
+    ],
+    cat: [
+      "/images/cat1.jpg",
+      "/images/cat2.jpg",
+      "/images/cat3.jpg"   
+    ],
+    rabbit: [
+      "/images/rabbit1.jpg",
+      "/images/rabbit2.jpg",
+      "/images/rabbit3.jpg"   
+    ],
+    hamster: [
+      "/images/hamster1.jpg",
+      "/images/hamster2.jpg",
+      "/images/hamster3.jpg"
+    ],
+    bird: [
+      "/images/bird1.jpg",
+      "/images/bird2.jpg",
+      "/images/bird3.jpg"
+    ],
+    fish: [
+      "/images/fish1.jpg",
+      "/images/fish2.jpg",
+      "/images/fish3.jpg"    
+    ],
+    turtle: [
+      "/images/turtle1.jpg",
+      "/images/turtle2.jpg",
+      "/images/turtle3.jpg" 
+    ],
+
+    dragon: [
+      "/images/dragon1.jpg",
+      "/images/dragon2.jpg",
+      "/images/dragon3.jpg" 
+    ]
+  };
+
+ // Update petImage when pet type changes
+ useEffect(() => {
+  if (petImages[petType] && petImages[petType].length > 0) {
+    setPetImage(petImages[petType][0]);
+  }
+}, [petType]);
+
   const petTypes = [
     { id: "dog", name: "Dog", emoji: "🐶" },
     { id: "cat", name: "Cat", emoji: "🐱" },
@@ -22,6 +74,42 @@ export default function PetProfileApp() {
   ];
 
   const personalities = ["Friendly", "Shy", "Brave", "Silly", "Smart", "Curious", "Loyal", "Protective", "Playful", "Mischievous", "Energetic", "Lazy", "Noisy", "Adventurous", "Clever" ];
+
+  // Background colors based on pet type for the right side preview
+  const bgColors = {
+    dog: "from-blue-300 to-indigo-400",
+    cat: "from-amber-300 to-orange-400",
+    rabbit: "from-pink-300 to-rose-400",
+    hamster: "from-yellow-300 to-amber-400",
+    bird: "from-sky-300 to-blue-400",
+    fish: "from-cyan-300 to-blue-400",
+    turtle: "from-green-300 to-emerald-400",
+    dragon: "from-red-300 to-purple-400"
+  };
+
+  // Emoji decorations for the right side preview
+  const decorations = {
+    dog: ["🦴", "🐕", "🐾", "🦮", "🏠", "🦮", "🦴", "🏠"],
+    cat: ["🧶", "🐈", "🐟", "🐭", "🪶", "🧶", "🐈", "🐟",],
+    rabbit: ["🥕", "🌿", "🌱", "🌻", "🌼", "🥕", "🌿", "🌱",],
+    hamster: ["🌰", "🧀", "🏃", "🏠", "🛞", "🌰", "🧀", "🏃", ],
+    bird: ["🌳", "🪶", "🌤️", "🐛", "🪺", "🌳", "🪶", "🌤️",],
+    fish: ["🫧", "🪸", "🐚", "🐙", "🌊", "🫧", "🪸", "🐚",],
+    turtle: ["🥬", "🍃", "🐢", "🪨", "🌴", "🥬", "🍃", "🐢", ],
+    dragon: ["🔥", "✨", "💎", "⚡", "🏔️", "🔥", "✨", "💎", ],
+  };
+
+  // Position definitions for the 8 dots around the image
+  const emojiPositions = [
+    { top: "0%", left: "50%" },     // top middle
+    { top: "15%", left: "85%" },    // top right
+    { top: "50%", left: "100%" },   // right middle
+    { top: "85%", left: "85%" },    // bottom right
+    { top: "100%", left: "50%" },   // bottom middle
+    { top: "85%", left: "15%" },    // bottom left
+    { top: "50%", left: "0%" },     // left middle
+    { top: "15%", left: "15%" }     // top left
+  ];
 
   return (
     <div className="flex h-screen font-sans bg-gradient-to-br from-purple-100 to-blue-100">
@@ -242,7 +330,5 @@ export default function PetProfileApp() {
 
   );
 }
-
-
 
 
