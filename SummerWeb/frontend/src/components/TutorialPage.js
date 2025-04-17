@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function PetProfileApp() {
   const [petName, setPetName] = useState("My Pet");
@@ -9,6 +9,58 @@ export default function PetProfileApp() {
   const [petColor, setPetColor] = useState("#8B5CF6");
   const [petPersonality, setPetPersonality] = useState("Friendly");
   const [petTalent, setPetTalent] = useState("");
+
+  // Stored animal images based on pet type
+  const petImages = {
+    dog: [
+      "/images/dog1.jpg",
+      "/images/dog2.jpg",
+      "/images/dog3.jpg"    
+    ],
+    cat: [
+      "/images/cat1.jpg",
+      "/images/cat2.jpg",
+      "/images/cat3.jpg"   
+    ],
+    rabbit: [
+      "/images/rabbit1.jpg",
+      "/images/rabbit2.jpg",
+      "/images/rabbit3.jpg"   
+    ],
+    hamster: [
+      "/images/hamster1.jpg",
+      "/images/hamster2.jpg",
+      "/images/hamster3.jpg"
+    ],
+    bird: [
+      "/images/bird1.jpg",
+      "/images/bird2.jpg",
+      "/images/bird3.jpg"
+    ],
+    fish: [
+      "/images/fish1.jpg",
+      "/images/fish2.jpg",
+      "/images/fish3.jpg"    
+    ],
+    turtle: [
+      "/images/turtle1.jpg",
+      "/images/turtle2.jpg",
+      "/images/turtle3.jpg" 
+    ],
+
+    dragon: [
+      "/images/dragon1.jpg",
+      "/images/dragon2.jpg",
+      "/images/dragon3.jpg" 
+    ]
+  };
+
+ // Update petImage when pet type changes
+ useEffect(() => {
+  if (petImages[petType] && petImages[petType].length > 0) {
+    setPetImage(petImages[petType][0]);
+  }
+}, [petType]);
 
   const petTypes = [
     { id: "dog", name: "Dog", emoji: "🐶" },
@@ -23,16 +75,55 @@ export default function PetProfileApp() {
 
   const personalities = ["Friendly", "Shy", "Brave", "Silly", "Smart", "Curious", "Loyal", "Protective", "Playful", "Mischievous", "Energetic", "Lazy", "Noisy", "Adventurous", "Clever" ];
 
+  // Background colors based on pet type for the right side preview
+  const bgColors = {
+    dog: "from-blue-300 to-indigo-400",
+    cat: "from-amber-300 to-orange-400",
+    rabbit: "from-pink-300 to-rose-400",
+    hamster: "from-yellow-300 to-amber-400",
+    bird: "from-sky-300 to-blue-400",
+    fish: "from-cyan-300 to-blue-400",
+    turtle: "from-green-300 to-emerald-400",
+    dragon: "from-red-300 to-purple-400"
+  };
+
+  // Emoji decorations for the right side preview
+  const decorations = {
+    dog: ["🦴", "🐕", "🐾", "🦮", "🏠", "🦮", "🦴", "🏠"],
+    cat: ["🧶", "🐈", "🐟", "🐭", "🪶", "🧶", "🐈", "🐟",],
+    rabbit: ["🥕", "🌿", "🌱", "🌻", "🌼", "🥕", "🌿", "🌱",],
+    hamster: ["🌰", "🧀", "🏃", "🏠", "🛞", "🌰", "🧀", "🏃", ],
+    bird: ["🌳", "🪶", "🌤️", "🐛", "🪺", "🌳", "🪶", "🌤️",],
+    fish: ["🫧", "🪸", "🐚", "🐙", "🌊", "🫧", "🪸", "🐚",],
+    turtle: ["🥬", "🍃", "🐢", "🪨", "🌴", "🥬", "🍃", "🐢", ],
+    dragon: ["🔥", "✨", "💎", "⚡", "🏔️", "🔥", "✨", "💎", ],
+  };
+
+  // Position definitions for the 8 dots around the image
+  const emojiPositions = [
+    { top: "0%", left: "50%" },     // top middle
+    { top: "15%", left: "85%" },    // top right
+    { top: "50%", left: "100%" },   // right middle
+    { top: "85%", left: "85%" },    // bottom right
+    { top: "100%", left: "50%" },   // bottom middle
+    { top: "85%", left: "15%" },    // bottom left
+    { top: "50%", left: "0%" },     // left middle
+    { top: "15%", left: "15%" }     // top left
+  ];
+
   return (
     <div className="flex h-screen font-sans bg-gradient-to-br from-purple-100 to-blue-100">
       {/* Left Panel - Form */}
       <div className="w-1/2 p-6 bg-white shadow-lg rounded-tr-3xl rounded-br-3xl flex flex-col overflow-auto">
-        <h2 className="text-3xl font-bold text-purple-700 mb-6 flex items-center">Create Your Pet Friend!</h2>
-        
+        <h2 className="text-3xl font-bold text-purple-700 mb-6 flex items-center">
+          Create Your Pet Friend! 
+          <span className="ml-2 text-4xl">✨</span>
+        </h2>
+
         {/* Pet Info Section */}
         <div className="bg-purple-50 rounded-xl p-4 mb-4 border-2 border-purple-200">
           <h3 className="text-xl font-bold text-purple-600 mb-2 flex items-center">
-            Pet Basics
+            Pet Basics 🐾
           </h3>
           <label className="text-gray-700 font-medium block">Pet Name:</label>
           <input
@@ -44,7 +135,7 @@ export default function PetProfileApp() {
           />
 
         {/* Pet Type Selection */}
-          <label className="text-gray-700 font-medium block">Pet Type:</label>
+        <label className="text-gray-700 font-medium block">Pet Type:</label>
           <div className="grid grid-cols-4 gap-2 my-2">
             {petTypes.map((type) => (
               <button
@@ -65,51 +156,55 @@ export default function PetProfileApp() {
         {/* Appearance Section */}
         <div className="bg-blue-50 rounded-xl p-4 mb-4 border-2 border-blue-200">
           <h3 className="text-xl font-bold text-blue-600 mb-2 flex items-center">
-            Pet Appearance
+            Pet Appearance 🌈
           </h3>
-          {/* <label className="text-gray-700 font-medium block">Pet Color:</label>
-           <div className="flex items-center mt-1 mb-3">
-            <input
-              type="color"
-              value={petColor}
-              onChange={(e) => setPetColor(e.target.value)}
-              className="w-12 h-12 rounded-lg mr-3 border-0"
-            />
-            <div 
-              className="w-full h-8 rounded-lg"
-              style={{ backgroundColor: petColor }}
-            ></div>
-          </div> */}
           
           <label className="text-gray-700 font-medium">Pet Age:</label>
-          <div className="flex items-center mt-1 mb-3">
+          <div className="flex items-center mt-1 mb-5">
             <input
               type="range"
               min="1"
               max="15"
               value={petAge}
-              onChange={(e) => setPetAge(e.target.value)}
+              onChange={(e) => setPetAge(parseInt(e.target.value))}
               className="w-full h-4 accent-blue-500"
             />
             <span className="ml-3 bg-blue-500 text-white font-bold px-2 py-1 rounded-lg min-w-8 text-center">
               {petAge}
             </span>
           </div>
-
-          <label className="text-gray-700 font-medium block">Pet Image URL:</label>
-          <input
-            type="text"
-            value={petImage}
-            onChange={(e) => setPetImage(e.target.value)}
-            className="border-2 border-blue-300 focus:ring-2 focus:ring-blue-400 focus:outline-none p-2 rounded-lg w-full mt-1 mb-1"
-            placeholder="https://example.com/pet.jpg"
-          />
+          
+          {/* Pet Image Selection - Larger Images */}
+          <label className="text-gray-700 font-medium block mb-2">Choose a Pet Image:</label>
+          <div className="grid grid-cols-3 gap-3">
+            {petImages[petType]?.map((imgSrc, index) => (
+              <div 
+                key={index} 
+                onClick={() => setPetImage(imgSrc)}
+                className={`cursor-pointer rounded-xl overflow-hidden border-4 h-32 transition-all transform hover:scale-105 ${
+                  petImage === imgSrc 
+                    ? 'border-blue-500 ring-4 ring-blue-300 scale-105' 
+                    : 'border-transparent hover:border-blue-200'
+                }`}
+              >
+                <img 
+                  src={imgSrc} 
+                  alt={`${petType} option ${index + 1}`}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/api/placeholder/200/200";
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Personality info Section */}
         <div className="bg-green-50 rounded-xl p-4 mb-4 border-2 border-green-200">
           <h3 className="text-xl font-bold text-green-600 mb-2 flex items-center">
-            Pet Personality
+            Pet Personality 🦸‍♂️
           </h3>
           <label className="text-gray-700 font-medium block">Personality:</label>
           <div className="grid grid-cols-3 gap-2 my-2">
@@ -141,7 +236,7 @@ export default function PetProfileApp() {
         {/* Story Section */}
         <div className="bg-pink-50 rounded-xl p-4 border-2 border-pink-200">
           <h3 className="text-xl font-bold text-pink-600 mb-2 flex items-center">
-            Pet Story
+            Pet Story 📖
           </h3>
           <label className="text-gray-700 font-medium">Your Pet Story:</label>
           <textarea
@@ -151,98 +246,134 @@ export default function PetProfileApp() {
             placeholder="Tell us about your amazing pet!"
           ></textarea>
         </div>
-        </div>
+      </div>
 
          {/* Right Panel - Live Preview with Browser Window Look */}
-<div className="w-1/2 h-full bg-gray-100 flex flex-col overflow-hidden border-l border-gray-200">
-  {/* Fake Browser Frame */}
-  <div className="rounded-t-lg border border-gray-300 shadow-lg flex flex-col overflow-hidden h-full">
-    {/* Fake Browser Bar */}
-    <div className="flex items-center gap-2 bg-gray-200 px-3 py-2">
-      <span className="w-3 h-3 bg-red-500 rounded-full" />
-      <span className="w-3 h-3 bg-yellow-500 rounded-full" />
-      <span className="w-3 h-3 bg-green-500 rounded-full" />
-    </div>
-
-    {/* Actual Website Preview */}
-    <div className="flex flex-col h-full overflow-auto bg-white">
-
-      {/* Navbar */}
-      <header className="bg-purple-600 text-white py-4 px-6 flex justify-between items-center shadow-md">
-        <h1 className="text-xl font-bold">🐾 PetWorld</h1>
-        <nav className="space-x-4 text-sm">
-          <span className="hover:underline cursor-pointer">Home</span>
-          {/* <span className="hover:underline cursor-pointer">Pets</span>
-          <span className="hover:underline cursor-pointer">Contact</span> */}
-        </nav>
-      </header>
-
-      {/* Hero Section - Reduced height */}
-      <section
-        className="flex items-center justify-center text-white text-center"
-        style={{
-          backgroundColor: petColor || '#7C3AED',
-          backgroundImage: "url('https://www.transparenttextures.com/patterns/diagmonds.png')",
-          minHeight: '100px', 
-        }}
-      >
-        <div>
-          <h2 className="text-3xl font-bold">{petName || 'My Pet'}</h2>
-          <p className="italic text-base mt-1">
-            {petTypes.find((t) => t.id === petType)?.emoji || '🐾'} {petType?.toUpperCase() || ''} • {petAge} Years Old
-          </p>
-        </div>
-      </section>
-
-      {/* Profile Card Section */}
-      <section className="flex-1 bg-white px-6 py-10 flex justify-center items-start overflow-auto">
-        <div className="w-full max-w-3xl bg-gray-50 rounded-xl shadow-lg p-6">
-          {/* Image */}
-          <div className="flex justify-center mb-6">
-            {petImage ? (
-              <img
-                src={petImage}
-                alt="Pet"
-                className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md"
-              />
-            ) : (
-              <div className="w-64 h-64 bg-gray-200 rounded-full border-4 border-white shadow-md flex items-center justify-center text-gray-500 text-sm">
-                No image
-              </div>
-            )}
-          </div>
-
-          {/* Description and Traits */}
-          <div className="text-center">
-            <p className="text-gray-600 text-lg mb-6">{petDescription || 'A lovely pet of mine!'}</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left text-sm max-w-2xl mx-auto">
-              <div>
-                <h4 className="font-semibold text-gray-700 mb-1">Personality</h4>
-                <p className="text-gray-800">{petPersonality || 'Chill'}</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-700 mb-1">Special Talent</h4>
-                <p className="text-gray-800">{petTalent || 'Can say Hi!'}</p>
-              </div>
+         <div className="w-1/2 h-full bg-gradient-to-br from-indigo-100 to-purple-100 flex flex-col overflow-hidden border-l border-gray-200">
+        {/* Fake Browser Frame */}
+        <div className="mx-4 my-4 rounded-2xl border-4 border-purple-300 shadow-xl flex flex-col overflow-hidden h-full bg-white">
+          {/* Fake Browser Bar with cute face */}
+          <div className="flex items-center gap-2 bg-gradient-to-r from-purple-400 to-pink-400 px-4 py-3">
+            <div className="flex gap-2">
+              <span className="w-4 h-4 bg-red-400 rounded-full flex items-center justify-center text-xs font-bold">×</span>
+              <span className="w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center text-xs">−</span>
+              <span className="w-4 h-4 bg-green-400 rounded-full flex items-center justify-center text-xs">+</span>
+            </div>
+            <div className="ml-4 bg-white bg-opacity-20 rounded-full px-4 py-1 text-white text-sm flex-grow text-center">
+              {petName}'s Adventure Zone 🚀
             </div>
           </div>
+
+    {/* Actual Website Preview */}
+    <div className="flex flex-col h-full overflow-auto bg-white relative">
+            {/* Removed floating decorations from background */}
+
+            {/* Navbar */}
+            <header className="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-6 flex justify-between items-center shadow-md">
+              <h1 className="text-xl font-bold flex items-center">
+                <span className="text-2xl mr-2">🐾</span> 
+                PetWorld
+              </h1>
+              <nav className="space-x-4 text-sm">
+                <button className="bg-white bg-opacity-30 px-3 py-1 rounded-full hover:bg-opacity-40 transition-all">
+                  Home
+                </button>
+              </nav>
+            </header>
+
+      {/* Hero Section - Colorful & fun */}
+      <section
+              className={`flex items-center justify-center text-white text-center py-6 bg-gradient-to-r ${bgColors[petType] || 'from-purple-400 to-pink-500'}`}
+            >
+              <div className="py-3">
+                <h2 className="text-4xl font-bold drop-shadow-md">{petName || 'My Pet'}</h2>
+                <p className="italic text-lg mt-2 bg-white bg-opacity-20 rounded-full px-4 py-1">
+                  {petTypes.find((t) => t.id === petType)?.emoji || '🐾'} {petType?.charAt(0).toUpperCase() + petType?.slice(1) || ''} • {petAge} Years Old
+                </p>
+              </div>
+            </section>
+
+      {/* Profile Card Section */}
+      <section className="flex-1 bg-white px-6 py-8 flex justify-center items-start overflow-auto">
+              <div className="w-full max-w-3xl bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl shadow-xl p-6 border-2 border-blue-200">
+                {/* Image in a fun frame WITH emoji decorations at specific positions */}
+                <div className="flex justify-center mb-6 relative">
+                  {/* Emojis at specific positions around the image */}
+                  {decorations[petType]?.slice(0, 8).map((emoji, idx) => (
+                    <div
+                      key={`dot-emoji-${idx}`}
+                      className="absolute text-2xl"
+                      style={{
+                        top: emojiPositions[idx].top,
+                        left: emojiPositions[idx].left,
+                        transform: "translate(-50%, -50%)"
+                      }}
+                    >
+                      {emoji}
+                    </div>
+                  ))}
+                  
+                  {petImage ? (
+                    <div className={`w-48 h-48 rounded-full overflow-hidden border-4 border-${petType === 'dragon' ? 'red' : petType === 'fish' ? 'blue' : 'green'}-400 shadow-xl transform hover:scale-105 transition-all duration-300 z-10`}>
+                      <img
+                        src={petImage}
+                        alt={`${petName} the ${petType}`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "/api/placeholder/200/200";
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-48 h-48 bg-gray-200 rounded-full border-4 border-purple-300 shadow-lg flex items-center justify-center text-gray-500 z-10">
+                      <span className="text-4xl">📷</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Speech bubble with description */}
+                <div className="relative bg-white rounded-2xl p-4 mb-6 shadow-md border-2 border-blue-200">
+                  <div className="absolute top-0 left-12 transform -translate-y-full">
+                    <div className="w-6 h-6 bg-white border-l-2 border-t-2 border-blue-200 transform rotate-45 translate-y-3"></div>
+                  </div>
+                  <p className="text-gray-700 text-lg text-center">{petDescription || 'A lovely pet of mine!'}</p>
+                </div>
+
+                {/* Fun personality badges */}
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div className="bg-gradient-to-r from-purple-100 to-purple-200 rounded-xl p-4 shadow transform hover:scale-105 transition-all">
+                    <h4 className="font-bold text-purple-700 mb-2 text-lg flex items-center justify-center">
+                      <span className="text-xl mr-1">✨</span> Personality
+                    </h4>
+                    <p className="text-purple-800 text-lg font-medium bg-white bg-opacity-50 rounded-full py-1">
+                      {petPersonality || 'Friendly'}
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-amber-100 to-amber-200 rounded-xl p-4 shadow transform hover:scale-105 transition-all">
+                    <h4 className="font-bold text-amber-700 mb-2 text-lg flex items-center justify-center">
+                      <span className="text-xl mr-1">🌟</span> Special Talent
+                    </h4>
+                    <p className="text-amber-800 text-lg font-medium bg-white bg-opacity-50 rounded-full py-1">
+                      {petTalent || 'Can say Hi!'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Fun Footer */}
+            <footer className="bg-gradient-to-r from-purple-200 to-pink-200 text-center py-4 text-sm text-purple-700 font-medium">
+              <div className="flex items-center justify-center space-x-1">
+                <span>🎈</span>
+                <span>© 2025 PetWorld</span>
+                <span>🎈</span>
+              </div>
+              <div className="text-xs mt-1">Made with ❤️ for kids</div>
+            </footer>
+          </div>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-100 text-center py-4 text-sm text-gray-500">
-        © 2025 PetWorld. All rights reserved.
-      </footer>
+      </div>
     </div>
-  </div>
-</div>
-
-
-    </div>
-
   );
 }
-
-
-
-
