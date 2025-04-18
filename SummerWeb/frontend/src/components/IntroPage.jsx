@@ -1,20 +1,21 @@
+// intro_page.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './IntroPage.css';
 
-const FlipCard = ({ frontTitle, frontContent, backContent }) => {
+const FlipCard = ({ frontTitle, frontContent, backContent, color }) => {
   const [flipped, setFlipped] = useState(false);
 
   return (
     <div className={`flip-card ${flipped ? 'flipped' : ''}`} onClick={() => setFlipped(!flipped)}>
       <div className="flip-card-inner">
-        <div className="flip-card-front">
+        <div className="flip-card-front" style={{ backgroundColor: color.front }}>
           <h3>{frontTitle}</h3>
           <div className="card-content">
             {frontContent}
           </div>
         </div>
-        <div className="flip-card-back">
+        <div className="flip-card-back" style={{ backgroundColor: color.back }}>
           {backContent}
         </div>
       </div>
@@ -55,118 +56,40 @@ const HumanBodyIllustration = () => {
     <div className="human-body-illustration">
       <div className="human-figure">
         <div
-        className="body-part head" 
+          className="body-part head" 
           onClick={() => handlePartClick('head')}
-          style={{
-            width: '60px',
-            height: '60px',
-            borderRadius: '50%',
-            left: '20px',
-            top: '0',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#1a5276',
-            fontWeight: 'bold',
-            backgroundColor: '#87cefa',
-            cursor: 'pointer'
-          }}
         >
-        head
+          head
         </div>
           
         <div 
           className="body-part torso" 
           onClick={() => handlePartClick('body')}
-          style={{
-            width: '60px',
-            height: '80px',
-            borderRadius: '10px',
-            left: '20px',
-            top: '65px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#1a5276',
-            fontWeight: 'bold',
-            backgroundColor: '#87cefa',
-            cursor: 'pointer'
-          }}
-          >
+        >
           body
-          </div>
+        </div>
 
         <div 
           className="body-part left-arm" 
           onClick={() => handlePartClick('arms')}
-          style={{
-            width: '20px',
-            height: '70px',
-            borderRadius: '10px',
-            left: '0',
-            top: '70px',
-            backgroundColor: '#87cefa',
-            cursor: 'pointer'
-          }}
         />
         <div 
           className="body-part right-arm" 
           onClick={() => handlePartClick('arms')}
-          style={{
-            width: '20px',
-            height: '70px',
-            borderRadius: '10px',
-            left: '80px',
-            top: '70px',
-            backgroundColor: '#87cefa',
-            cursor: 'pointer'
-          }}
         />
 
         <div 
           className="body-part left-leg" 
           onClick={() => handlePartClick('legs')}
-          style={{
-            width: '20px',
-            height: '70px',
-            borderRadius: '10px',
-            left: '20px',
-            top: '150px',
-            backgroundColor: '#87cefa',
-            cursor: 'pointer'
-          }}
         />
         <div 
           className="body-part right-leg" 
           onClick={() => handlePartClick('legs')}
-          style={{
-            width: '20px',
-            height: '70px',
-            borderRadius: '10px',
-            left: '60px',
-            top: '150px',
-            backgroundColor: '#87cefa',
-            cursor: 'pointer'
-          }}
         />
 
         <div 
           className="body-part foot" 
           onClick={() => handlePartClick('feet')}
-          style={{
-            width: '70px',
-            height: '20px',
-            borderRadius: '10px',
-            left: '15px',
-            top: '225px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#1a5276',
-            fontWeight: 'bold',
-            backgroundColor: '#87cefa',
-            cursor: 'pointer'
-          }}
         >
           feet
         </div>
@@ -210,108 +133,31 @@ const WebPageIllustration = () => {
   
   return (
     <div className="web-page-illustration">
-      <div className="browser-window" style={{
-        width: '300px',
-        height: '250px',
-        border: '2px solid #666',
-        borderRadius: '8px',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: 'white',
-        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-        margin: '0 auto'
-      }}>
-        {/* Browser with URL bar */}
-        <div 
-          className="browser-chrome" 
-          style={{
-            height: '30px',
-            backgroundColor: '#f0f0f0',
-            borderBottom: '1px solid #ddd',
-            display: 'flex',
-            alignItems: 'center',
-            padding: '0 10px'
-          }}
-        >
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '5px'
-          }}>
-            <div style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              backgroundColor: '#ff6058'
-            }}></div>
-            <div style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              backgroundColor: '#ffbd2e'
-            }}></div>
-            <div style={{
-              width: '12px',
-              height: '12px',
-              borderRadius: '50%',
-              backgroundColor: '#28ca41'
-            }}></div>
+      <div className="browser-window">
+        <div className="browser-chrome">
+          <div className="browser-controls">
+            <div className="control-dot red"></div>
+            <div className="control-dot yellow"></div>
+            <div className="control-dot green"></div>
           </div>
 
           <div 
-            style={{
-              flex: 1,
-              margin: '0 10px',
-              height: '18px',
-              backgroundColor: 'white',
-              borderRadius: '10px',
-              fontSize: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#333',
-              cursor: 'pointer',
-              position: 'relative'
-            }}
+            className="url-bar"
             onClick={() => setShowUrlPopup(!showUrlPopup)}
           >
             https://weblearning.fun
-            <span style={{ fontSize: '8px', marginLeft: '5px', color: '#27ae60' }}>ℹ️</span>
+            <span className="info-icon">ℹ️</span>
           </div>
         </div>
         
-        {/* URL Information Popup */}
         {showUrlPopup && (
-          <div style={{
-            position: 'absolute',
-            top: '45px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            backgroundColor: 'white',
-            border: '1px solid #ddd',
-            borderRadius: '5px',
-            padding: '10px',
-            zIndex: 1000,
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-            maxWidth: '250px',
-            fontSize: '12px',
-            fontWeight: 'bold',
-          }}>
-            <h4 style={{ margin: '0 0 5px 0' }}>🔗 Web URL</h4>
-            <p style={{ margin: '0 0 10px 0' }}>Every webpage has its own address, just like your home "🏠"</p>
-            <p style={{ margin: '0' }}><strong>https://</strong> = secure connection</p>
-            <p style={{ margin: '0' }}><strong>weblearning.fun</strong> = website name</p>
+          <div className="url-popup">
+            <h4>🔗 Web URL</h4>
+            <p>Every webpage has its own address, just like your home "🏠"</p>
+            <p><strong>https://</strong> = secure connection</p>
+            <p><strong>weblearning.fun</strong> = website name</p>
             <button 
-              style={{
-                position: 'absolute',
-                top: '5px',
-                right: '5px',
-                background: 'none',
-                border: 'none',
-                fontSize: '16px',
-                cursor: 'pointer'
-              }}
+              className="close-url-popup"
               onClick={() => setShowUrlPopup(false)}
             >
               ×
@@ -319,56 +165,23 @@ const WebPageIllustration = () => {
           </div>
         )}
         
-        {/* Page header */}
         <div 
           className="page-part header" 
           onClick={() => handlePartClick('header')}
-          style={{ 
-            height: '40px',
-            backgroundColor: '#b8daff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px',
-            fontWeight: 'bold',
-            cursor: 'pointer'
-          }}
         >
           Header
         </div>
         
-        {/* Body content */}
         <div 
           className="page-part body" 
           onClick={() => handlePartClick('body')}
-          style={{ 
-            flex: 1,
-            backgroundColor: '#87cefa',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px',
-            fontWeight: 'bold',
-            cursor: 'pointer'
-          }}
         >
           body
         </div>
         
-        {/* Footer */}
         <div 
           className="page-part footer" 
           onClick={() => handlePartClick('footer')}
-          style={{ 
-            height: '25px',
-            backgroundColor: '#b2b0e6',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px',
-            fontWeight: 'bold',
-            cursor: 'pointer'
-          }}
         >
           footer
         </div>
@@ -393,110 +206,125 @@ const IntroPage = () => {
     navigate('/tutorial');
   };
 
+  const cardColors = [
+    { front: '#FF9E9E', back: '#FF6B6B' }, // Red
+    { front: '#FFD6A5', back: '#FFC078' }, // Orange
+    { front: '#FDFFB6', back: '#FFEE93' }, // Yellow
+    { front: '#CAFFBF', back: '#9BF6FF' }, // Green/Blue
+    { front: '#A0C4FF', back: '#BDB2FF' }, // Blue/Purple
+    { front: '#FFC6FF', back: '#FFADAD' }  // Pink
+  ];
+
   return (
-    <div className="intro-page-container" style={{backgroundColor: '#a3e4f3'}}>
+    <div className="intro-page-container">
       <div className="header-section">
-        <h1 className="header-title rainbow-text">
-          🎉 Let's Learn About the Web - How it Works! 🎉
+        <h1 className="header-title">
+          Let's Learn About <span className="title-highlight">Web Pages</span>!
         </h1>
+        <p className="header-subtitle">Discover how web pages work by comparing them to the human body!</p>
+        <div className="header-decoration">
+          <span className="emoji">🌐</span>
+          <span className="emoji">👨‍💻</span>
+          <span className="emoji">💡</span>
+        </div>
       </div>
 
-      <hr className="divider" />
-
-      <div className="main-content" style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'flex-start',
-        margin: '20px 0',
-        padding: '20px'
-      }}>
-        <div className="content-column human-body-section" style={{
-          flex: 1,
-          backgroundColor: '#fef6f6',
-          padding: '20px',
-          borderRadius: '10px',
-          margin: '0 10px',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-        }}>
-          <h2>🧍 Human Body (You!)</h2>
+      <div className="main-content">
+        <div className="content-column human-body-section">
+          <div className="section-header">
+            <h2>🧍 Your Amazing Body</h2>
+            <p>Click on body parts to learn web page connections</p>
+          </div>
           <HumanBodyIllustration />
-          <div className="speech-bubble" style={{ 
-            fontWeight: 'bold',
-            backgroundColor: '#feffc9',
-            padding: '10px 15px',
-            borderRadius: '20px',
-            margin: '10px 0',
-            textAlign: 'center'
-          }}>
-            <p><span className="avatar">👦</span> "That's me!"</p>
+          <div className="speech-bubble">
+            <p><span className="avatar">👦</span> "That's me! Web pages have similar parts!"</p>
           </div>
         </div>
 
-        <div className="content-column web-page-section" style={{
-          flex: 1,
-          backgroundColor: '#fef6f6',
-          padding: '20px',
-          borderRadius: '10px',
-          margin: '0 10px',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-        }}>
-          <h2>🌐 Web Page</h2>
+        <div className="content-column web-page-section">
+          <div className="section-header">
+            <h2>🌐 Web Page Structure</h2>
+            <p>Click on sections to learn what they do</p>
+          </div>
           <WebPageIllustration />
-          <div className="speech-bubble" style={{ 
-            fontWeight: 'bold',
-            backgroundColor: '#feffc9',
-            padding: '10px 15px',
-            borderRadius: '20px',
-            margin: '10px 0',
-            textAlign: 'center'
-          }}>
-            <p><span className="avatar">🧑‍🎓</span> "It's like a digital twin of us!"</p>
+          <div className="speech-bubble">
+            <p><span className="avatar">🧑‍🎓</span> "It's like my digital twin!"</p>
           </div>
         </div>
       </div>
 
       <div className="info-cards-section">
-        <FlipCard
-          frontTitle="📄 What is a Web Page?"
-          frontContent={
-            <>
-              <p>It's like a colorful book page online.</p>
-              <p>It can have text, pictures, videos & buttons!</p>
-              <p>View it in Chrome, Firefox, Safari, etc.</p>
-            </>
-          }
-          backContent={<p>🌍 Websites = bunch of pages linked together!</p>}
-        />
-
-        <FlipCard
-          frontTitle="🧩 Parts of a Web Page"
-          frontContent={
-            <>
-              <p><strong>Head:</strong> Behind-the-scenes setup.</p>
-              <p><strong>Body:</strong> What users see & interact with.</p>
-              <p><strong>Footer:</strong> Ends the story with contact/info.</p>
-            </>
-          }
-          backContent={<p>🧠 Head + 🎨 Body + 📞 Footer = Happy Page!</p>}
-        />
-
-        <FlipCard
-          frontTitle="🎉 Fun Fact!"
-          frontContent={
-            <>
-              <p>The first website is still live!</p>
-              <p>By Tim Berners-Lee in 1991 👨‍🔬</p>
-              <p><a href="http://info.cern.ch" target="_blank">Visit it here</a></p>
-            </>
-          }
-          backContent={<p>🕸️ It started the entire web!</p>}
-        />
-      </div>
+  <FlipCard
+    frontTitle="🚀 What is HTML?"
+    frontContent={
+      <>
+        <p>HTML is like the skeleton of every website!</p>
+        <p>It's the code that gives structure to all the cool stuff you see online.</p>
+        <p>Without HTML, the internet would just be plain text. Boring!</p>
+      </>
+    }
+    backContent={<p>🔍 HTML = HyperText Markup Language. It's how you tell browsers what to display!</p>}
+    color={cardColors[0]}
+  />
+  <FlipCard
+    frontTitle="🧙‍♂️ HTML Magic Spells"
+    frontContent={
+      <>
+        <p><strong>&lt;h1&gt;</strong>: The BIG headline that grabs attention!</p>
+        <p><strong>&lt;p&gt;</strong>: Regular text, like what you're reading now.</p>
+        <p><strong>&lt;img&gt;</strong>: Summons pictures from anywhere in the web universe!</p>
+      </>
+    }
+    backContent={<p>💡 These "spells" are called TAGS - they always come in pairs like &lt;tag&gt;content&lt;/tag&gt;</p>}
+    color={cardColors[1]}
+  />
+  <FlipCard
+    frontTitle="🎮 Power-Ups!"
+    frontContent={
+      <>
+        <p>Add <strong>CSS</strong> to make your page look awesome!</p>
+        <p>Use <strong>JavaScript</strong> to add interactivity and games!</p>
+        <p>HTML is level 1, CSS is level 2, JS is the boss level!</p>
+      </>
+    }
+    backContent={<p>🔥 HTML is just the beginning of your coding adventure!</p>}
+    color={cardColors[2]}
+  />
+  <FlipCard
+    frontTitle="🕵️‍♀️ Secret Code Challenge"
+    frontContent={
+      <>
+        <p>Can you spot HTML in the wild?</p>
+        <p>Right-click on any website and select "View Page Source"</p>
+        <p>You'll see the HTML behind EVERY website you visit!</p>
+      </>
+    }
+    backContent={<p>👀 Even YouTube, TikTok, and Instagram use HTML! Try it!</p>}
+    color={cardColors[3] || cardColors[0]}
+  />
+  <FlipCard
+    frontTitle="🤣 HTML Joke Time"
+    frontContent={
+      <>
+        <p>Why did the HTML tag go to therapy?</p>
+        <p>It had too many issues with its PARENT!</p>
+        <p>(Parent tags contain child elements in HTML!)</p>
+      </>
+    }
+    backContent={<p>😎 Now you know enough HTML to laugh at coding jokes!</p>}
+    color={cardColors[4] || cardColors[1]}
+  />
+</div>
 
       <div className="interactive-section">
-        <button className="pet-button bounce" onClick={handleCreatePetClick} >🐾 Let's Create a Pet!</button>
+        <button className="pet-button" onClick={handleCreatePetClick}>
+          <span className="button-icon">🐾</span>
+          <span className="button-text">Let's Create a Web Pet!</span>
+          <span className="button-arrow">→</span>
+        </button>
       </div>
     </div>
   );
 };
+
 export default IntroPage;
