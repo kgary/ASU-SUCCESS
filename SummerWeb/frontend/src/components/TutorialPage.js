@@ -16,6 +16,10 @@ export default function PetProfileApp() {
   // Ref for the preview element to capture for PDF
   const previewRef = useRef(null);
 
+  const handleBackClick = () => {
+    window.location.href = "http://localhost:3000/"
+  };
+
   // Stored animal images based on pet type
   const petImages = {
     dog: [
@@ -184,10 +188,34 @@ export default function PetProfileApp() {
     <div className="flex h-screen font-sans bg-gradient-to-br from-purple-100 to-blue-100">
       {/* Left Panel - Form */}
       <div className="w-1/2 p-6 bg-white shadow-lg rounded-tr-3xl rounded-br-3xl flex flex-col overflow-auto">
-        <h2 className="text-3xl font-bold text-purple-700 mb-6 flex items-center">
-          Create Your Pet Friend!
-          <span className="ml-2 text-4xl">✨</span>
-        </h2>
+        {/* Back Button */}
+        <button 
+        onClick={handleBackClick}
+        className="absolute left-6 text-purple-700 hover:text-purple-900 transition-colors"
+        aria-label="Back to Intro Page">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          className="w-8 h-8" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+        >
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
+      {/* Title */}
+      <h2 className="text-3xl font-bold text-purple-700 flex items-center mx-auto">
+        Create Your Pet Friend!
+        <span className="ml-2 text-4xl">✨</span>
+      </h2>
+      
+      {/* Element to balance the layout */}
+      <div className="invisible w-8 h-8 absolute right-6"></div>
+  
 
         {/* Pet Info Section */}
         <div className="bg-purple-50 rounded-xl p-4 mb-4 border-2 border-purple-200">
