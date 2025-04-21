@@ -371,10 +371,8 @@ export default function PetProfileApp() {
                 PetWorld
               </h1>
               <nav className="space-x-4 text-sm">
-                <button className="bg-white bg-opacity-30 px-3 py-1 rounded-full hover:bg-opacity-40 transition-all">
-                  Home
-                </button>
-              </nav>
+              <h1 className="text-xl font-bold flex items-center"> 🎲 Pet Hub </h1>
+            </nav>
             </header>
 
             <section className={`flex items-center justify-center text-white text-center py-6 bg-gradient-to-r ${bgColors[petType] || 'from-purple-400 to-pink-500'}`}>
