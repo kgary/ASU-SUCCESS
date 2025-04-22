@@ -7,6 +7,7 @@ import base64
 import tempfile
 import os
 
+
 # ======== Initial story to be used in both visual + prompt ========
 INITIAL_LORE = """
 Neo City is under attack. The evil villain Darkstorm has plunged the skyline into shadows. Buildings vanish. People panic.
@@ -43,7 +44,7 @@ def generate_story(image):
     {INITIAL_LORE}
 
     Look at the hero in the image. Based on their appearance, imagine how they fought Darkstorm and saved Neo City.
-    Write the rest of the story using this image. Be dramatic, fun, and simple for young readers.
+    Write a short paragraph (3-5 lines only) to describe how the hero saves the city. Keep it under 100 words. using this image. Be dramatic, fun, and simple for young readers.
     
     Make sure the story includes:
     - A beginning, middle, and heroic ending
@@ -60,7 +61,7 @@ def generate_story(image):
             "prompt": full_prompt,
             "images": [encoded_image],
             "stream": False,
-            "max_tokens": 450,
+            "max_tokens": 200,
             "temperature": 0.7
         }
     )
@@ -76,115 +77,28 @@ def generate_superhero(prompt):
     return image
 
 # ======== Gradio UI ========
-story_intro = f"""
-<div class='story-block'>
-<h2>📖 The Story So Far...</h2>
-<p>{INITIAL_LORE}</p>
-</div>
-"""
+# Read external HTML and CSS
+with open("story_blocks.html", "r") as f:
+    story_html = f.read()
 
-call_to_action = """
-<div class='cta-block'>
-<h2>🦸 Create Your Hero</h2>
-<p>Describe your superhero in words. They can be magical, futuristic, mythical — anything you imagine!</p>
-</div>
-"""
+with open("styles.css", "r") as f:
+    custom_css = f.read()
 
-with gr.Blocks(css="""
-/* Global styles */
-.gradio-container {
-    overflow: visible !important;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
-    padding: 20px;
-    color: #333;
-}
-
-/* Shared card styles */
-.story-block, .cta-block, #story-output {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.story-block:hover,
-.cta-block:hover,
-#story-output:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-}
-
-/* Heading style */
-h2 {
-    color: #2e3a59;
-    font-size: 24px;
-    margin-bottom: 12px;
-}
-
-/* Paragraph style */
-p {
-    color: #444;
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Story output overrides */
-#story-output {
-    background-color: #f0f8ff;
-    color: #222;
-    font-size: 18px;
-    line-height: 1.7;
-}
-
-/* Button styling */
-button {
-    background-color: #1e2a48 !important;
-    color: white !important;
-    border: none !important;
-    border-radius: 12px !important;
-    padding: 10px 20px !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    cursor: pointer !important;
-    transition: background-color 0.3s ease, transform 0.2s ease !important;
-}
-
-button:hover {
-    background-color: #2c3e60 !important;
-    transform: scale(1.03);
-}
-/* Image output styling */
-#image-output {
-    border-radius: 16px;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-#image-output:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-}
-"""
-) as demo:
-
-    gr.Markdown(story_intro)
-    gr.Markdown(call_to_action)
+with gr.Blocks(css=custom_css) as demo:
+    gr.HTML(story_html)
 
     with gr.Row():
-        with gr.Column():
+        with gr.Column(elem_classes=["story-block"]):
             prompt = gr.Textbox(label="📝 Describe Your Superhero", placeholder="A glowing ninja with thunder boots", lines=3)
             generate_button = gr.Button("💥 Generate Hero!")
         with gr.Column():
             image_output = gr.Image(label="🖼️ Your Hero Appears")
 
-    with gr.Row():
+    with gr.Column():
         continue_button = gr.Button("📜 See How Your Hero Saved The City")
         loading_text = gr.Markdown(visible=False)
-        story_output = gr.Markdown(elem_id="story-output")
+        story_output = gr.HTML()
+
 
 
     state_image = gr.State()
@@ -201,9 +115,10 @@ button:hover {
 
     def hide_loading_and_show_story(image):
         story = generate_story(image)
-        return gr.update(visible=False), story
+        return gr.update(visible=False), f"<div class='story-block'><p>{story}</p></div>"
+
 
     continue_button.click(fn=show_loading, outputs=[loading_text, story_output])
     continue_button.click(fn=hide_loading_and_show_story, inputs=state_image, outputs=[loading_text, story_output], queue=True)
 
-demo.launch()
+demo.launch(show_api=False, show_error=True, share=False)
