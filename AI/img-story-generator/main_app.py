@@ -72,7 +72,7 @@ def generate_story(image):
 
 # ======== Hero Generator ========
 def generate_superhero(prompt):
-    image = pipe(prompt, num_inference_steps=1, guidance_scale=7.5).images[0]
+    image = pipe(prompt, num_inference_steps=25, guidance_scale=7.5).images[0]
     return image
 
 # ======== Gradio UI ========
