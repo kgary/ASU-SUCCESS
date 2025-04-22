@@ -83,11 +83,13 @@ def generate_story(image):
 
 # ======== Hero Generator ========
 def generate_superhero(prompt):
+
     negative_prompt = (
         "nude, nudity, nsfw, blood, guns, weapons, violence, scary, horror, "
         "zombie, demon, dark, creepy, disturbing, mature, gore, inappropriate, evil"
     )
     image = pipe(prompt,negative_prompt=negative_prompt, num_inference_steps=25, guidance_scale=7.5).images[0]
+
     return image
 
 # ======== Gradio UI ========
