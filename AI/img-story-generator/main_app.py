@@ -72,7 +72,7 @@ def generate_story(image):
 
 # ======== Hero Generator ========
 def generate_superhero(prompt):
-    image = pipe(prompt, num_inference_steps=25, guidance_scale=7.5).images[0]
+    image = pipe(prompt, num_inference_steps=1, guidance_scale=7.5).images[0]
     return image
 
 # ======== Gradio UI ========
@@ -91,34 +91,85 @@ call_to_action = """
 """
 
 with gr.Blocks(css="""
-.story-block, .cta-block {
-    font-family: 'Comic Sans MS', cursive;
-    background-color: #fff8dc;
-    border: 3px dashed #ff6347;
+/* Global styles */
+.gradio-container {
+    overflow: visible !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
     padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 4px 4px #e0e0e0;
-}
-h2 {
-    color: #ff4500;
-}
-p {
-    color: black;
-    font-size: 16px;
-    line-height: 1.5;
-}
-#story-output {
-    color: white;
-    background-color: #1e1e1e;
-    padding: 16px;
-    border-radius: 10px;
-    font-family: 'Comic Sans MS', cursive;
-    font-size: 16px;
-    line-height: 1.6;
+    color: #333;
 }
 
-""") as demo:
+/* Shared card styles */
+.story-block, .cta-block, #story-output {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-block:hover,
+.cta-block:hover,
+#story-output:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* Heading style */
+h2 {
+    color: #2e3a59;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+/* Paragraph style */
+p {
+    color: #444;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Story output overrides */
+#story-output {
+    background-color: #f0f8ff;
+    color: #222;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* Button styling */
+button {
+    background-color: #1e2a48 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 10px 20px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease, transform 0.2s ease !important;
+}
+
+button:hover {
+    background-color: #2c3e60 !important;
+    transform: scale(1.03);
+}
+/* Image output styling */
+#image-output {
+    border-radius: 16px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#image-output:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+"""
+) as demo:
 
     gr.Markdown(story_intro)
     gr.Markdown(call_to_action)
