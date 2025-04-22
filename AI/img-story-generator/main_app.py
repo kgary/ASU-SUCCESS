@@ -10,12 +10,15 @@ import os
 
 # ======== Initial story to be used in both visual + prompt ========
 INITIAL_LORE = """
-Neo City is under attack. The evil villain Darkstorm has plunged the skyline into shadows. Buildings vanish. People panic.
+Neo City once buzzed with joy, light, and floating buses — until one day, Darkstorm returned.
 
-From the sky: "No one can save you now!"
+From a swirling storm cloud, he emerged with a sneer, casting shadows that made entire buildings vanish. “No one can save you now!” he boomed. Fear spread through every corner of the city.
 
-But then, hope arises. A new protector is being imagined — by you.
+But then... the people remembered something important: imagination is powerful. With hope in their hearts, they began to imagine a hero — someone with brilliant powers, dazzling courage, and a heart full of kindness.
+
+That hero is now taking form — created by you — ready to rise and bring the light back to Neo City.
 """
+
 
 # ======== Load DreamShaper Model ========
 model_path = "./models/dreamshaper_8.safetensors"
@@ -25,7 +28,6 @@ dtype = torch.float16 if device == "cuda" else torch.float32
 pipe = StableDiffusionPipeline.from_single_file(
     model_path,
     torch_dtype=dtype,
-    safety_checker=None
 ).to(device)
 
 # ======== Story Generator Function ========
@@ -39,20 +41,28 @@ def generate_story(image):
     os.unlink(temp_image_path)
 
     full_prompt = f"""
-    Continue this story:
+        You are an imaginative children's storyteller. Continue the story below, using the image provided of the superhero created by the user.
 
-    {INITIAL_LORE}
+        Story so far:
+        {INITIAL_LORE}
 
-    Look at the hero in the image. Based on their appearance, imagine how they fought Darkstorm and saved Neo City.
-    Write a short paragraph (3-5 lines only) to describe how the hero saves the city. Keep it under 100 words. using this image. Be dramatic, fun, and simple for young readers.
-    
-    Make sure the story includes:
-    - A beginning, middle, and heroic ending
-    - How the superhero defeats or outsmarts Darkstorm
-    - A sense of joy or peace returning to the city
+        Your task:
+        Based on the image of the superhero, write a vivid and exciting story (2–3 paragraphs) about how they save Neo City from Darkstorm.
 
-    Only return the story. No extra commentary or notes.
-    """
+        Make the story:
+        - Easy to read and follow (aimed at 10–14 year-olds)
+        - Full of action, imagination, and emotion
+        - Uplifting and satisfying, with a strong ending
+
+        Include:
+        - How the superhero arrives and reacts to the destruction
+        - A challenge or battle with Darkstorm
+        - A clever or powerful way the hero wins
+        - Joy returning to Neo City
+
+        Avoid giving explanations — just tell the story in narrative format. No titles or intros. Just the story.
+        """
+
 
     response = requests.post(
         "http://localhost:11434/api/generate",
@@ -61,7 +71,7 @@ def generate_story(image):
             "prompt": full_prompt,
             "images": [encoded_image],
             "stream": False,
-            "max_tokens": 200,
+            "max_tokens": 450,
             "temperature": 0.7
         }
     )
@@ -73,7 +83,11 @@ def generate_story(image):
 
 # ======== Hero Generator ========
 def generate_superhero(prompt):
-    image = pipe(prompt, num_inference_steps=1, guidance_scale=7.5).images[0]
+    negative_prompt = (
+        "nude, nudity, nsfw, blood, guns, weapons, violence, scary, horror, "
+        "zombie, demon, dark, creepy, disturbing, mature, gore, inappropriate, evil"
+    )
+    image = pipe(prompt,negative_prompt=negative_prompt, num_inference_steps=25, guidance_scale=7.5).images[0]
     return image
 
 # ======== Gradio UI ========
