@@ -1,12 +1,11 @@
-
 # 🦸‍♂️ AI-Powered Superhero Story Generator
 
-This is a fun, educational, and interactive AI storytelling experience designed especially for students. Users can:
+A fun, educational, and interactive AI storytelling experience designed especially for students. Kids can:
 
-1. Read the beginning of a story where a villain attacks the city.
+1. Read the beginning of a comic-style story where a villain attacks Neo City.
 2. Describe a superhero who can save the day.
 3. Generate a superhero image using the **DreamShaper model**.
-4. Generate the continuation of the story using that image via **LLaVA (using Ollama)**.
+4. Use that image to continue the story using **LLaVA (via Ollama)**.
 
 ---
 
@@ -16,7 +15,10 @@ This is a fun, educational, and interactive AI storytelling experience designed 
 img_story_generator/
 ├── models/
 │   └── dreamshaper_8.safetensors     # Put the DreamShaper model here
-├── main_app.py                       # Full Gradio application (image + story)
+├── styles.css                        # Custom playful theme
+├── story_blocks.html                 # Custom story blocks
+├── story_blocks.html                 # HTML blocks for story and CTA
+├── main_app.py                       # Gradio app (image + story generator)
 ├── requirements.txt                  # Dependencies for the project
 ```
 
@@ -24,19 +26,39 @@ img_story_generator/
 
 ## ⚙️ Setup Instructions
 
-### 1. Clone the Repo & Navigate to
+### 1. Clone the Repository
 
 ```bash
+git clone <your-repo-url>
 cd img_story_generator
 ```
 
 ---
 
-### 2. Create a Local Environment with Python 3.11 or lower
+
+### 2. Create a Virtual Environment (Python 3.10 or 3.11)
+
+### **Please Install Python 3.11**  
+Make sure that **Python 3.11** is installed on your system before proceeding to create the virtual environment. You can download Python 3.11 from [here](https://www.python.org/downloads/release/python-3110/).  
+Once Python 3.11 is installed, proceed to create the virtual environment.
+
+#### 🖥️ macOS/Linux:
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+```
+
+#### 🪟 Windows:
+
+```bash
+py -3.11 -m venv .venv
+.venv\Scripts\activate
+```
 
 ---
 
-### 3. Install Dependencies
+### 3. Install Python Dependencies
 
 ```bash
 pip install --upgrade pip
@@ -47,7 +69,7 @@ pip install -r requirements.txt
 
 ### 4. Set Up the DreamShaper Model
 
-1. Download the DreamShaper model from the following link:  
+1. Download the DreamShaper model from:  
    🔗 [https://civitai.com/models/4384/dreamshaper](https://civitai.com/models/4384/dreamshaper)
 
 2. Rename the downloaded file to:
@@ -56,54 +78,84 @@ pip install -r requirements.txt
 dreamshaper_8.safetensors
 ```
 
-3. Move it into the `models/` folder:
+3. Move it to the `models/` directory:
 
-```
-img_story_generator/models/dreamshaper_8.safetensors
+```bash
+mv dreamshaper_8.safetensors ./models/
 ```
 
-> **Note:** Make sure `main_app.py` is referencing the correct relative path.
+> **Note:** Ensure `main_app.py` correctly references the path to the model.
 
 ---
 
 ### 5. Set Up the LLaVA Model via Ollama
 
-1. Install **Ollama**:  
-   Follow the instructions here:  
-   🔗 [https://ollama.com](https://ollama.com)
+1. Install [Ollama](https://ollama.com) on your system.
 
-2. Once Ollama sup and running, Pull the LLaVA model using below command:
+2. Pull the LLaVA model by running:
 
-Run it in the same file location i.e -->> ./ASU-SUCCESS/AI/img-story-generator
 ```bash
 ollama pull llava
 ```
 
-> This will download and prepare the LLaVA vision-language model for local inference at `http://localhost:11434/api/generate`.
+> ⚠️ Make sure Ollama is actively running and accessible at `http://localhost:11434`.
 
 ---
 
-## 🚀 Usage
-
-### 🔹 Run the Full Application (Image + Story)
+## 🚀 Run the Full Application
 
 ```bash
 python main_app.py
 ```
 
-This will launch a Gradio UI where you can:
-- Read a comic-style story intro.
-- Describe a superhero.
-- Generate their image using DreamShaper.
-- Click a button to continue the story using that image with LLaVA.
+Once started, a Gradio interface will launch in your browser. You can:
+
+- 📖 Read the initial comic-style story.
+- ✏️ Describe a superhero in your own words.
+- 🎨 Generate the superhero's image.
+- 📜 Continue the story based on your generated hero.
 
 ---
 
 ## 📌 Notes
 
-- Requires a **GPU** for fast image generation via DreamShaper.
-- LLaVA model can work on CPU or GPU, depending on Ollama configuration.
-- Fully offline; all models run locally — no external API calls needed.
+- 🧠 **All models run locally** — no API keys or external services required.
+- ⚡ For best results, **DreamShaper image generation requires a GPU**.
+- 💡 **LLaVA model via Ollama** supports both CPU and GPU execution.
+- 🎈 The web app is designed with a **colorful, kid-friendly theme**.
 
 ---
 
+## ✅ Requirements
+
+Make sure you are using:
+
+- Python: `>=3.10, <3.12`
+
+### Required packages:
+
+```
+torch==2.2.2
+diffusers==0.33.1
+transformers==4.51.3
+gradio==4.25.2
+safetensors==0.5.3
+Pillow==11.2.0
+requests==2.32.3
+```
+
+Install them all with:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 🧠 Credits
+
+- 🎨 **DreamShaper** by Lykon → [CivitAI](https://civitai.com/models/4384/dreamshaper)
+- 🔍 **LLaVA** via [Ollama](https://ollama.com)
+- Built with 💻 Python, 🤗 Diffusers, 🎨 Gradio, 🖼️ Pillow
+
+---
