@@ -94,10 +94,10 @@ def generate_superhero(prompt):
 
 # ======== Gradio UI ========
 # Read external HTML and CSS
-with open("story_blocks.html", "r") as f:
+with open("story_blocks.html", "r", encoding="utf-8") as f:
     story_html = f.read()
 
-with open("styles.css", "r") as f:
+with open("styles.css", "r", encoding="utf-8") as f:
     custom_css = f.read()
 
 with gr.Blocks(css=custom_css) as demo:

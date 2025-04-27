@@ -61,7 +61,7 @@ py -3.11 -m venv .venv
 ### 3. Install Python Dependencies
 
 ```bash
-pip install --upgrade pip
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
@@ -138,9 +138,9 @@ Make sure you are using:
 torch==2.2.2
 diffusers==0.33.1
 transformers==4.51.3
-gradio==4.25.2
+gradio==5.25.2
 safetensors==0.5.3
-Pillow==11.2.0
+Pillow==11.2.1
 requests==2.32.3
 ```
 
