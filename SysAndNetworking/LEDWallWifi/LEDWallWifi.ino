@@ -63,6 +63,7 @@ void connectToWiFi() {
   if (WiFi.status() == WL_CONNECTED) {
     Serial.println();
     Serial.println("WiFi connected.");
+    delay(1000);
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
   } else {

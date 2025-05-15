@@ -10,13 +10,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Arduino IP address and port
-var arduinoIP = '192.168.0.150';
+const arduinoIP = '192.168.0.150';
 const arduinoPort = 80;
 
 // Function to send data to Arduino using POST request
 function sendToArduino(data) {
-    console.log("Arduino IP: " + arduinoIP);
-    console.log("Arduino Port: " + arduinoPort);
     return new Promise((resolve, reject) => {
         const options = {
             hostname: arduinoIP,
@@ -33,7 +31,7 @@ function sendToArduino(data) {
             res.setEncoding('utf8');
             
             res.on('data', chunk => {
-                console.log(`Response from Arduino: ${chunk}`);
+                // console.log(`Response from Arduino: ${chunk}`);
                 responseData += chunk;
             });
 
@@ -93,6 +91,7 @@ function readFromArduino() {
     });
 }
 
+
 async function lightUpLEDStrip(command){
     console.log(`Sending to Arduino: ${command}`);
     try {
@@ -102,6 +101,7 @@ async function lightUpLEDStrip(command){
         console.error('Error sending first command to Arduino:', error);
     }
 }
+
 
 // Routes
 app.post('/send-command', async (req, res) => {
@@ -126,27 +126,6 @@ app.post('/send-command', async (req, res) => {
     });
 });
 
-app.post('/ip-command', async (req, res) => {
-    let ipaddr = '';
-    
-    req.on('data', chunk => {
-        ipaddr += chunk.toString();
-    });
-
-    req.on('end', () => {
-        if (ipaddr) {
-            res.send('New IP address received: ' + ipaddr);
-            arduinoIP = ipaddr;
-        } else {
-            res.status(400).send('No IP address provided');
-        }
-    });
-
-    req.on('error', err => {
-        console.error('Error receiving command:', err);
-        res.status(500).send('Error receiving command');
-    });
-});
 
 // GET route to read data from Arduino
 app.get('/read-data', async (req, res) => {

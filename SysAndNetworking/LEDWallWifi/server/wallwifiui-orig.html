@@ -58,13 +58,12 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const submitButton = document.getElementById("submitCommand");
-    const changeArduinoButton = document.getElementById("changeArduino");
     const fetchDataButton = document.getElementById("fetchData");
     const responseContainer = document.getElementById("responseContainer");
 
     submitButton.addEventListener("click", function() {
         const command = document.getElementById("commandInput").value;
-        fetch("http://localhost:8080/send-command", {
+        fetch("http://192.168.0.154:8080/send-command", {
             method: "POST",
             headers: {
                 "Content-Type": "text/plain",
@@ -79,25 +78,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .catch(error => console.error("Error:", error));
     });
 
-    changeArduinoButton.addEventListener("click", function() {
-      const arduinoIP = document.getElementById("ipaddr").value;
-      fetch("http://localhost:8080/ip-command", {
-            method: "POST",
-            headers: {
-                "Content-Type": "text/plain",
-            },
-            body: arduinoIP,
-        })
-        .then(response => response.text())
-        .then(data => {
-            responseContainer.innerHTML = `<div class='responseText'>Response: ${data}</div>`;
-            responseContainer.style.display = "block";
-        })
-        .catch(error => console.error("Error:", error));
-    });
-
     fetchDataButton.addEventListener("click", function() {
-        fetch("http://localhost:8080/read-data")
+        fetch("http://192.168.0.154:8080/read-data")
         .then(response => response.text())
         .then(data => {
             responseContainer.innerHTML = `<div class='responseText'>Data: ${data}</div>`;
@@ -109,11 +91,13 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </head>
 <body>
-    <input type="text" id="ipaddr" name="ipaddress" placeholder="Enter IP address to change Arduino:"/>
-    <button id="changeArduino">Change Arduino</button>
-    <input type="text" id="commandInput" name="command" placeholder="Enter your command"/>
+    <nav>
+        <a href="https://app.frame.io/reviews/ee5dab61-6941-4e64-9bda-feb42e90bef0/56b523f5-d2b5-45d8-9188-665902320ebf" target="_blank">SUCCESS Promo 1</a>
+        <a href="https://app.frame.io/reviews/852403a1-0903-4436-8462-fdc26eeaffc4/89c0646a-8551-4835-860e-1d4735f7cc37" target="_blank">SUCCESS Promo 2</a>
+    </nav>
+    <input type="text" id="commandInput" placeholder="Enter your command">
     <button id="submitCommand">Submit Command</button>
-    <button id="fetchData">Fetch Data from Arduino</button>
+    <button id="fetchData">Fetch Data</button>
     <div id="responseContainer"></div>
 </body>
 </html>
