@@ -20,7 +20,9 @@
   <script>
     let myPath='girl.json'
     let animation=null;
-    fetch('http://localhost:8088', {
+    const baseURL='http://localhost:8008';
+ 
+    fetch(baseURL, {
     method: 'POST',
     headers: {
       'Content-Type': 'text/plain'
@@ -51,26 +53,57 @@
     const messages = document.getElementById("messages");
 
     // Chat logic
-    form.addEventListener("submit", function(e) {
-    e.preventDefault();
-    const text = input.value.trim();
-    if (!text) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const text = input.value.trim();
+        if (!text) return;
 
-    addMessage(text, "user");
-    input.value = "";
+        addMessage(text, "user");
+        input.value = "";
 
-    // ▶️ Start animation when thinking/responding
-    animation.goToAndPlay(0, true);
+        // ▶️ Start animation when thinking/responding
+        animation.goToAndPlay(0, true);
 
-    setTimeout(() => {
-        const reply = processReply(text);
-        addMessage(reply, "bot");
-        // Speak the bot's response
-        speakText(reply);
-        // ⏹️ Stop animation after replying
-        animation.stop();
-    }, 900);  // Simulate delay
-});
+        setTimeout(() => {
+          if (Math.random() < 0.1) {
+            console.log("Using local dictionary");
+            const reply = processReply(text);
+            addMessage(reply, "bot");
+            speakText(reply);
+            animation.stop();
+          } else {
+            console.log("Using AI");
+            fetch(baseURL + "/ai-response", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'  // Changed to application/json
+              },
+              body: JSON.stringify({ prompt: text })
+            }).then(response => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.text();
+              }).then(reply => {
+                console.log('AI returned ' + reply);
+                let r = JSON.parse(reply);
+                
+                addMessage(r.response.aiResponse, "bot");
+                speakText(r.response.aiResponse);
+                addMessage(r.response.followUpQuestion, "bot");
+                speakText(r.response.followUpQuestion);
+                
+                animation.stop();
+              }).catch(error => {
+                console.error('Fetch error:', error);
+                const fallback = "Sorry, I couldn't get a response.";
+                addMessage(fallback, "bot");
+                speakText(fallback);
+                animation.stop();
+              });
+          }
+        }, 900);
+      });
 
     function getRandomIntInclusive(min, max) {
         const minCeiled = Math.ceil(min);

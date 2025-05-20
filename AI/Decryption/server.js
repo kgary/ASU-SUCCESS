@@ -58,7 +58,9 @@ app.post('/ai-response', async (req, res) => {
     const { prompt, encryptedApiKey } = req.body;
     console.log("Request body:", req.body);
     try {
-        const apiKey = decrypt(encryptedApiKey);
+        // Commented out this to bypass encryption
+        // const apiKey = decrypt(encryptedApiKey);
+        const apiKey = encryptedApiKey; // it is not really encrypted
         const aiResponse = await getAIResponse(prompt, apiKey);
         res.json({ response: aiResponse });
     } catch (error) {

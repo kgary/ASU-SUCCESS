@@ -1,0 +1,125 @@
+const express = require('express');
+const http = require('http');
+const fs = require('fs');
+const cors = require('cors');
+const path = require('path');
+const url = require('url');
+const { OpenAI } = require('openai');
+
+require('dotenv').config()
+
+const app = express();
+const port = 8008;
+const ROOT_DIR = "/";  // Ensure this is the directory containing your static files
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get('*', async (req,res) => {
+    const reqPath = decodeURIComponent(req.url);
+    let filePath = path.join(__dirname, reqPath === '/' ? '/elizabot.html' : reqPath);
+    console.log(req.path);
+    console.log(filePath);
+
+    // Ensure that only files inside the root directory are served (security measure)
+    if (!filePath.startsWith(ROOT_DIR)) {
+        res.status(403).type('text/plain').send("403 Forbidden");
+        return;
+    }
+
+    // Get the file extension to set the correct MIME type
+    const ext = path.extname(filePath).toLowerCase();
+    const mimeTypes = {
+        '.html': 'text/html',
+        '.js': 'application/javascript',
+        '.json': 'application/json',
+        '.css': 'text/css',
+        '.svg': 'image/svg+xml'
+    };
+
+    // Read the file and send the response
+    fs.readFile(filePath, function (err, data) {
+        if (err) {
+            res.status(404).type('text/plain').send("404 Not Found: " + err.message);
+            return;
+        }
+
+        // Set the correct MIME type and send the file data
+        res.status(200).type(mimeTypes[ext] || 'application/octet-stream').send(data);
+    });
+});
+
+app.post('/', async (req, res) => {
+    const lottieDir = path.join(__dirname, 'lotties');
+
+    // Read all files in the lotties directory
+    fs.readdir(lottieDir, (err, files) => {
+        if (err) {
+            console.error('Error reading directory:', err);
+            return;
+        }
+        // Filter for .json files
+        const jsonFiles = files.filter(file => file.endsWith('.json'));
+        if (jsonFiles.length === 0) {
+            console.log('No .json files found in the lotties directory.');
+            return;
+        }
+        // Select one at random
+        const randomFile = jsonFiles[Math.floor(Math.random() * jsonFiles.length)];
+        res.status(200).type('text/plain').send(randomFile);
+    });
+});
+
+// Endpoint to handle client requests and fetch AI responses
+app.post('/ai-response', async (req, res) => {
+    const prompt = req.body.prompt;
+    console.log("Prompt:", prompt);
+    try {
+        // Commented out this to bypass encryption
+        // const apiKey = decrypt(encryptedApiKey);
+        const apiKey = process.env.OPENAI_API_KEY; // it is not really encrypted
+        const aiResponse = await getAIResponse(prompt, apiKey);
+        res.json({ response: aiResponse });
+    } catch (error) {
+        console.error('Error fetching AI response:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
+
+// AI-access functions
+async function getAIResponse(prompt, apiKey) {
+    const openai = new OpenAI({
+        apiKey: apiKey
+    });
+
+    console.log("Prompt received:", prompt);
+
+    try {
+        const response = await openai.chat.completions.create({
+            model: 'gpt-3.5-turbo',
+            messages: [
+                { role: 'system', content: 'You are a helpful assistant.' },
+                { role: 'user', content: prompt },
+                { role: 'user', content: 'Give your response in no more than 5 words and then ask a follow up question as well in no more than 5 words, both separated by a #' }
+            ]
+        });
+
+        console.log("Response from OpenAI:", response);
+
+        const fullResponse = response.choices[0].message.content.trim();
+
+        // Assuming the model separates the response and follow-up question by a period
+        const [aiResponse, followUpQuestion] = fullResponse.split('#').map(part => part.trim());
+
+        return { aiResponse, followUpQuestion };
+    } catch (error) {
+        console.error("Error in OpenAI API call:", error.response ? error.response.data : error.message);
+        throw error;
+    }
+}
