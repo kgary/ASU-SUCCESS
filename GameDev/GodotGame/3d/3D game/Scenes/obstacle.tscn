@@ -1,23 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://y06y5avu1pia"]
+[gd_scene load_steps=9 format=3 uid="uid://y06y5avu1pia"]
 
-[ext_resource type="Script" path="res://Scripts/obstacle.gd" id="1_dwt3f"]
-[ext_resource type="Texture2D" uid="uid://c4xo5v2po6fdx" path="res://Assets/Image/basketball.png" id="2_f28jc"]
+[ext_resource type="Script" uid="uid://pib53sfcexfg" path="res://Scripts/obstacle.gd" id="1_dwt3f"]
 [ext_resource type="AudioStream" uid="uid://bny7w7j1rtqji" path="res://Assets/Sounds/Thump.mp3" id="2_l2ltd"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5g6p8"]
-albedo_texture = ExtResource("2_f28jc")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3oxy"]
-albedo_texture = ExtResource("2_f28jc")
-
-[sub_resource type="SphereMesh" id="SphereMesh_h0dm1"]
+[sub_resource type="SphereMesh" id="SphereMesh_2p81s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teb4u"]
 albedo_color = Color(0, 0, 0, 1)
 metallic = 1.0
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_rxei5"]
-radius = 1.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_rvx1i"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_05su0"]
 lifetime_randomness = 0.55
@@ -42,8 +34,8 @@ size = Vector3(0.1, 0.1, 0.1)
 collision_layer = 2
 collision_mask = 5
 mass = 2000.0
-max_contacts_reported = 1
 contact_monitor = true
+max_contacts_reported = 1
 linear_damp_mode = 1
 linear_damp = 20.0
 angular_damp_mode = 1
@@ -51,14 +43,12 @@ angular_damp = 30.0
 script = ExtResource("1_dwt3f")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_5g6p8")
-material_overlay = SubResource("StandardMaterial3D_b3oxy")
-mesh = SubResource("SphereMesh_h0dm1")
+transform = Transform3D(1.05113, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_2p81s")
 surface_material_override/0 = SubResource("StandardMaterial3D_teb4u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_rxei5")
+shape = SubResource("SphereShape3D_rvx1i")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.433452, -0.546909)

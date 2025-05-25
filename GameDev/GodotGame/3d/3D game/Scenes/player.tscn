@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://n5ljjn66i1pc"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_pk5g3"]
+[ext_resource type="Script" uid="uid://5kwi1irmrapk" path="res://Scripts/player.gd" id="1_pk5g3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_nxxgt"]
 
@@ -13,8 +13,8 @@ albedo_color = Color(1, 0, 0, 1)
 collision_mask = 14
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-max_contacts_reported = 1
 contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_pk5g3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

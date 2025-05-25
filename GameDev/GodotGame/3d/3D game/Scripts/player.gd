@@ -6,12 +6,12 @@ class_name Player
 @export var camera_z_offset = 5
 @onready var ui = $"../UI" as UI
 
-var speed = 100 #Change me
-var vertical_speed_increment = .2 #Can be updated
-var horizontal_speed_increment = .1 #Can be updated
+var speed = 100 # Change me
+var vertical_speed_increment = .2 # Can be updated
+var horizontal_speed_increment = .1 # Can be updated
 
 
-const JUMP_FORCE = 6 #Can be updated
+const JUMP_FORCE = 6 # Can be updated
 
 var input: Vector3 = Vector3.ZERO
 

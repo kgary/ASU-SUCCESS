@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://2s7mkisu1x51"]
 
 [ext_resource type="StyleBox" uid="uid://b14m51xsyf2ar" path="res://Styles/panel_menu.tres" id="1_jh8fa"]
-[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_l5kow"]
+[ext_resource type="Script" uid="uid://cjbed4dy3umcg" path="res://Scripts/main_menu.gd" id="1_l5kow"]
 [ext_resource type="FontFile" uid="uid://dw344tttfq1lj" path="res://Assets/Kanit-MediumItalic.ttf" id="2_37lc7"]
 
 [node name="MainMenu" type="CanvasLayer"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://byj6snccrjesk"]
 
-[ext_resource type="Script" path="res://Scripts/level_select.gd" id="1_tmk4m"]
+[ext_resource type="Script" uid="uid://bxpk727c8tcw5" path="res://Scripts/level_select.gd" id="1_tmk4m"]
 [ext_resource type="StyleBox" uid="uid://b14m51xsyf2ar" path="res://Styles/panel_menu.tres" id="1_tv620"]
 [ext_resource type="FontFile" uid="uid://dw344tttfq1lj" path="res://Assets/Kanit-MediumItalic.ttf" id="2_n2kuv"]
 

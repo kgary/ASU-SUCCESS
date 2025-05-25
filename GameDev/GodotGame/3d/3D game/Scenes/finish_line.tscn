@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cqhyugmlu5ntx"]
 
-[ext_resource type="Script" path="res://Scripts/finish_line.gd" id="1_lb6re"]
+[ext_resource type="Script" uid="uid://cuty114blagmn" path="res://Scripts/finish_line.gd" id="1_lb6re"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ydtos"]
 
