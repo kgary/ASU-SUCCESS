@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://dd07mlpqt7ndq"]
+
+[ext_resource type="Texture2D" uid="uid://bsqpqaliaek7v" path="res://assets/img/obstacles/basket.png" id="1_suusm"]
+[ext_resource type="Script" uid="uid://cyp0jo85fbg5w" path="res://scenes/basketball.gd" id="1_vyvws"]
+[ext_resource type="Texture2D" uid="uid://bydmvwtiy1qcf" path="res://assets/img/obstacles/basketFrame.png" id="2_eoim3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt7i5"]
+atlas = ExtResource("2_eoim3")
+region = Rect2(0, 0, 288, 318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0e2kp"]
+atlas = ExtResource("2_eoim3")
+region = Rect2(288, 0, 288, 318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lomn0"]
+atlas = ExtResource("2_eoim3")
+region = Rect2(576, 0, 288, 318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y2h3"]
+atlas = ExtResource("2_eoim3")
+region = Rect2(864, 0, 288, 318)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4jmv"]
+atlas = ExtResource("2_eoim3")
+region = Rect2(1152, 0, 288, 318)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rxft2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt7i5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0e2kp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lomn0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5y2h3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4jmv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rswkl"]
+radius = 63.89
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_vyvws")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_rxft2")
+frame = 3
+frame_progress = 0.645606
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rswkl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_suusm")

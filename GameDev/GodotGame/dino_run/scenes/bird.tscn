@@ -1,21 +1,21 @@
 [gd_scene load_steps=10 format=3 uid="uid://crugqy7j4jt4a"]
 
 [ext_resource type="Texture2D" uid="uid://dyasm1fruq87r" path="res://assets/img/obstacles/Bird.png" id="1_rxtif"]
-[ext_resource type="Script" path="res://scenes/bird.gd" id="1_sru60"]
+[ext_resource type="Script" uid="uid://r3bh2gawacfm" path="res://scenes/bird.gd" id="1_sru60"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3nmc2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6s4m"]
 atlas = ExtResource("1_rxtif")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sun05"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkr2b"]
 atlas = ExtResource("1_rxtif")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_byqkj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hrn8u"]
 atlas = ExtResource("1_rxtif")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_imiir"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2mqi"]
 atlas = ExtResource("1_rxtif")
 region = Rect2(96, 0, 32, 32)
 
@@ -23,16 +23,16 @@ region = Rect2(96, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3nmc2")
+"texture": SubResource("AtlasTexture_b6s4m")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sun05")
+"texture": SubResource("AtlasTexture_kkr2b")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_byqkj")
+"texture": SubResource("AtlasTexture_hrn8u")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_imiir")
+"texture": SubResource("AtlasTexture_j2mqi")
 }],
 "loop": true,
 "name": &"flying",
@@ -55,6 +55,7 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_5lysr")
 animation = &"flying"
 autoplay = "flying"
+frame_progress = 0.526049
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-38.5, 2.5)

@@ -23,3 +23,4 @@ func _physics_process(delta):
 		$AnimatedSprite2D.play("jump")
 		
 	move_and_slide()
+

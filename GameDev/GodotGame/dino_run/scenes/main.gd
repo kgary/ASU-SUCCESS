@@ -3,22 +3,22 @@ extends Node
 #preload obstacles
 var stump_scene = preload("res://scenes/stump.tscn")
 
-# UNCOMMENT ME AND ADD TO OBSTACLE TYPES!!!!!!!!!!!!!!!
-var rock_scene = preload("res://scenes/rock.tscn")
-#var barrel_scene = preload("res://scenes/barrel.tscn") 
-var redbird= preload("res://scenes/redbird.tscn")
-var bluebird = preload("res://scenes/blue.tscn")
-var greenbird = preload("res://scenes/greenbird.tscn")
-#Add Basket Ball scene
-#var birds = [redbird,bluebird,greenbird]
-var obstacle_types := [rock_scene,stump_scene,redbird,bluebird,greenbird] # Adding obstacles
-
+# UNCOMMENT ME AND ADD ANOTHER OBSTACLE!
+#var rock_scene = preload("res://scenes/rock.tscn")
+var barrel_scene = preload("res://scenes/barrel.tscn")
 # Adding Bird Scenes
 #var bird_scene = preload("res://scenes/bird.tscn")
-
+#var bird_heights := [200, 390] # Heights can be changed [575,600]
+#var redbird= preload("res://scenes/redbird.tscn")
+#var bluebird = preload("res://scenes/blue.tscn")
+#var greenbird = preload("res://scenes/greenbird.tscn")
+#Add Basket Ball scene
+#var basketball_scene = preload("res://scenes/basketball.tscn")
+#var birds = [redbird,bluebird,greenbird]
+var obstacle_types := [stump_scene, barrel_scene] # Add the rock scene here!
+#var obstacle_types := [rock_scene,stump_scene,redbird,bluebird,greenbird] # Adding obstacles
 var obstacles : Array
-#Uncomment when bird is added
-#var bird_heights := [575,600] # Bird height
+
 
 #game variables
 const DINO_START_POS := Vector2i(150, 485) # Position can be changed
@@ -29,9 +29,9 @@ var score : int
 const SCORE_MODIFIER : int = 10
 var high_score : int
 var speed : float
-const START_SPEED : float = 10.0 #Can be changed
-const MAX_SPEED : int = 25
-const SPEED_MODIFIER : int = 5000
+const START_SPEED : float = 10.0 # Can be changed
+const MAX_SPEED : int = 25 # Can be changed
+const SPEED_MODIFIER : int = 5000 # Can be changed
 var screen_size : Vector2i
 var ground_height : int
 var game_running : bool
@@ -39,16 +39,7 @@ var last_obs
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#Set desired window size
-	var width = 1152  # Set your desired width
-	var height = 648  # Set your desired height
-	#window_settings.window_size = Vector2(width, height)
-
-	
-   
-	
 	screen_size = get_window().size
-	print(screen_size)
 	ground_height = $Ground.get_node("Sprite2D").texture.get_height()
 	$GameOver.get_node("Button").pressed.connect(new_game)
 	new_game()
@@ -111,32 +102,25 @@ func _process(delta):
 
 func generate_obs():
 	#generate ground obstacles
-	if obstacles.is_empty() or last_obs.position.x < score + randi_range(300, 500):
+	if obstacles.is_empty() or last_obs.position.x < score + randi_range(300, 500): # Can be changed (100, 500)
 		var obs_type = obstacle_types[randi() % obstacle_types.size()]
 		var obs
 		var max_obs = difficulty + 1
 		for i in range(randi() % max_obs + 1):
 			obs = obs_type.instantiate()
-			var obs_height = 0
-			var obs_scale = Vector2(1, 1)
-			if obs.has_node("Sprite"):
-				obs_height = obs.get_node("Sprite").texture.get_height()
-				obs_scale = obs.get_node("Sprite").scale
+			var obs_height = obs.get_node("Sprite2D").texture.get_height()
+			var obs_scale = obs.get_node("Sprite2D").scale
 			var obs_x : int = screen_size.x + score + 100 + (i * 100)
-			#var obs_y : int = screen_size.y - ground_height - (obs_height * obs_scale.y / 2) + 5
-			var obs_y = 725 # Fixed height can be changed
-			
+			var obs_y : int = screen_size.y - ground_height - (obs_height * obs_scale.y / 2) + 5
 			last_obs = obs
 			add_obs(obs, obs_x, obs_y)
-			
-		# When adding bird UNNCOMMENT ME
+		#additionally random chance to spawn a bird UNCOMMENT ME
 		#if difficulty == MAX_DIFFICULTY:
 			#if (randi() % 2) == 0:
 				##generate bird obstacles
 				#obs = bird_scene.instantiate()
 				#var obs_x : int = screen_size.x + score + 100
 				#var obs_y : int = bird_heights[randi() % bird_heights.size()]
-				#
 				#add_obs(obs, obs_x, obs_y)
 
 func add_obs(obs, x, y):

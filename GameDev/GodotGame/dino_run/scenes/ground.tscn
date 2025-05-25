@@ -3,21 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://c1oqrqxusukd2" path="res://assets/img/background/ground.png" id="1_achns"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_te2nw"]
-size = Vector2(4734.5, 98)
+size = Vector2(2304, 97)
 
 [node name="Ground" type="StaticBody2D"]
-z_index = -10
-z_as_relative = false
-position = Vector2(-367, 44)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -10
-z_as_relative = false
-position = Vector2(-4, 764)
-scale = Vector2(2.04861, 1)
+position = Vector2(0, 552)
 texture = ExtResource("1_achns")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2364, 809)
+position = Vector2(1152, 599.5)
 shape = SubResource("RectangleShape2D_te2nw")
