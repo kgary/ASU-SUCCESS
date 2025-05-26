@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 // Arduino IP address and port
 var arduinoIP = '192.168.0.150';
 const arduinoPort = 80;
+var intervalId = null;
 
 // Function to send data to Arduino using POST request
 function sendToArduino(data) {
@@ -110,11 +111,19 @@ app.post('/send-command', async (req, res) => {
     req.on('data', chunk => {
         command += chunk.toString();
     });
-
     req.on('end', () => {
-        if (command) {
+       if (command) {
             res.send('Command received');
-            lightUpLEDStrip(command);
+
+            // Clear the previous interval if it exists
+            if (intervalId !== null) {
+                clearInterval(intervalId);
+            }
+
+            // Start a new interval to call lightUpLEDStrip repeatedly
+            intervalId = setInterval(() => {
+                lightUpLEDStrip(command);
+            }, 1000); // Adjust the interval time (in ms) as needed
         } else {
             res.status(400).send('No command provided');
         }
