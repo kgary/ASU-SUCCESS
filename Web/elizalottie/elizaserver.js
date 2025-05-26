@@ -91,35 +91,3 @@ app.post('/ai-response', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
-
-// AI-access functions
-async function getAIResponse(prompt, apiKey) {
-    const openai = new OpenAI({
-        apiKey: apiKey
-    });
-
-    console.log("Prompt received:", prompt);
-
-    try {
-        const response = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
-            messages: [
-                { role: 'system', content: 'You are a helpful assistant.' },
-                { role: 'user', content: prompt },
-                { role: 'user', content: 'Give your response in no more than 5 words and then ask a follow up question as well in no more than 5 words, both separated by a #' }
-            ]
-        });
-
-        console.log("Response from OpenAI:", response);
-
-        const fullResponse = response.choices[0].message.content.trim();
-
-        // Assuming the model separates the response and follow-up question by a period
-        const [aiResponse, followUpQuestion] = fullResponse.split('#').map(part => part.trim());
-
-        return { aiResponse, followUpQuestion };
-    } catch (error) {
-        console.error("Error in OpenAI API call:", error.response ? error.response.data : error.message);
-        throw error;
-    }
-}

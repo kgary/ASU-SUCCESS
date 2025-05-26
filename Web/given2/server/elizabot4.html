@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ELIZA Chatbot version 2</title>
+  <!--  For version 2 we make Eliza appear more intelligent by adding an avatar and speech! -->
+  <link rel="stylesheet" href="eliza.css">
+
+  <!-- This line tells this page to go load what is in vocab.js -->
+  <script src="./vocab.js" type="text/javascript"></script>
+
+  <!-- To use a lottie animation we have to use the lottie library - just like we did with Arduino sketches -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.0/lottie.min.js"></script>
+
+</head>
+
+<body>
+  <!-- Load the banner image and scale it to 400 pixels wide -->
+  <img src="success25.png" alt="SUCCESS camp logo" width="400px"><br />
+  <h3>Hello and welcome to Eliza!</h3>
+
+  <!-- We add one div tag to allow our animation
+  -->
+  <div id="chat-container">
+    <div id="lottie-avatar"></div>
+    <div id="messages"></div>
+    <form id="input-form">
+      <input type="text" id="user-input" placeholder="Say something..." autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <!-- A script tag could look like the above, where we load the code in vocab.js, or like this below,
+      where we put the code directly in the HTML page. It works either way, and the general rule of 
+      thumb is that if the code gets really long you move it to another file so it is easier to manage.
+  -->
+  <script>
+    let animation=null;
+    const baseURL='http://localhost:8008';
+ 
+    //In order for us to load animations, we have to use a server, due to security restrictions in web
+    // browsers that try and ensure you do not get hacked. This funky bit of code asks for a local server
+    // to give us the animation, avoiding security restrictions. -->
+    fetch(baseURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain'
+    }
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    }).then(data => {
+        console.log('Received:', data); // Example: { filename: "example.json" }
+        // Lottie animation setup
+        animation = lottie.loadAnimation({
+          container: document.getElementById('lottie-avatar'),
+          renderer: 'svg',
+          loop: true,
+          autoplay: false,
+          path: './lotties/' + data // Replace with your own Lottie file URL
+      });
+    }).catch(error => {
+        console.error('Fetch error:', error);
+    });
+
+    // DOM elements. DOM simply means "Document Object Model", which is just a fancy term for referring to this
+    // web page within the browser. Even without knowing how to code, I bet you can figure out what these 3 lines do!
+    const form = document.getElementById("input-form");
+    const input = document.getElementById("user-input");
+    const messages = document.getElementById("messages");
+
+    // Chat logic. "addEventListener" is a way in Javascript to attach a function to the input form, so when
+    // the user clicks "send", something happens. What we want to have happen is to have Eliza find a response,
+    // which is done by calling "processReply" a few lines below.
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+
+      addMessage(text, "user");
+      input.value = "";
+
+      const reply = processReply(text);
+      addMessage(reply.phrase, "bot");
+      addMessage(reply.followUpQuestion, "bot");
+      // CHALLENGE 4: Let's make our Eliza talk!
+      speakText(reply.phrase);
+      speakText(reply.followUpQuestion);
+
+      // CHALLENGE 2: Uncomment this line to animate your lottie
+      // Start animation when thinking/responding
+      animation.goToAndPlay(0, true);
+      
+      setTimeout(() => {
+        //CHALLENGE 2: How do we stop an animation after a while? See setTimeout
+        animation.stop();
+      }, 1000);  // 1000 is 1000 milliseconds, or 1 second 
+    });
+
+    function addMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.className = "message " + sender;
+      msg.textContent = text;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // Get a random number between two numbers
+    function getRandomIntInclusive(min, max) {
+        const minCeiled = Math.ceil(min);
+        const maxFloored = Math.floor(max);
+        return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+    }
+
+    // This function uses the browser's built-in Speech API!
+    // For each phrase uttered, it randomly selects a voice
+    // Function to speak text (text-to-speech)
+    function speakText(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang.startsWith("en"));;
+      utterance.lang = 'en-US';  // You can change the language if needed
+      utterance.pitch = 1; // Set pitch of the voice
+      utterance.rate = 1; // Set rate of speech
+      utterance.voice = voices[getRandomIntInclusive(0, voices.length-1)];
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function processReply(userInput) {
+      console.log(userInput);
+      var wordsInInput = userInput.split(" ");
+      var matchedIndex = -1;
+
+      for (var i = 0; i < wordsInInput.length; i++) {
+        //check in dictonary
+        for (var j = 0; j < dict.length; j++) {
+          if (dict[j].key.indexOf(wordsInInput[i]) > -1) { //key found
+            matchedIndex = j;
+          }
+        }
+      }
+      //get related response(phrase+question) according to the key
+      if (matchedIndex === -1) {  //no matchedIndex (key)
+        // CHALLENGE 3: If the user typed in something that was not in our vocab.js, then we will print out one of the 
+        // "not found" messages below with the single follow up question below. Can you figure out how to 
+        // a) extend the set of not found messages, and then b) create multiple follow up questions that could be returned? 
+        var notFoundMessages = ["eee! Not sure what are you talking about!", "OOps! Help me understand please!"];
+        var randomIndex = Math.floor(Math.random() * notFoundMessages.length);
+        return {
+          phrase: notFoundMessages[randomIndex],
+          followUpQuestion: "Care to explain more?"
+        };
+      } else {
+        //get response for that key from vocab.js
+        var responsePhrase = dict[matchedIndex].phrase;
+        var responseQues = dict[matchedIndex].question;
+        return {
+          phrase: responsePhrase[Math.floor(Math.random() * responsePhrase.length)],
+          followUpQuestion: responseQues[Math.floor(Math.random() * responseQues.length)]
+        };
+      }
+    }
+  </script>
+</body>
+<!-- CHALLENGES 4 and 5 are specified in vocab.js -->
+
+</html>
