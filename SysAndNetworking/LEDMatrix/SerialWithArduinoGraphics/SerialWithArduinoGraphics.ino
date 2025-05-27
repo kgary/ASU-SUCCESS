@@ -24,7 +24,7 @@ void loop() {
         text = Serial.readStringUntil('\n');
         text.trim();  // Remove any whitespace
         text.toUpperCase();  // Convert to uppercase to match the wall
-    }
+  }
   matrix.textFont(Font_4x6);
   matrix.beginText(0, 1, 0xFFFFFF);
   matrix.println(text);
