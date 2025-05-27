@@ -14,7 +14,7 @@ CRGB leds[NUM_LEDS];
 // you use forward or reverse lettering, and then have to figure out what lights to skip
 //                    XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 //String letterIndex = "--ABC-DEFG-H------Q-P-O-NM-LKJI-----RSTU-VWX-Y-Z--";
-String letterIndex = "--ZYX-W-V-UT-S----JK-L-MNO-P-QR-----IHG-F-EDC-B-A-";
+String letterIndex = "Z-Y-X-WV-UT-S-R--I-JK-L-M-NO-P-Q--H-G-F-E-D-C-B--A-";
 //String colorLetterIndex = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 String colorLetterIndex = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
 
