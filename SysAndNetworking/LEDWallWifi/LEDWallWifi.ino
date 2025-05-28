@@ -4,8 +4,9 @@
 #include <Arduino_DebugUtils.h>
 
 // WiFi credentials for mobile hotspot
-const char* ssid = "ASU-SUCCESS";  // Replace with your hotspot SSID
-const char* password = "SUCC355!";  // Replace with your hotspot password
+const char* ssid = "FenwayPark24";  // Replace with your hotspot SSID
+const char* password = "4805458334";
+//const char* password = "SUCC355!";  // Replace with your hotspot password
 
 // How many leds in your strip?
 #define NUM_LEDS 50
@@ -32,6 +33,7 @@ WiFiClient client;
 
 void setup() {
   Serial.begin(9600);
+
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
   FastLED.setBrightness(BRIGHTNESS);
 
@@ -96,6 +98,14 @@ void loop() {
       client.stop();
       delay(50);
     }
+  }
+  // This is very similar to SerialWithArduinoGraphics
+  String text;
+  if (Serial.available() > 0) {
+      text = Serial.readStringUntil('\n');
+      // if anything is typed in, write out the IP address
+      Serial.print("IP address: ");
+      Serial.println(WiFi.localIP());
   }
 }
 
