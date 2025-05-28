@@ -4,9 +4,8 @@
 #include <Arduino_DebugUtils.h>
 
 // WiFi credentials for mobile hotspot
-const char* ssid = "FenwayPark24";  // Replace with your hotspot SSID
-const char* password = "4805458334";
-//const char* password = "SUCC355!";  // Replace with your hotspot password
+const char* ssid = "ASU-SUCCESS";  // Replace with your hotspot SSID
+const char* password = "SUCC355!";  // Replace with your hotspot password
 
 // How many leds in your strip?
 #define NUM_LEDS 50
